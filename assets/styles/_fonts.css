@@ -1,0 +1,41 @@
+@font-face {
+    font-family: "TT Interfaces";
+    font-weight: 400;
+    src: url("../font/TTInterfaces-Regular.ttf");
+    font-display: swap
+}
+
+/*@font-face {*/
+/*    font-family: Montserrat;*/
+/*    font-weight: 400;*/
+/*    src: url("../fonts/Montserrat-Italic.ttf");*/
+/*    font-display: swap*/
+/*}*/
+
+@font-face {
+    font-family: "TT Interfaces";
+    font-weight: 500;
+    src: url("../font/TTInterfaces-Medium.ttf");
+    font-display: swap
+}
+
+@font-face {
+    font-family: "TT Interfaces";
+    font-weight: 600;
+    src: url("../font/TTInterfaces-SemiBold.ttf");
+    font-display: swap
+}
+
+@font-face {
+    font-family: "TT Interfaces";
+    font-weight: 700;
+    src: url("../font/TTInterfaces-Bold.ttf");
+    font-display: swap
+}
+
+@font-face {
+    font-family: "TT Interfaces";
+    font-weight: 800;
+    src: url("../font/TTInterfaces-ExtraBold.ttf");
+    font-display: swap
+}
