@@ -1,3 +1,5 @@
 {
-  "hello": "Salom"
+  "address": "Manzil",
+  "catalog": "Katalog",
+  "search_for_product": "Mahsulotni qidirish"
 }

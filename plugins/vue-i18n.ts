@@ -6,7 +6,7 @@ import uz from '@/locales/uz.json'
 
 export default defineNuxtPlugin((nuxtApp) => {
   const i18n = createI18n({
-    locale: useCookie('locale').value || 'ru',
+    locale: useCookie('locale').value || 'uz',
     legacy: false,
     messages: {
       en,

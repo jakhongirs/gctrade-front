@@ -15,12 +15,47 @@ export default <Partial<Config>>{
   ],
   theme: {
     extend: {
-      screens: {
-        xs: '400px',
-      },
+      screens: ['1200px'],
       colors: {
-        primary: '#1576B5',
-        dark_blue: '#0A639C',
+        blue: {
+          DEFAULT: '#1A77F9',
+          rgba05: 'rgba(26, 119, 249, 0.05)',
+          100: '#EEF5FF',
+          200: '#D1E4FE',
+          300: '#A8CDFF',
+          400: '#4892FA',
+          500: '#245CAB',
+          600: '#040E19',
+          700: '#E1EAF7',
+          800: '#005AD7',
+        },
+        facebook: '#3B5998',
+        twitter: '#00ACEE',
+        telegram: '#0088CC',
+        linkedin: '#0E76A8',
+        reddit: '#FF4500',
+        dark: {
+          DEFAULT: '#040E1A',
+          400: '#001334',
+          500: '#0C2037',
+        },
+        white: {
+          DEFAULT: '#FFFFFF',
+          200: '#FBFDFF',
+        },
+        gray: {
+          100: '#D5D8DC',
+          200: '#F6F6F6',
+          300: '#D0CCC0',
+          400: '#82888E',
+        },
+        red: {
+          DEFAULT: '#F93943',
+          300: '#B44437',
+        },
+        yellow: {
+          DEFAULT: '#FFAE03',
+        },
       },
       backgroundImage: {
         'primary-gradient': 'linear-gradient(90deg, #1295D2 0%, #2164A6 100%)',
