@@ -80,7 +80,7 @@ const sizes = {
 }
 
 const variants = {
-  primary: 'bg-blue text-white hover:bg-blue-800 ',
+  primary: 'bg-red text-white hover:bg-red-300 ',
   light: 'bg-blue/20 text-blue hover:!bg-blue-300',
   white: 'bg-white text-blue !outline-white/20 hover:bg-blue-200',
   outline: '!bg-transparent text-blue hover:text-blue-800 !outline-none',

@@ -1,5 +1,16 @@
 {
   "address": "Manzil",
   "catalog": "Katalog",
-  "search_for_product": "Mahsulotni qidirish"
+  "search_for_product": "Mahsulotni qidirish",
+  "categories": "Kategoriyalar",
+  "all_categories": "Barcha kategoriyalar",
+  "partners": "Hamkorlarimiz",
+  "partners_ideas": "Hamkorlarimizning biz haqimizdagi fikrlari",
+  "products": "Mahsulotlar",
+  "all_products": "Barcha mahsulotlar",
+  "top_products": "Top mahsulotlar",
+  "all_top_products": "Barcha top mahsulotlar",
+  "sale_products": "Chegirmadagi mahsulotlar",
+  "all_sale_products": "Barcha chegirmadagi mahsulotlar",
+  "to_cart": "Savatga qo'shish"
 }

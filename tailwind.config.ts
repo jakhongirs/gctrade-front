@@ -36,18 +36,23 @@ export default <Partial<Config>>{
         reddit: '#FF4500',
         dark: {
           DEFAULT: '#040E1A',
+          100: '#383838',
           400: '#001334',
           500: '#0C2037',
         },
         white: {
           DEFAULT: '#FFFFFF',
+          100: '#F7F8FA',
           200: '#FBFDFF',
         },
         gray: {
+          DEFAULT: '#CDCDD0',
           100: '#D5D8DC',
           200: '#F6F6F6',
           300: '#D0CCC0',
           400: '#82888E',
+          500: '#F2F3F5',
+          600: '#6F6F6F',
         },
         red: {
           DEFAULT: '#F93943',

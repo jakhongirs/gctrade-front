@@ -1,7 +1,7 @@
 <template>
   <div class="w-full">
     <div
-      class="w-full flex items-center bg-blue/[0.05] dark:bg-dark-500 rounded-lg relative outline-0 border-2 border-solid border-transparent focus-within:border-blue main-transition"
+      class="w-full flex items-center bg-gray-500 rounded-lg relative outline-0 border-2 border-solid border-transparent focus-within:border-gray-600 main-transition"
       :class="[
         { '!border-red focus-within:!border-red': error },
         { 'focus-within:!border-transparent': readonly },
@@ -16,7 +16,7 @@
           v-model="inputValue"
           :type="type"
           :area-label="areaLabel"
-          placeholder=""
+          :placeholder="placeholder"
           :maxLength="maxLength"
           :minLength="minLength"
           :readonly="readonly"
@@ -26,15 +26,6 @@
           @input="sanitizeInput"
           @blur="(e: Event) => emit('blur', e)"
         />
-        <span
-          class="absolute top-0 py-3 px-4 left-0 z-0 text-dark-400 dark:text-white opacity-20 leading-21 text-lg origin-left scale-100 transition-all duration-150"
-          :class="[
-            { '!scale-75 !opacity-0': inputValue?.length },
-            placeholderClass,
-          ]"
-        >
-          {{ placeholder }}
-        </span>
       </div>
       <div :class="postfixClass">
         <slot name="postfix"></slot>
