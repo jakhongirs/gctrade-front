@@ -48,9 +48,11 @@
         <UIButton
           :text="$t('catalog')"
           size="small"
-          variant="outline"
-          class="mr-6"
+          variant="custom"
+          text-class="text-white"
+          class="mr-6 header-burger"
         />
+        <!--        <LayoutCatalogButton />-->
         <FormInput
           :placeholder="$t('search_for_product')"
           input-class="!py-2"
@@ -79,5 +81,28 @@
 <style>
 header {
   filter: drop-shadow(0 8px 44px rgba(56, 56, 56, 0.12));
+}
+.header-burger {
+  background: linear-gradient(84.8deg, #383838 0%, #6f6f6f 131.39%);
+}
+
+.header-burger::before {
+  content: '';
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 7px;
+  transition: opacity 0.2s ease-in-out;
+  background: linear-gradient(84.8deg, #d7d7d7 0%, #f4f4f4 131.39%);
+  top: 0;
+  left: 0;
+}
+
+.header-burger:hover::before {
+  opacity: 1;
+}
+.header-burger:hover .text-class {
+  color: #040e1a !important;
 }
 </style>

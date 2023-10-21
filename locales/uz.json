@@ -12,5 +12,7 @@
   "all_top_products": "Barcha top mahsulotlar",
   "sale_products": "Chegirmadagi mahsulotlar",
   "all_sale_products": "Barcha chegirmadagi mahsulotlar",
-  "to_cart": "Savatga qo'shish"
+  "to_cart": "Savatga qo'shish",
+  "recent_products": "Yaqinda ko'rilgan mahsulotlar",
+  "all_recent_products": "Yaqinda ko'rilgan barcha mahsulotlar"
 }

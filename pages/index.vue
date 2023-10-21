@@ -7,6 +7,7 @@
     <SectionsIdeas />
     <SectionsTopProducts />
     <SectionsOnSaleProducts />
+    <SectionsRecentlySeen />
   </div>
 </template>
 <script setup lang="ts">

@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   ssr: true,
   app: {
     head: {
-      title: 'Nuxt3 project',
+      title: 'GC Trade',
     },
   },
   css: [

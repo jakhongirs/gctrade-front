@@ -2,7 +2,7 @@
   <ClientOnly>
     <NuxtLink
       to="/products/top_product"
-      class="shadow rounded-lg hover:shadow-2xl group transition-200"
+      class="shadow rounded-lg hover:shadow-2xl flex flex-col min-h-fit group transition-200"
     >
       <div class="max-h-[280px] h-full rounded-t-lg overflow-hidden relative">
         <UILikeButton class="top-4 right-4" @click.stop.prevent="addCart" />
@@ -12,7 +12,7 @@
           class="h-full w-full object-cover relative z-0 aspect-square rounded-t-lg transition-200 group-hover:scale-105"
         />
       </div>
-      <div class="px-4 pt-6 pb-4">
+      <div class="px-4 pt-6 pb-4 grow">
         <h3 class="text-dark text-base transition-200 group-hover:text-red">
           Product name come here
         </h3>

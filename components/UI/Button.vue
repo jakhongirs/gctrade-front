@@ -8,44 +8,50 @@
       { 'pointer-events-none': loading },
     ]"
   >
-    <Transition mode="out-in" name="fade">
-      <span :key="loading" class="flex items-center justify-center">
-        <span v-show="loading" class="loader inline-block">
-          <svg class="circular" viewBox="25 25 50 50">
-            <circle
-              :class="{
-                '!stroke-white': variant === 'outline' || variant === 'primary',
-              }"
-              class="path"
-              cx="50"
-              cy="50"
-              r="20"
-              fill="none"
-              stroke-width="4"
-              stroke-miterlimit="10"
-            />
-          </svg>
-        </span>
-        <span v-show="!loading" class="flex justify-center items-center gap-1">
-          <span
-            :class="[
-              textClass,
-              {
-                '!text-base !leading-19': size === 'small',
-              },
-            ]"
-            class="font-normal text-center items-center justify-center letter-3"
-          >
-            {{ text }}
+    <slot>
+      <Transition mode="out-in" name="fade">
+        <span :key="loading" class="flex items-center justify-center relative">
+          <span v-show="loading" class="loader inline-block">
+            <svg class="circular" viewBox="25 25 50 50">
+              <circle
+                :class="{
+                  '!stroke-white':
+                    variant === 'outline' || variant === 'primary',
+                }"
+                class="path"
+                cx="50"
+                cy="50"
+                r="20"
+                fill="none"
+                stroke-width="4"
+                stroke-miterlimit="10"
+              />
+            </svg>
           </span>
           <span
-            v-if="iconName"
-            class="text-base main-transition"
-            :class="`icon-${iconName}`"
-          ></span>
+            v-show="!loading"
+            class="flex justify-center items-center gap-1"
+          >
+            <span
+              :class="[
+                textClass,
+                {
+                  '!text-base !leading-19': size === 'small',
+                },
+              ]"
+              class="font-normal text-class text-center items-center justify-center letter-3"
+            >
+              {{ text }}
+            </span>
+            <span
+              v-if="iconName"
+              class="text-base main-transition"
+              :class="`icon-${iconName}`"
+            ></span>
+          </span>
         </span>
-      </span>
-    </Transition>
+      </Transition>
+    </slot>
   </button>
 </template>
 
