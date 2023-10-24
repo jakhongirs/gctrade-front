@@ -1,5 +1,5 @@
 <template>
-  <header class="w-full bg-white fixed top-0 z-[999]">
+  <header open class="w-full bg-white fixed top-0 z-[999]">
     <div class="bg-white-100 w-full py-1">
       <div class="container flex items-center justify-between">
         <div class="group">
@@ -49,9 +49,21 @@
           :text="$t('catalog')"
           size="small"
           variant="custom"
+          :icon-name="open ? 'close-circle-colored' : 'hamburger-menu'"
           text-class="text-white"
           class="mr-6 header-burger min-w-[150px] -ml-20"
-        />
+          @click="$emit('on-open')"
+        >
+          <div class="flex items-center justify-center gap-2 w-full text-white">
+            <i
+              class="text-xl text-white"
+              :class="
+                open ? 'icon-close-circle-regular' : 'icon-hamburger-menu'
+              "
+            ></i>
+            {{ $t('catalog') }}
+          </div>
+        </UIButton>
         <!--        <LayoutCatalogButton />-->
         <FormInput
           :placeholder="$t('search_for_product')"
@@ -77,32 +89,20 @@
     </div>
   </header>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+interface Props {
+  open: boolean
+}
+defineProps<Props>()
+defineEmits<{
+  (e: 'on-open'): void
+}>()
+</script>
 <style>
 header {
   filter: drop-shadow(0 8px 44px rgba(56, 56, 56, 0.12));
 }
 .header-burger {
   background: linear-gradient(84.8deg, #383838 0%, #6f6f6f 131.39%);
-}
-
-.header-burger::before {
-  content: '';
-  opacity: 0;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 7px;
-  transition: opacity 0.2s ease-in-out;
-  background: linear-gradient(84.8deg, #d7d7d7 0%, #f4f4f4 131.39%);
-  top: 0;
-  left: 0;
-}
-
-.header-burger:hover::before {
-  opacity: 1;
-}
-.header-burger:hover .text-class {
-  color: #040e1a !important;
 }
 </style>

@@ -31,3 +31,21 @@
 .fade-leave-active {
     animation: fade 100ms reverse forwards;
 }
+@keyframes transform {
+    from {
+        /*opacity: 0;*/
+        transform: translateY(-100px);
+    }
+    to {
+        /*opacity: 1;*/
+        transform: translateY(0);
+    }
+}
+.transform-enter-active {
+    animation: transform 200ms forwards;
+}
+
+.transform-leave-active {
+    animation: transform 200ms reverse forwards;
+    opacity: 0;
+}
