@@ -86,7 +86,7 @@ const sizes = {
 }
 
 const variants = {
-  primary: 'bg-red text-white hover:bg-red-300 ',
+  primary: 'bg-reddit text-white hover:bg-red',
   light: 'bg-blue/20 text-blue hover:!bg-blue-300',
   white: 'bg-white text-blue !outline-white/20 hover:bg-blue-200',
   outline: '!bg-transparent text-blue hover:text-blue-800 !outline-none',

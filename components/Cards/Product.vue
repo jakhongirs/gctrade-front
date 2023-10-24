@@ -12,15 +12,21 @@
           class="h-full w-full object-cover relative z-0 aspect-square rounded-t-lg transition-200 group-hover:scale-105"
         />
       </div>
-      <div class="px-4 pt-6 pb-4 grow">
-        <h3 class="text-dark text-base transition-200 group-hover:text-red">
-          Product name come here
-        </h3>
-        <p class="font-bold text-xl text-dark">120 000 UZS</p>
+      <div class="px-4 pt-6 pb-4 grow flex flex-col">
+        <span v-if="ind % 2 === 0" class="text-red-400 text-xs line-through"
+          >160 000 UZS</span
+        >
+        <h3 class="font-bold text-xl text-dark">120 000 UZS</h3>
+        <p class="text-dark text-base transition-200">Product name come here</p>
+
+        <p class="my-4 text-base font-medium text-dark">
+          Manufacturer, <span class="text-gray-400 font-normal">Tashkent</span>
+        </p>
+
         <UIButton
           :text="$t('to_cart')"
           size="small"
-          class="w-full mt-4"
+          class="w-full mt-auto"
           @click.stop.prevent="addCart"
         />
       </div>

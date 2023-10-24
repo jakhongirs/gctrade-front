@@ -14,5 +14,13 @@
   "all_sale_products": "Barcha chegirmadagi mahsulotlar",
   "to_cart": "Savatga qo'shish",
   "recent_products": "Yaqinda ko'rilgan mahsulotlar",
-  "all_recent_products": "Yaqinda ko'rilgan barcha mahsulotlar"
+  "all_recent_products": "Yaqinda ko'rilgan barcha mahsulotlar",
+  "dashboard": "Asosiy",
+  "price": "Narx",
+  "min_price": "Minimal narx",
+  "enter_min_price": "Minimal narxni kiriting",
+  "max_price": "Maksimal narx",
+  "enter_max_price": "Maksimal narxni kiriting",
+  "about": "Biz haqimizda",
+  "statistics": "Statistika"
 }

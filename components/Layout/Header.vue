@@ -50,7 +50,7 @@
           size="small"
           variant="custom"
           text-class="text-white"
-          class="mr-6 header-burger"
+          class="mr-6 header-burger min-w-[150px] -ml-20"
         />
         <!--        <LayoutCatalogButton />-->
         <FormInput
