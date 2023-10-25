@@ -45,11 +45,28 @@
           reprehenderit sit soluta ullam unde voluptates voluptatum.
         </div>
       </div>
-
-      <div class="py-16">
+    </div>
+    <div class="bg-white my-10">
+      <div class="pt-10 pb-16 container">
         <UISectionTitle center title="statistics" />
+        <div class="grid grid-cols-4 gap-4 mt-14">
+          <div
+            v-for="(item, index) in statistics"
+            :key="index"
+            class="flex items-center gap-4"
+          >
+            <i class="text-red text-4xl" :class="item.icon"></i>
+            <div>
+              <p class="text-3xl font-bold">{{ item.value }}</p>
+              <p class="text-sm text-gray-600">
+                {{ $t(item.title) }}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+    <SectionsTopProducts />
   </div>
 </template>
 <script setup lang="ts">
@@ -61,4 +78,26 @@ const breadcrumbs = computed(() => {
     },
   ]
 })
+const statistics = [
+  {
+    icon: 'icon-checklist',
+    title: 'successful_shipments',
+    value: '2 000+',
+  },
+  {
+    icon: 'icon-users-group',
+    title: 'happy_customers',
+    value: '50+',
+  },
+  {
+    icon: 'icon-list-heart',
+    title: 'product_types',
+    value: '3 000+',
+  },
+  {
+    icon: 'icon-basket-regular',
+    title: 'in_market_since',
+    value: '2013',
+  },
+]
 </script>

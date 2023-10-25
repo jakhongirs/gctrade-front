@@ -24,5 +24,9 @@
   "about": "Biz haqimizda",
   "statistics": "Statistika",
   "pages": "Sahifalar",
-  "contacts": "Aloqa uchun"
+  "contacts": "Aloqa uchun",
+  "successful_shipments": "Muvaffaqqiyatli yetkazib berish",
+  "product_types": "Mahsulot turlari",
+  "happy_customers": "Mamnun xaridorlar",
+  "in_market_since": "Bozorda {year} dan buyon ishlamoqda."
 }
