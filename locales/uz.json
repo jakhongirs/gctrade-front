@@ -28,5 +28,13 @@
   "successful_shipments": "Muvaffaqqiyatli yetkazib berish",
   "product_types": "Mahsulot turlari",
   "happy_customers": "Mamnun xaridorlar",
-  "in_market_since": "Bozorda {year} dan buyon ishlamoqda."
+  "in_market_since": "Bozorda {year} dan buyon ishlamoqda.",
+  "phone": "Telefon",
+  "email": "Email",
+  "enter_full_name": "F.I.O ni kiritish",
+  "enter_phone": "Telefon raqamni kiritish",
+  "enter_email": "Emailni kiritish",
+  "question": "Savol",
+  "send": "Yuborish",
+  "send_question": "Savol yuborish"
 }
