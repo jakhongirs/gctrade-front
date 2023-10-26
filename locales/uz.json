@@ -36,5 +36,10 @@
   "enter_email": "Emailni kiritish",
   "question": "Savol",
   "send": "Yuborish",
-  "send_question": "Savol yuborish"
+  "send_question": "Savol yuborish",
+  "category": "Kategoriya",
+  "description": "Mahsulot haqida",
+  "recommended_products": "Tavsiya etiladigan mahsulotlar",
+  "order_count": "Buyurtmalar soni",
+  "products_count": "Mahsulotlar soni"
 }
