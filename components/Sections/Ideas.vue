@@ -2,11 +2,11 @@
   <div class="py-14">
     <UISectionTitle title="partners_ideas" center class="mb-8" />
     <div>
-      <Swiper v-bind="settings" class="!pt-6 pb-16 h-full overflow-hidden">
+      <Swiper v-bind="settings" class="!pt-6 !pb-16 h-full overflow-hidden">
         <SwiperSlide
           v-for="(item, idx) in 10"
           :key="'A' + idx"
-          class="cursor-grab active:cursor-grabbing relative md:!h-max"
+          class="cursor-grab active:cursor-grabbing relative max-w-[350px] w-full md:!h-max"
         >
           <CardsIdea />
         </SwiperSlide>
@@ -15,7 +15,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { Autoplay, Pagination } from 'swiper'
+import { Autoplay } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 
 const settings = {
@@ -33,6 +33,6 @@ const settings = {
     delay: 3000,
     disableOnInteraction: false,
   },
-  modules: [Pagination, Autoplay],
+  modules: [Autoplay],
 }
 </script>

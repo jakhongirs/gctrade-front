@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Autoplay, Pagination } from 'swiper'
+import { Autoplay, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 
 interface Props {

@@ -78,13 +78,14 @@
             class="icon-heart text-2xl text-gray-600 group-hover:text-red transition-200"
           ></i>
         </div>
-        <div
+        <NuxtLink
+          to="/basket"
           class="w-8 h-8 rounded-lg bg-white-100 flex items-center justify-center group cursor-pointer"
         >
           <i
             class="icon-basket text-2xl text-gray-600 group-hover:text-red transition-200"
           ></i>
-        </div>
+        </NuxtLink>
       </div>
     </div>
   </header>

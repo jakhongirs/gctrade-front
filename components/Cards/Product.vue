@@ -23,12 +23,7 @@
           Manufacturer, <span class="text-gray-400 font-normal">Tashkent</span>
         </p>
 
-        <UIButton
-          :text="$t('to_cart')"
-          size="small"
-          class="w-full mt-auto"
-          @click.stop.prevent="addCart"
-        />
+        <UIAddButton :saved="ind % 2 === 0" />
       </div>
     </NuxtLink>
   </ClientOnly>

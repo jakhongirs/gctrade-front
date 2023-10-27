@@ -41,5 +41,12 @@
   "description": "Mahsulot haqida",
   "recommended_products": "Tavsiya etiladigan mahsulotlar",
   "order_count": "Buyurtmalar soni",
-  "products_count": "Mahsulotlar soni"
+  "products_count": "Mahsulotlar soni",
+  "in_cart": "Savatda",
+  "basket": "Savat",
+  "select_all": "Barchasini belgilash",
+  "your_order": "Sizning buyurtmangiz",
+  "total": "Jami",
+  "discount": "Chegirma",
+  "send_order": "Buyurtma berish"
 }

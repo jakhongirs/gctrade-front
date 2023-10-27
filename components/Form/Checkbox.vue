@@ -21,7 +21,7 @@
       ]"
       class="shrink-0 duration-200 ease-in-out inline-block bg-white-100 h-6 w-6 rounded-md border-2 peer-checked:-rotate-90 peer-checked:after:opacity-100 peer-checked:after:rotate-[138deg] after:transition-all after:duration-200 after:absolute after:left-2 after:top-1 after:w-[7px] after:h-3 after:border-r-[2.2px] after:border-b-[2.2px] after:rotate-[0deg] after:opacity-0 peer-checked:bg-reddit border-[#C8CFD6] peer-checked:border-red-400 after:border-white peer-disabled:border-grey-100 peer-disabled:after:border-grey-100"
     />
-    <span class="ml-2">
+    <span v-if="label" class="ml-2">
       <slot name="label">
         <p class="leading-130 text-dark text-sm" :class="[labelStyles]">
           {{ $t(label) }}
@@ -42,7 +42,9 @@ interface Props {
   labelStyles?: string
   checked: boolean
 }
-const props = withDefaults(defineProps<Props>(), {})
+const props = withDefaults(defineProps<Props>(), {
+  label: '',
+})
 
 const emit = defineEmits<{
   (e: 'update:modelValue', value: boolean): void

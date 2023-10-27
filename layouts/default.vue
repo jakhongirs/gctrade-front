@@ -1,10 +1,10 @@
 <template>
-  <div class="flex flex-col min-h-screen">
+  <div class="flex flex-col min-h-screen relative">
     <LayoutHeader :open="isOpen" class="z-10" @on-open="isOpen = !isOpen" />
     <Transition name="fade" mode="out-in">
       <div
         v-if="isOpen"
-        class="absolute min-h-screen w-full inset-0 bg-white z-[998] pt-[128px]"
+        class="fixed min-h-screen w-full inset-0 bg-white z-[998] pt-[128px]"
       >
         <div class="container pt-16">
           <ul @click="isOpen = !isOpen">
@@ -27,7 +27,7 @@
         </div>
       </div>
     </Transition>
-    <div class="bg-white-100 pt-[128px] grow">
+    <div class="bg-white-100 pt-[128px] grow relative z-0">
       <slot />
     </div>
   </div>
