@@ -5,8 +5,6 @@
       <UISectionTitle title="basket" class="mb-6" />
       <div class="grid grid-cols-12 gap-6">
         <div class="col-span-8 bg-white shadow p-5 rounded">
-          <FormCheckbox :label="$t('select_all')" />
-          <hr class="h-0.5 bg-gray-400/20 w-full my-2" />
           <div>
             <template v-for="(item, index) in 4" :key="index">
               <CardsBasket />

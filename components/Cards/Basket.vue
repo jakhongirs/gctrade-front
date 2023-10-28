@@ -1,11 +1,6 @@
 <template>
   <div class="flex h-full">
     <div class="max-w-[140px] w-full rounded-md shrink-0 relative">
-      <div
-        class="absolute top-2 left-2 w-10 h-10 rounded bg-white/40 flex items-center justify-center"
-      >
-        <FormCheckbox />
-      </div>
       <img
         src="https://picsum.photos/200/200"
         alt=""
@@ -23,6 +18,11 @@
       class="max-w-[180px] min-w-[178px] w-full shrink-0 relative pl-6 border-l border-l-gray-100/50 flex flex-col"
     >
       <UILikeButton class="!right-0" />
+      <div
+        class="w-8 h-8 cursor-pointer flex items-center justify-center rounded absolute right-0 top-8"
+      >
+        <i class="icon-trash text-xl transition-200 hover:text-red"></i>
+      </div>
       <div>
         <p class="text-base font-semibold">
           {{ formatMoneyDecimal(150000) }} UZS

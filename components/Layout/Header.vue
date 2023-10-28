@@ -71,17 +71,23 @@
         />
       </div>
       <div class="flex items-center gap-2">
-        <div
+        <NuxtLink
+          to="/saved"
           class="w-8 h-8 rounded-lg bg-white-100 flex items-center justify-center group cursor-pointer"
         >
           <i
             class="icon-heart text-2xl text-gray-600 group-hover:text-red transition-200"
           ></i>
-        </div>
+        </NuxtLink>
         <NuxtLink
           to="/basket"
-          class="w-8 h-8 rounded-lg bg-white-100 flex items-center justify-center group cursor-pointer"
+          class="w-8 h-8 relative rounded-lg bg-white-100 flex items-center justify-center group cursor-pointer"
         >
+          <div
+            class="flex items-center justify-center rounded-full bg-red text-white text-xs absolute w-5 h-5 -top-3 -right-4 font-medium"
+          >
+            10
+          </div>
           <i
             class="icon-basket text-2xl text-gray-600 group-hover:text-red transition-200"
           ></i>
