@@ -18,7 +18,7 @@
       <!--        :text-to-highlight="'Metall alyumin'"-->
       <!--      />-->
       <div
-        class="flex items-center gap-1 transition-300 opacity-0 group-hover:opacity-100"
+        class="flex items-center gap-1 transition-300 md:opacity-0 group-hover:opacity-100"
       >
         <p class="text-red text-sm leading-130">{{ $t('more') }}</p>
         <i class="icon-arrow-right text-red text-base leading-4" />
@@ -27,7 +27,7 @@
     <ClientOnly>
       <div class="h-full self-end shrink-0">
         <img
-          class="w-full max-w-[60px] md:max-w-[106px] translate-y-14 md:translate-y-4 h-full"
+          class="w-full max-w-[106px] translate-y-4 h-full"
           src="/fake/category.webp"
           alt="card"
         />

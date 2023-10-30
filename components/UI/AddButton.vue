@@ -4,10 +4,12 @@
     size="small"
     :variant="saved ? 'light' : 'primary'"
     class="w-full mt-auto"
-    @click.stop.prevent="emit('on-action')"
+    @click.stop.prevent="store.incrementCount"
   />
 </template>
 <script setup lang="ts">
+import { useBasketStore } from '~/store/basket'
+
 interface Props {
   saved?: boolean
 }
@@ -16,4 +18,6 @@ defineProps<Props>()
 const emit = defineEmits<{
   (e: 'on-action'): void
 }>()
+
+const store = useBasketStore()
 </script>

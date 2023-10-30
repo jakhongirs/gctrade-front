@@ -4,7 +4,7 @@
     <Transition name="fade" mode="out-in">
       <LayoutCatalogButton :is-open="isOpen" @on-click="isOpen = !isOpen" />
     </Transition>
-    <div class="bg-white-100 pt-[128px] grow relative z-0 pb-16">
+    <div class="bg-white-100 lg:pt-[128px] pt-16 grow relative z-0 pb-16">
       <slot />
     </div>
     <LayoutFooter class="mt-auto" />
@@ -12,7 +12,17 @@
 </template>
 <script setup lang="ts">
 const isOpen = ref(false)
+const route = useRoute()
 
+watch(
+  () => route.fullPath,
+  () => {
+    isOpen.value = false
+  },
+  {
+    deep: true,
+  }
+)
 watch(isOpen, (val) => {
   val
     ? (document.body.style.overflowY = 'hidden')

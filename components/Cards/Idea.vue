@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-white min-w-[350px] rounded-lg shadow-2xl p-6 flex flex-col items-center justify-center"
+    class="bg-white sm:min-w-[350px] min-w-[300px] rounded-lg shadow-2xl p-6 flex flex-col items-center justify-center"
   >
     <div class="max-w-[80px] h-[80px] rounded-full mt-6">
       <img

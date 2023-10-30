@@ -48,8 +48,9 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emit = defineEmits<{
   (e: 'update:modelValue', value: boolean): void
+  (e: 'change', val: Event): void
 }>()
 const handleChange = (e: Event) => {
-  emit('update:modelValue', e?.target?.checked)
+  emit('update:modelValue', e?.target?.value)
 }
 </script>

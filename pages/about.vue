@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="w-full max-h-[400px] min-h-[390px] h-full">
+    <div class="w-full max-h-[400px] md:min-h-[390px] min-h-[190px] h-full">
       <img
         src="/fake/about1.png"
         alt=""
@@ -10,12 +10,14 @@
     <UIBreadcrumb :list="breadcrumbs" />
 
     <div class="container mt-6">
-      <h2 class="text-4xl text-dark font-medium text-center">
+      <h2
+        class="lg:text-4xl md:text-2xl text-xl text-dark font-medium text-center"
+      >
         {{ $t('about') }}
       </h2>
       <div class="mt-8">
         <div
-          class="text-base text-gray-600 leading-7 mx-auto flex flex-col justify-center items-center max-w-[900px]"
+          class="md:text-base text-sm text-gray-600 leading-7 mx-auto flex flex-col justify-center items-center max-w-[900px]"
         >
           <span>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi
@@ -49,7 +51,7 @@
     <div class="bg-white my-10">
       <div class="pt-10 pb-16 container">
         <UISectionTitle center title="statistics" />
-        <div class="grid grid-cols-4 gap-4 mt-14">
+        <div class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 mt-14">
           <div
             v-for="(item, index) in statistics"
             :key="index"

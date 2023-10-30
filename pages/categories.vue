@@ -6,7 +6,7 @@
         <UISectionTitle title="categories" />
         <span class="text-gray-600 text-xl"> (125) </span>
       </div>
-      <div class="grid grid-cols-3 gap-6 mt-6">
+      <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 mt-6">
         <CardsCategory v-for="(item, index) in 9" :key="index" :ind="index" />
       </div>
     </div>

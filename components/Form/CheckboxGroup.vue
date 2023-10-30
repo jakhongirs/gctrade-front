@@ -3,13 +3,13 @@
     <FormCheckbox
       v-for="(item, index) in items"
       :key="index"
-      class="w-full py-1"
+      class="w-full"
       :checked="modelValue.includes(item[valueKey])"
       :label="item[labelKey]"
       :value="item[valueKey]"
       :disabled="disabled ? !modelValue?.includes(item[valueKey]) : false"
       :name="name"
-      @change="onChange($event, item[valueKey])"
+      @update:model-value="onChange($event, item[valueKey])"
     />
   </div>
 </template>
@@ -26,7 +26,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  wrapperClass: 'flex flex-wrap gap-4',
+  wrapperClass: 'flex flex-wrap gap-2',
   labelKey: 'name',
   valueKey: 'id',
   name: `k-checkbox-${Math.floor(Math.random() * 1000)}`,

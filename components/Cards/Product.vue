@@ -4,7 +4,7 @@
       to="/products/top_product"
       class="shadow rounded-lg hover:shadow-2xl flex flex-col min-h-fit group transition-200"
     >
-      <div class="max-h-[280px] h-full rounded-t-lg overflow-hidden relative">
+      <div class="max-h-[250px] h-full rounded-t-lg overflow-hidden relative">
         <UILikeButton class="top-4 right-4" @click.stop.prevent="addCart" />
         <img
           :src="`https://picsum.photos/400/50${ind}`"

@@ -1,6 +1,8 @@
 <template>
   <footer class="bg-white shadow py-10 mt-16">
-    <div class="container grid grid-cols-3 gap-16">
+    <div
+      class="container lg:grid grid-cols-3 md:grid-cols-2 grid-cols-1 gap-16"
+    >
       <div>
         <NuxtLink to="/" class="text-3xl">
           <img src="/svg/logo.svg" alt="" class="max-w-[180px]" />

@@ -1,6 +1,6 @@
 <template>
   <header open class="w-full bg-white fixed top-0 z-[999]">
-    <div class="bg-white-100 w-full py-1">
+    <div class="bg-white-100 w-full py-1 lg:block hidden">
       <div class="container flex items-center justify-between">
         <div class="group">
           <a
@@ -44,7 +44,7 @@
           <img src="/svg/logo.svg" alt="" class="max-w-[180px]" />
         </NuxtLink>
       </div>
-      <div class="min-w-[600px] flex">
+      <div class="min-w-[600px] lg:flex hidden">
         <UIButton
           :text="$t('catalog')"
           size="small"
@@ -84,9 +84,10 @@
           class="w-8 h-8 relative rounded-lg bg-white-100 flex items-center justify-center group cursor-pointer"
         >
           <div
+            v-if="count"
             class="flex items-center justify-center rounded-full bg-red text-white text-xs absolute w-5 h-5 -top-3 -right-4 font-medium"
           >
-            10
+            {{ count }}
           </div>
           <i
             class="icon-basket text-2xl text-gray-600 group-hover:text-red transition-200"
@@ -97,6 +98,8 @@
   </header>
 </template>
 <script setup lang="ts">
+import { useBasketStore } from '~/store/basket'
+
 interface Props {
   open: boolean
 }
@@ -104,6 +107,8 @@ defineProps<Props>()
 defineEmits<{
   (e: 'on-open'): void
 }>()
+const store = useBasketStore()
+const count = computed(() => store.count)
 </script>
 <style>
 header {

@@ -1,9 +1,12 @@
 <template>
   <div
-    class="flex justify-between items-center"
-    :class="{ '!justify-center flex-col': center }"
+    class="flex justify-between items-center md:flex-row flex-col lg:px-0 px-4"
+    :class="{ '!justify-center !flex-col': center }"
   >
-    <h2 class="text-2xl font-medium text-dark" :class="{ '!text-3xl': center }">
+    <h2
+      class="lg:text-2xl text-xl font-medium text-dark"
+      :class="{ 'lg:!text-3xl text-center': center }"
+    >
       {{ $t(title) }}
     </h2>
     <p v-if="center" class="text-sm text-gray-600">

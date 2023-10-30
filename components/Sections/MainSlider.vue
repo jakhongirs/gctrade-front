@@ -1,7 +1,10 @@
 <template>
   <ClientOnly>
     <Transition name="fade" mode="out-in">
-      <div :key="loading" class="md:!h-[487px] overflow-hidden md:pb-[52px]">
+      <div
+        :key="loading"
+        class="md:!h-[487px] h-[200px] overflow-hidden md:pb-[52px]"
+      >
         <Swiper
           v-bind="settings"
           class="main-slider !pb-8 h-full"
@@ -10,13 +13,13 @@
           <SwiperSlide
             v-for="(item, idx) in data"
             :key="'A' + idx"
-            class="cursor-grab active:cursor-grabbing min-w-[900px] max-w-[1000px] relative md:!h-max"
+            class="cursor-grab active:cursor-grabbing md:min-w-[900px] sm:min-w-[740px] min-w-[350px] max-w-[1000px] relative md:h-max"
           >
             <div class="inner_slider_main h-full image-preloader">
               <img
                 :src="item?.image_src"
                 alt="banner"
-                class="object-cover transition-200 rounded-lg w-full h-full"
+                class="object-cover transition-200 rounded-lg sm:w-full w-[350px] md:h-full h-[200px]"
               />
             </div>
           </SwiperSlide>
@@ -45,12 +48,17 @@ const settings = {
   // centerInsufficientSlides: true,
   pauseOnMouseEnter: true,
   loop: true,
-  spaceBetween: 20,
+  spaceBetween: 10,
   autoplay: {
     delay: 3000,
     disableOnInteraction: false,
   },
   modules: [Pagination, Autoplay],
+  breakpoints: {
+    450: {
+      spaceBetween: 20,
+    },
+  },
 }
 
 const activeSlide = ref(0)
