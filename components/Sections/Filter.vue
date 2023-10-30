@@ -1,8 +1,10 @@
 <template>
-  <div>
-    <h2 class="text-xl text-dark font-medium">Filter</h2>
-    <hr class="h-0.5 w-full bg-gray-100/50 my-4" />
-    <div class="max-h-[500px] overflow-y-auto filter-group pr-4 -mr-4">
+  <div class="sm:mt-0 mt-6">
+    <h2 class="text-xl text-dark font-medium sm:block hidden">Filter</h2>
+    <hr class="h-0.5 w-full bg-gray-100/50 my-4 sm:block hidden" />
+    <div
+      class="sm:max-h-[500px] sm:overflow-y-auto filter-group sm:pr-4 sm:-mr-4"
+    >
       <div
         v-for="(item, index) in categories"
         :key="index"
@@ -121,6 +123,12 @@ const handleChange = (id: number) => {
     group.value.push(id)
   }
 }
+watch(
+  () => route.query?.category,
+  () => {
+    group.value.push(Number(route.query?.category))
+  }
+)
 onMounted(() => {
   if (route.query?.category) {
     group.value.push(Number(route.query?.category))
