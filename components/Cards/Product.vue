@@ -3,7 +3,9 @@
     <div
       class="shadow rounded-lg hover:shadow-2xl flex flex-col min-h-fit group transition-200"
     >
-      <div class="max-h-[250px] h-full rounded-t-lg overflow-hidden relative">
+      <div
+        class="sm:max-h-[250px] sm:min-h-[250px] max-h-[200px] min-h-[200px] h-full rounded-t-lg overflow-hidden relative"
+      >
         <UILikeButton class="top-4 right-4" @click.stop.prevent="addCart" />
         <img
           :src="`https://picsum.photos/400/50${ind}`"
@@ -13,15 +15,15 @@
       </div>
       <NuxtLink
         to="/products/top_products"
-        class="px-4 pt-6 pb-4 grow flex flex-col"
+        class="sm:px-4 sm:pt-6 sm:pb-4 px-2 pt-4 pb-2 grow active:outline-none active:bg-transparent flex flex-col"
       >
         <span v-if="ind % 2 === 0" class="text-red-400 text-xs line-through"
           >160 000 UZS</span
         >
-        <h3 class="font-bold text-xl text-dark">120 000 UZS</h3>
+        <h3 class="font-bold sm:text-xl text-base text-dark">120 000 UZS</h3>
         <p class="text-dark text-base transition-200">Product name come here</p>
 
-        <p class="my-4 text-base font-medium text-dark">
+        <p class="my-4 sm:text-base text-sm font-medium text-dark">
           Manufacturer, <span class="text-gray-400 font-normal">Tashkent</span>
         </p>
 

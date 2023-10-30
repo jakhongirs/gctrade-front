@@ -1,5 +1,5 @@
 <template>
-  <div class="container py-16">
+  <div class="container sm:py-16 py-5">
     <SectionTitle
       title="categories"
       link="/categories"
