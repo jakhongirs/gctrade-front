@@ -1,7 +1,6 @@
 <template>
   <ClientOnly>
-    <NuxtLink
-      to="/products/top_product"
+    <div
       class="shadow rounded-lg hover:shadow-2xl flex flex-col min-h-fit group transition-200"
     >
       <div class="max-h-[250px] h-full rounded-t-lg overflow-hidden relative">
@@ -12,7 +11,10 @@
           class="h-full w-full object-cover relative z-0 aspect-square rounded-t-lg transition-200 group-hover:scale-105"
         />
       </div>
-      <div class="px-4 pt-6 pb-4 grow flex flex-col">
+      <NuxtLink
+        to="/products/top_products"
+        class="px-4 pt-6 pb-4 grow flex flex-col"
+      >
         <span v-if="ind % 2 === 0" class="text-red-400 text-xs line-through"
           >160 000 UZS</span
         >
@@ -24,8 +26,8 @@
         </p>
 
         <UIAddButton :saved="ind % 2 === 0" />
-      </div>
-    </NuxtLink>
+      </NuxtLink>
+    </div>
   </ClientOnly>
 </template>
 <script setup lang="ts">

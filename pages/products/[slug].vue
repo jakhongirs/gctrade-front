@@ -4,9 +4,9 @@
     <div class="container mt-16">
       <div class="grid grid-cols-12 gap-6">
         <ClientOnly>
-          <SectionsSingleSlider class="col-span-5" />
+          <SectionsSingleSlider class="lg:col-span-5 col-span-12" />
         </ClientOnly>
-        <div class="col-span-7 flex flex-col h-full">
+        <div class="lg:col-span-7 col-span-12 flex flex-col h-full">
           <div class="flex items-center justify-between">
             <h2 class="text-dark-400 text-3xl font-bold shrink-0">
               Product name
@@ -51,11 +51,11 @@
             </div>
           </div>
           <hr class="h-0.5 bg-gray-400/50 w-full rounded my-4" />
-          <UIButton :text="$t('to_cart')" class="mt-6" />
+          <UIButton :text="$t('to_cart')" class="mt-6 sm:w-fit w-full" />
           <!--          <hr class="h-0.5 bg-gray-400/50 w-full rounded my-4" />-->
         </div>
       </div>
-      <div class="mt-16 px-16">
+      <div class="mt-16 lg:px-16">
         <h3 class="text-2xl font-medium mb-4">{{ $t('description') }}</h3>
         <div class="text-base text-dark-400 leading-7">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab

@@ -16,7 +16,7 @@
             :value="category.id"
             :label="category.title"
             name="checkbox_group"
-            class="py-1"
+            class="py-1 block w-full"
             :checked="group.includes(category.id)"
             @update:model-value="handleChange(category.id)"
           />

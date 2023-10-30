@@ -32,7 +32,7 @@
         </li>
         <li class="mb-2">
           <NuxtLink
-            to="/contact"
+            to="/products"
             class="transition-200 text-sm text-dark-400 hover:text-red"
           >
             {{ $t('products') }}</NuxtLink
@@ -40,7 +40,7 @@
         </li>
         <li class="mb-2">
           <NuxtLink
-            to="/contact"
+            to="/categories"
             class="transition-200 text-sm text-dark-400 hover:text-red"
           >
             {{ $t('categories') }}</NuxtLink
