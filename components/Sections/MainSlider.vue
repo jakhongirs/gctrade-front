@@ -7,15 +7,17 @@
       >
         <Swiper
           v-bind="settings"
-          class="main-slider !pb-8 h-full"
+          class="!pb-8 h-full"
           @slide-change="onChangeSlide"
         >
           <SwiperSlide
             v-for="(item, idx) in data"
             :key="'A' + idx"
-            class="cursor-grab active:cursor-grabbing md:min-w-[900px] sm:min-w-[740px] min-w-[350px] max-w-[1000px] relative md:h-max"
+            class="cursor-grab active:cursor-grabbing relative md:max-w-[1000px] max-w-[350px] w-full md:!h-max"
           >
-            <div class="inner_slider_main h-full image-preloader">
+            <div
+              class="inner_slider_main lg:min-w-[1000px] min-w-[320px] h-full image-preloader"
+            >
               <img
                 :src="item?.image_src"
                 alt="banner"
@@ -48,12 +50,12 @@ const settings = {
   // centerInsufficientSlides: true,
   pauseOnMouseEnter: true,
   loop: true,
-  spaceBetween: 10,
+  spaceBetween: 20,
   autoplay: {
     delay: 3000,
     disableOnInteraction: false,
   },
-  modules: [Pagination, Autoplay],
+  modules: [Autoplay],
   breakpoints: {
     450: {
       spaceBetween: 20,
