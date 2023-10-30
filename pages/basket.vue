@@ -4,7 +4,7 @@
     <div class="container my-12">
       <UISectionTitle title="basket" class="mb-6" />
       <div class="grid grid-cols-12 gap-6">
-        <div class="col-span-8 bg-white shadow p-5 rounded">
+        <div class="lg:col-span-8 col-span-12 bg-white shadow p-5 rounded">
           <div>
             <template v-for="(item, index) in 4" :key="index">
               <CardsBasket />
@@ -12,7 +12,9 @@
             </template>
           </div>
         </div>
-        <div class="col-span-4 bg-white shadow p-5 rounded h-fit">
+        <div
+          class="lg:col-span-4 col-span-12 bg-white shadow p-5 rounded h-fit"
+        >
           <h2 class="text-lg font-semibold text-dark-400">
             {{ $t('your_order') }}
           </h2>
