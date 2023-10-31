@@ -69,10 +69,10 @@
           </li>
         </ul>
         <UILanguageSwitcher class="max-w-[180px] -ml-3" />
-        <div class="mt-auto">
+        <div class="mt-auto mb-10">
           <a
             href="/"
-            class="flex items-center w-full transition-200 text-base mb-3"
+            class="flex items-center w-full transition-200 text-sm mb-2"
           >
             <i
               class="icon-map-square text-gray text-2xl mr-1 transition-200"
@@ -81,7 +81,7 @@
           </a>
           <a
             href="https://t.me/bozor_com"
-            class="flex items-center w-full transition-200 text-base mb-3"
+            class="flex items-center w-full transition-200 text-sm mb-2"
           >
             <i
               class="icon-telegram text-xl text-gray mr-2 group-hover:text-red transition-200"
@@ -90,7 +90,7 @@
           >
           <a
             href="tel:+998955156515"
-            class="flex items-center w-full transition-200 text-base mb-3"
+            class="flex items-center w-full transition-200 text-sm mb-2"
             ><i
               class="icon-phone text-2xl text-gray mr-2 group-hover:text-red transition-200"
             ></i>
