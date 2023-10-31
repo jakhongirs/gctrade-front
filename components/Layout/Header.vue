@@ -70,7 +70,13 @@
           input-class="!py-2"
         />
       </div>
-      <div class="flex items-center gap-2">
+      <div class="" @click="$emit('on-open')">
+        <i
+          class="text-3xl text-dark"
+          :class="open ? 'icon-close-circle-regular' : 'icon-hamburger-menu'"
+        ></i>
+      </div>
+      <div class="md:flex hidden items-center gap-2">
         <NuxtLink
           to="/saved"
           class="w-8 h-8 rounded-lg bg-white-100 flex items-center justify-center group cursor-pointer"

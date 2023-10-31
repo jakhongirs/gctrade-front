@@ -2,7 +2,18 @@
   <div class="flex flex-col min-h-screen relative">
     <LayoutHeader :open="isOpen" class="z-10" @on-open="isOpen = !isOpen" />
     <Transition name="fade" mode="out-in">
-      <LayoutCatalogButton :is-open="isOpen" @on-click="isOpen = !isOpen" />
+      <div>
+        <LayoutCatalogButton
+          class="md:block hidden"
+          :is-open="isOpen"
+          @on-click="isOpen = !isOpen"
+        />
+        <LayoutResponsiveMenu
+          class="md:hidden block"
+          :is-open="isOpen"
+          @on-click="isOpen = !isOpen"
+        />
+      </div>
     </Transition>
     <div class="bg-white-100 lg:pt-[128px] pt-16 grow relative z-0 pb-16">
       <slot />
