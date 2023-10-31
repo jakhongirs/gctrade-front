@@ -1,7 +1,7 @@
 <template>
   <footer class="bg-white shadow py-10 mt-16">
     <div
-      class="container lg:grid grid-cols-3 md:grid-cols-2 grid-cols-1 gap-16"
+      class="container lg:grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-16"
     >
       <div>
         <NuxtLink to="/" class="text-3xl">
@@ -48,23 +48,23 @@
         </li>
       </ul>
       <div>
-        <p class="text-base text-dark-400 font-medium mb-4">
+        <p class="text-sm text-dark-400 font-medium mb-4">
           {{ $t('on_social_media') }}:
         </p>
         <div class="flex items-center gap-4 my-4">
           <a href="">
             <i
-              class="icon-telegram transition-200 text-gray-600 hover:text-telegram text-2xl"
+              class="icon-telegram transition-200 text-gray-600 hover:text-telegram text-xl"
             ></i>
           </a>
           <a href="">
             <i
-              class="icon-instagram transition-200 text-gray-600 hover:text-red text-2xl"
+              class="icon-instagram transition-200 text-gray-600 hover:text-red text-xl"
             ></i>
           </a>
           <a href="">
             <i
-              class="icon-facebook-square transition-200 text-gray-600 hover:text-facebook text-2xl"
+              class="icon-facebook-square transition-200 text-gray-600 hover:text-facebook text-xl"
             ></i>
           </a>
         </div>

@@ -1,38 +1,109 @@
 <template>
-  <div v-if="loading" aria-hidden="true" aria-label="skeleton" @click.stop>
+  <Transition name="skeleton" mode="out-in">
     <div
-      v-for="(i, index) in count"
-      :key="i"
-      class="bg-gray-100 animate-pulse rounded-md cursor-progress"
-      :class="itemClass"
+      v-if="loading"
+      key="loading"
+      :class="preloaderClass"
+      class="flex-shrink-0"
       :style="{
-        width: getWidth(index),
-        height,
+        height: height,
+        width: width,
+        margin: margin,
       }"
-    ></div>
-  </div>
-  <slot v-else />
+    >
+      <span class="skeleton" :style="shimmerStyles" />
+    </div>
+    <template v-else>
+      <ClientOnly>
+        <slot />
+      </ClientOnly>
+    </template>
+  </Transition>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
+import { computed } from 'vue'
+
 interface Props {
   loading?: boolean
-  width?: string
   height?: string
-  itemClass?: string | string[]
-  count?: number
+  width?: string
+  margin?: string
+  line?: string | number
+  borderRadius?: string
+  preloaderClass?: string | string[]
+  circle?: boolean
+  contentWrapperClass?: string
 }
+
 const props = withDefaults(defineProps<Props>(), {
-  count: 1,
-  width: '100%',
-  height: '',
-  itemClass: '',
+  height: '20px',
+  width: '50px',
+  line: 1,
+  borderRadius: '4px',
+  preloaderClass: '',
 })
 
-function getWidth(index: number) {
-  if (props.width.includes(',')) {
-    return props.width.split(',')[index]
+const shimmerStyles = computed(() => {
+  return {
+    '--width': props.width,
+    '--height': props.height,
+    '--border-radius': props.circle ? '50%' : props.borderRadius,
   }
-  return props.width
-}
+})
 </script>
+
+<style scoped>
+.skeleton {
+  background: #1c1c1c;
+  background-image: linear-gradient(
+    to right,
+    rgba(114, 91, 91, 0) 0%,
+    #3c3c3cc7 20%,
+    #3c3c3c 50%,
+    #3c3c3cc7 70%,
+    rgba(49, 31, 31, 0) 100%
+  );
+  width: 100%;
+  height: 100%;
+  border-radius: var(--border-radius);
+  background-repeat: no-repeat;
+  background-size: var(--width) var(--height);
+  display: inline-block;
+  position: relative;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeholderShimmer;
+  animation-timing-function: linear;
+}
+
+.dark .skeleton {
+  background: linear-gradient(
+    to right,
+    rgba(194, 198, 204, 0.3) 5.93%,
+    rgba(255, 255, 255, 0.42) 26.56%,
+    rgba(194, 198, 204, 0.3) 62.69%
+  ) !important;
+}
+
+@keyframes placeholderShimmer {
+  0% {
+    background-position: -468px 0;
+  }
+
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+.skeleton-enter-active,
+.skeleton-leave-active {
+  transition: all 0.1s ease-out;
+}
+
+.skeleton-enter,
+.skeleton-leave-to {
+  opacity: 0;
+}
+</style>

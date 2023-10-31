@@ -9,26 +9,21 @@
       <h3
         class="font-semibold text-sm md:text-xl text-dark leading-130 w-[80px] md:w-full"
       >
-        Konditsioner
+        {{ data.title }}
       </h3>
-      <!--      <Highlighter-->
-      <!--        class="font-semibold text-sm md:text-xl text-dark leading-130 w-[80px] md:w-full flex"-->
-      <!--        highlight-class-name="bg-[#FFCD55] rounded"-->
-      <!--        :search-words="[$route.query.search ?? '']"-->
-      <!--        :text-to-highlight="'Metall alyumin'"-->
-      <!--      />-->
-      <div
-        class="flex items-center gap-1 transition-300 md:opacity-0 group-hover:opacity-100"
+      <NuxtLink
+        :to="`/products?parent_category=${data.id}`"
+        class="inline-flex items-center gap-1 transition-300 md:opacity-0 group-hover:opacity-100"
       >
         <p class="text-red text-sm leading-130">{{ $t('more') }}</p>
         <i class="icon-arrow-right text-red text-base leading-4" />
-      </div>
+      </NuxtLink>
     </div>
     <ClientOnly>
       <div class="h-full self-end shrink-0">
         <img
           class="w-full max-w-[106px] translate-y-4 h-full"
-          src="/fake/category.webp"
+          :src="data.icon"
           alt="card"
         />
       </div>
@@ -37,12 +32,11 @@
 </template>
 
 <script setup lang="ts">
-// import Highlighter from 'vue-highlight-words'
-
-// import { TCategory } from '~/types/categories'
+import { ICategory } from '~/types'
 
 export interface Props {
   loading?: boolean
+  data: ICategory
 }
 defineProps<Props>()
 </script>

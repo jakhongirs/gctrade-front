@@ -8,9 +8,13 @@
     <SectionsTopProducts />
     <SectionsOnSaleProducts />
     <SectionsRecentlySeen />
+    <pre> {{ homeStore.categories }} </pre>
   </div>
 </template>
 <script setup lang="ts">
+import { useHomeStore } from '~/store/home'
+
+const homeStore = useHomeStore()
 const swiperData = [
   {
     image_src: 'https://picsum.photos/800/400',

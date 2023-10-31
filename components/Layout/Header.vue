@@ -70,7 +70,7 @@
           input-class="!py-2"
         />
       </div>
-      <div class="" @click="$emit('on-open')">
+      <div class="md:hidden block" @click="$emit('on-open')">
         <i
           class="text-3xl text-dark"
           :class="open ? 'icon-close-circle-regular' : 'icon-hamburger-menu'"
@@ -105,6 +105,7 @@
 </template>
 <script setup lang="ts">
 import { useBasketStore } from '~/store/basket'
+import { useHomeStore } from '~/store/home'
 
 interface Props {
   open: boolean
@@ -113,8 +114,14 @@ defineProps<Props>()
 defineEmits<{
   (e: 'on-open'): void
 }>()
+
+const homeStore = useHomeStore()
 const store = useBasketStore()
 const count = computed(() => store.count)
+
+Promise.allSettled([homeStore.fetchCategories()]).catch((err) => {
+  console.log(err)
+})
 </script>
 <style>
 header {
