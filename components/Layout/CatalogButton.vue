@@ -7,7 +7,7 @@
       <div class="col-span-3 overflow-y-auto">
         <ul class="px-4 py-2">
           <li
-            v-for="(item, index) in categories"
+            v-for="(item, index) in data"
             :key="index"
             :class="{ '!text-red': activeCatgeory === item.id }"
             class="text-lg cursor-pointer text-dark py-2 transition-200 hover:text-red flex justify-between items-center"
@@ -37,16 +37,19 @@
 
 <script lang="ts" setup>
 import { categories } from '~/data'
+import { useHomeStore } from '~/store/home'
+import { ICategory } from '~/types'
 
 export interface Props {
   isOpen: boolean
 }
 defineProps<Props>()
-
-const subCategories = ref(categories[0].categories || [])
+const store = useHomeStore()
+const data = computed((): ICategory[] => store.categories)
+const subCategories = ref(data.value[0]?.categories || [])
 const activeCatgeory = ref(1)
 function defineSubCategories(id: number) {
-  subCategories.value = categories.find(
+  subCategories.value = data.value.find(
     (element) => element.id === id
   )?.categories
 

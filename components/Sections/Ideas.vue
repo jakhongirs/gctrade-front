@@ -1,5 +1,5 @@
 <template>
-  <div class="py-14">
+  <div class="sm:py-14 pt-5">
     <UISectionTitle title="partners_ideas" center class="mb-8" />
     <div>
       <Swiper v-bind="settings" class="!pt-6 !pb-16 h-full overflow-hidden">

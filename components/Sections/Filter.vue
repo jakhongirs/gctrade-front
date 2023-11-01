@@ -1,9 +1,9 @@
 <template>
-  <div class="sm:mt-0 mt-6">
-    <h2 class="text-xl text-dark font-medium sm:block hidden">Filter</h2>
+  <div class="lg:mt-0 mt-6">
+    <h2 class="text-xl text-dark font-medium lg:block hidden">Filter</h2>
     <hr class="h-0.5 w-full bg-gray-100/50 my-4 sm:block hidden" />
     <div
-      class="sm:max-h-[500px] sm:overflow-y-auto filter-group sm:pr-4 sm:-mr-4"
+      class="lg:max-h-[500px] lg:overflow-y-auto filter-group lg:pr-4 lg:-mr-4"
     >
       <div
         v-for="(item, index) in categories"

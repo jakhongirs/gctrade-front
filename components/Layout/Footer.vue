@@ -1,9 +1,9 @@
 <template>
-  <footer class="bg-white shadow py-10 mt-16">
+  <footer class="bg-white shadow sm:py-10 pt-6 pb-4 mt-16">
     <div
       class="container lg:grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-16"
     >
-      <div>
+      <div class="sm:mb-0 mb-4">
         <NuxtLink to="/" class="text-3xl">
           <img src="/svg/logo.svg" alt="" class="max-w-[180px]" />
         </NuxtLink>
@@ -13,7 +13,7 @@
           veritatis!
         </p>
       </div>
-      <ul>
+      <ul class="sm:mb-0 mb-4">
         <li class="mb-2">
           <NuxtLink
             to="/about"

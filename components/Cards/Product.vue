@@ -19,27 +19,27 @@
         to="/products/top_products"
         class="px-2 pt-4 pb-2 grow active:outline-none active:bg-transparent flex flex-col"
       >
-        <UISkeleton v-bind="{ loading }" width="120px" height="16px">
+        <UISkeleton v-bind="{ loading }" width="70%" height="16px">
           <span v-if="ind % 2 === 0" class="text-red-400 text-xs line-through"
             >160 000 UZS</span
           >
         </UISkeleton>
         <UISkeleton
           v-bind="{ loading }"
-          width="160px"
+          width="80%"
           height="24px"
           margin="4px 0"
         >
           <h3 class="font-bold text-base text-dark">120 000 UZS</h3>
         </UISkeleton>
-        <UISkeleton v-bind="{ loading }" width="180px" height="24px">
+        <UISkeleton v-bind="{ loading }" width="96%" height="24px">
           <p class="text-dark text-base transition-200">
             Product name come here
           </p>
         </UISkeleton>
         <UISkeleton
           v-bind="{ loading }"
-          width="150px"
+          width="88%"
           height="24px"
           margin="16px 0"
         >

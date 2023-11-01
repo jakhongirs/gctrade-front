@@ -3,7 +3,7 @@
     :to="{ path: '/products', query: { manufacturers: brand?.id } }"
     class="cursor-pointer transition-200 bg-white p-4 rounded-2xl w-full h-[136px] flex justify-center items-center group inline-block"
     :class="{
-      '!bg-white-100 !h-[106px] !w-[220px] md:!h-[112px] md:!w-[234px]': isGray,
+      '!bg-white-100 !h-[80px] !w-[150px] md:!h-[112px] md:!w-[234px]': isGray,
     }"
   >
     <img
