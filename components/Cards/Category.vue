@@ -8,7 +8,7 @@
     >
       <UISkeleton v-bind="{ loading }" height="20px" width="60%">
         <h3
-          class="font-semibold text-sm md:text-xl text-dark leading-130 w-[80px] md:w-full"
+          class="font-semibold text-sm md:text-xl text-dark leading-130 md:w-full"
         >
           {{ data.title }}
         </h3>
