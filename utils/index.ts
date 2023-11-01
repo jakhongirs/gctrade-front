@@ -1,3 +1,5 @@
+import { IPartners } from '~/types'
+
 const timeouts: { [key: string]: any } = {}
 
 const cTimeout = (key = 'key') => {
@@ -53,4 +55,19 @@ export function formatMoneyDecimal(number: any, fix = 0, option = 'decimal') {
   return number
     ? new Intl.NumberFormat('ru-RU', option2).format(number)
     : '0,00'
+}
+export function generateItem(arr: any[]) {
+  let index = 0 // 1 / 2
+  const generatedArray = [] // [{id: 1},{id: 2}, {id: 3}, {id: 1}]
+  const checkResponseLength = arr?.length // 3
+  const checkAdditionalItems = 100 - checkResponseLength // 97
+  for (let i = 0; i <= checkAdditionalItems; i++) {
+    generatedArray.push(arr[index])
+    if (index + 1 === checkResponseLength) {
+      index = 0
+    } else {
+      index++
+    }
+  }
+  return generatedArray
 }

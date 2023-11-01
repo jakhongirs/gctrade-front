@@ -13,7 +13,9 @@ export const useMainStore = defineStore('main', {
     },
     async fetchPartners() {
       try {
-        const data = await useApi().$get<IResponse<IPartners>>(`partners/`)
+        const data = await useApi().$get<IResponse<IPartners>>(
+          `partners/feedback/`
+        )
         if (data) {
           this.partners = data?.results
         }

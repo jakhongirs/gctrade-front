@@ -25,3 +25,13 @@ export interface IPartners {
   order: number
   url: string
 }
+export interface IIdeas {
+  id: number
+  company: {
+    id: number
+    name: string
+    logo: string
+    url: string
+  }
+  text: string
+}

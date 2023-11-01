@@ -63,7 +63,11 @@ function generateItem(arr: IPartners[]) {
 try {
   loading.value = true
   const brands = useAsyncData('brands', () =>
-    useApi().$get<IResponse<IPartners>>(`partners/`)
+    useApi().$get<IResponse<IPartners>>(`partners/`, {
+      params: {
+        limit: 50,
+      },
+    })
   )
   if (brands.data.value) {
     data.value = brands.data.value?.results
