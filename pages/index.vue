@@ -11,9 +11,10 @@
   </div>
 </template>
 <script setup lang="ts">
-import { useHomeStore } from '~/store/home'
+import { useAsyncData } from '#app'
+import { useMainStore } from '~/store/main'
 
-const homeStore = useHomeStore()
+const store = useMainStore()
 const swiperData = [
   {
     image_src: 'https://picsum.photos/800/400',
@@ -28,4 +29,7 @@ const swiperData = [
     image_src: 'https://picsum.photos/800/403',
   },
 ]
+// useAsyncData('main', async () => {
+//   await store.fetchPartners()
+// })
 </script>

@@ -19,6 +19,7 @@
       <slot />
     </div>
     <LayoutFooter class="mt-auto" />
+    <LayoutLoader />
   </div>
 </template>
 <script setup lang="ts">

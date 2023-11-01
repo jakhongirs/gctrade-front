@@ -4,7 +4,7 @@
     <div class="marquee mb-8">
       <div class="marquee__group_left">
         <CardsBrand
-          v-for="(item, index) in 100"
+          v-for="(item, index) in loading ? 100 : generateItem(data)"
           :key="'F' + index"
           :brand="item"
           :loading="loading"
@@ -16,7 +16,7 @@
     <div class="marquee mb-6">
       <div class="marquee__group_right">
         <CardsBrand
-          v-for="(item, index) in 100"
+          v-for="(item, index) in loading ? 100 : generateItem(data)"
           :key="'G' + index"
           :brand="item"
           :loading="loading"
@@ -28,7 +28,7 @@
     <div class="marquee">
       <div class="marquee__group_left">
         <CardsBrand
-          v-for="(item, index) in 100"
+          v-for="(item, index) in loading ? 100 : generateItem(data)"
           :key="'H' + index"
           :brand="item"
           :loading="loading"
@@ -40,16 +40,14 @@
 </template>
 
 <script lang="ts" setup>
-interface Props {
-  partnersList: any[]
-  loading?: boolean
-  reverse?: boolean
-}
-defineProps<Props>()
-function generateItem(arr: any[]) {
+import { IPartners, IResponse } from '~/types'
+
+const data = ref<IPartners[]>([])
+const loading = ref(false)
+function generateItem(arr: IPartners[]) {
   let index = 0 // 1 / 2
   const generatedArray = [] // [{id: 1},{id: 2}, {id: 3}, {id: 1}]
-  const checkResponseLength = 10 // arr?.length // 3
+  const checkResponseLength = arr?.length // 3
   const checkAdditionalItems = 100 - checkResponseLength // 97
   for (let i = 0; i <= checkAdditionalItems; i++) {
     generatedArray.push(arr[index])
@@ -60,6 +58,20 @@ function generateItem(arr: any[]) {
     }
   }
   return generatedArray
+}
+
+try {
+  loading.value = true
+  const brands = useAsyncData('brands', () =>
+    useApi().$get<IResponse<IPartners>>(`partners/`)
+  )
+  if (brands.data.value) {
+    data.value = brands.data.value?.results
+  }
+} catch (err) {
+  console.log(err)
+} finally {
+  loading.value = false
 }
 </script>
 

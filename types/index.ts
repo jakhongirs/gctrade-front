@@ -18,3 +18,10 @@ export interface ICategory {
   icon: string
   categories: IChildCategory[] | []
 }
+export interface IPartners {
+  id: number
+  logo: string
+  name: string
+  order: number
+  url: string
+}
