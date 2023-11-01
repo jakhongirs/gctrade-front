@@ -8,7 +8,6 @@
     <SectionsTopProducts />
     <SectionsOnSaleProducts />
     <SectionsRecentlySeen />
-    <pre> {{ homeStore.categories }} </pre>
   </div>
 </template>
 <script setup lang="ts">

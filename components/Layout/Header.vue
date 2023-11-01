@@ -1,41 +1,46 @@
 <template>
   <header open class="w-full bg-white fixed top-0 z-[999]">
-    <div class="bg-white-100 w-full py-1 lg:block hidden">
-      <div class="container flex items-center justify-between">
-        <div class="group">
-          <a
-            href="/"
-            class="flex items-center transition-200 text-sm group-hover:text-red"
-          >
-            <i
-              class="icon-map-square text-gray text-xl mr-1 transition-200 group-hover:text-red"
-            ></i>
-            Toshkent
-          </a>
-        </div>
-        <div class="flex items-center gap-4">
-          <a
-            href="https://t.me/bozor_com"
-            class="flex items-center text-sm transition-200 group hover:text-red"
-          >
-            <i
-              class="icon-telegram text-base text-gray mr-2 group-hover:text-red transition-200"
-            ></i
-            >t.me/bozor_com</a
-          >
-          <a
-            href="tel:+998955156515"
-            class="flex items-center text-sm transition-200 group hover:text-red"
-            ><i
-              class="icon-phone text-2xl text-gray mr-2 group-hover:text-red transition-200"
-            ></i>
-            +998 95 515 65 15</a
-          >
-          <UILanguageSwitcher />
-          <!--          <UIThemeSwitcher />-->
+    <CollapseTransition easing="linear" dimension="height">
+      <div
+        v-if="!windowIsScrolled"
+        class="bg-white-100 w-full py-1 lg:block hidden"
+      >
+        <div class="container flex items-center justify-between">
+          <div class="group">
+            <a
+              href="/"
+              class="flex items-center transition-200 text-sm group-hover:text-red"
+            >
+              <i
+                class="icon-map-square text-gray text-xl mr-1 transition-200 group-hover:text-red"
+              ></i>
+              Toshkent
+            </a>
+          </div>
+          <div class="flex items-center gap-4">
+            <a
+              href="https://t.me/bozor_com"
+              class="flex items-center text-sm transition-200 group hover:text-red"
+            >
+              <i
+                class="icon-telegram text-base text-gray mr-2 group-hover:text-red transition-200"
+              ></i
+              >t.me/bozor_com</a
+            >
+            <a
+              href="tel:+998955156515"
+              class="flex items-center text-sm transition-200 group hover:text-red"
+              ><i
+                class="icon-phone text-2xl text-gray mr-2 group-hover:text-red transition-200"
+              ></i>
+              +998 95 515 65 15</a
+            >
+            <UILanguageSwitcher />
+            <!--          <UIThemeSwitcher />-->
+          </div>
         </div>
       </div>
-    </div>
+    </CollapseTransition>
     <div
       class="container bg-white w-full flex items-center justify-between py-4"
     >
@@ -104,6 +109,9 @@
   </header>
 </template>
 <script setup lang="ts">
+import CollapseTransition from '@ivanv/vue-collapse-transition/src/CollapseTransition.vue'
+import { useWindowScroll } from '@vueuse/core'
+
 import { useBasketStore } from '~/store/basket'
 import { useHomeStore } from '~/store/home'
 
@@ -118,6 +126,21 @@ defineEmits<{
 const homeStore = useHomeStore()
 const store = useBasketStore()
 const count = computed(() => store.count)
+const scroll = useWindowScroll()
+const scrollTop = scroll.y
+const windowIsScrolled = ref(false)
+//
+watch(
+  () => scrollTop.value,
+  (value) => {
+    if (value > 300) {
+      windowIsScrolled.value = true
+    }
+    if (value < 150) {
+      windowIsScrolled.value = false
+    }
+  }
+)
 
 Promise.allSettled([homeStore.fetchCategories()]).catch((err) => {
   console.log(err)

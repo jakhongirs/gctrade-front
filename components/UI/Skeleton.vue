@@ -28,17 +28,18 @@ interface Props {
   loading?: boolean
   height?: string
   width?: string
+  maxWidth?: string
   margin?: string
   line?: string | number
   borderRadius?: string
   preloaderClass?: string | string[]
   circle?: boolean
-  contentWrapperClass?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
   height: '20px',
   width: '50px',
+  maxWidth: '100px',
   line: 1,
   borderRadius: '4px',
   preloaderClass: '',
@@ -47,6 +48,7 @@ const props = withDefaults(defineProps<Props>(), {
 const shimmerStyles = computed(() => {
   return {
     '--width': props.width,
+    '--max-width': props.width,
     '--height': props.height,
     '--border-radius': props.circle ? '50%' : props.borderRadius,
   }
@@ -55,14 +57,12 @@ const shimmerStyles = computed(() => {
 
 <style scoped>
 .skeleton {
-  background: #1c1c1c;
+  background: #dddbdd;
   background-image: linear-gradient(
     to right,
-    rgba(114, 91, 91, 0) 0%,
-    #3c3c3cc7 20%,
-    #3c3c3c 50%,
-    #3c3c3cc7 70%,
-    rgba(49, 31, 31, 0) 100%
+    rgba(194, 198, 204, 0.3) 5.93%,
+    rgba(255, 255, 255, 0.42) 26.56%,
+    rgba(194, 198, 204, 0.3) 62.69%
   );
   width: 100%;
   height: 100%;

@@ -4,7 +4,7 @@
     size="small"
     :variant="saved ? 'light' : 'primary'"
     class="w-full mt-auto"
-    text-class="sm:!text-base !text-xs"
+    text-class="!text-xs"
     @click.stop.prevent="store.incrementCount"
   />
 </template>

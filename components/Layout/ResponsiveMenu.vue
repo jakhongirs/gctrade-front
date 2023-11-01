@@ -10,7 +10,7 @@
           <li
             v-for="(item, index) in categories"
             :key="index"
-            class="cursor-pointer rounded mb-2 border-b border-b-gray-100"
+            class="cursor-pointer rounded mb-2 border-b border-dashed border-b-gray-100/50"
             @click="
               activeCategory === item.id
                 ? (activeCategory = null)
@@ -18,8 +18,8 @@
             "
           >
             <div
-              class="text-lg text-dark transition-200 flex justify-between items-center"
-              :class="{ '!text-red': activeCategory === item.id }"
+              class="text-base font-medium text-dark transition-200 flex justify-between items-center"
+              :class="{ '!text-dark-400': activeCategory === item.id }"
             >
               {{ item.title }}
               <i
@@ -46,7 +46,7 @@
             </CollapseTransition>
           </li>
         </ul>
-        <ul>
+        <ul class="mt-8">
           <li class="py-1">
             <NuxtLink to="/about" class="text-base font-medium text-dark-400">
               {{ $t('about') }}
@@ -68,7 +68,7 @@
             </NuxtLink>
           </li>
         </ul>
-        <UILanguageSwitcher class="max-w-[180px] -ml-3" />
+        <UILanguageSwitcher class="max-w-[180px] -ml-3 mt-6" />
         <div class="mt-auto mb-10">
           <a
             href="/"

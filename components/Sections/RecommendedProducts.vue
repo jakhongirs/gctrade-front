@@ -6,7 +6,9 @@
       link-text=""
       class="mb-6"
     />
-    <div class="grid lg:grid-cols-4 grid-cols-2 sm:gap-6 gap-3">
+    <div
+      class="grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 sm:gap-6 gap-3"
+    >
       <CardsProduct v-for="(item, index) in 4" :key="index" :ind="index" />
     </div>
   </div>

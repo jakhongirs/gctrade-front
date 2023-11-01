@@ -7,7 +7,12 @@
       class="mb-8"
     />
     <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6">
-      <CardsCategory v-for="(item, index) in data" :key="index" :data="item" />
+      <CardsCategory
+        v-for="(item, index) in loading ? 6 : data"
+        :key="index"
+        :data="item"
+        :loading="loading"
+      />
     </div>
   </div>
 </template>
@@ -18,4 +23,5 @@ import { ICategory } from '~/types'
 
 const store = useHomeStore()
 const data = computed((): ICategory[] => store.categories)
+const loading = computed(() => store.loading)
 </script>
