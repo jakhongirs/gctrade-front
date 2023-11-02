@@ -20,21 +20,21 @@
   </div>
 </template>
 <script setup lang="ts">
-import { IProduct, IResponse } from '~/types'
+import { IProduct, IRecentProduct, IResponse } from '~/types'
 
 const loading = ref(true)
 const data = ref<IProduct[]>([])
 try {
   loading.value = true
   const list = useAsyncData('recent_products', () =>
-    useApi().$get<IResponse<IProduct>>(`product/last-seen-products/`, {
+    useApi().$get<IResponse<IRecentProduct>>(`product/last-seen-products/`, {
       params: {
         limit: 8,
       },
     })
   )
   if (list.data.value) {
-    data.value = list.data.value?.results
+    data.value = list.data.value?.results.map((el) => el.product)
   }
 } catch (err) {
   console.log(err)

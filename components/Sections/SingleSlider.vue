@@ -102,7 +102,7 @@ const settings = {
 
 const thumbsSwiper = ref()
 const onSwiper = (swiper) => {
-  console.log(swiper)
+  console.log('e')
 }
 const setThumbsSwiper = (swiper) => {
   // if (Image) {
@@ -110,15 +110,12 @@ const setThumbsSwiper = (swiper) => {
   // }
 }
 const onSlideChange = () => {
-  console.log('slide change')
+  console.log('e')
 }
-const images = ref([
-  '/fake/20_2.webp',
-  'https://picsum.photos/600/601',
-  '/fake/20_2.webp',
-  '/fake/20_2.webp',
-  '/fake/20_2.webp',
-])
+interface Props {
+  images: string[]
+}
+defineProps<Props>()
 </script>
 <style>
 .swiper-slide-thumb-active .active {

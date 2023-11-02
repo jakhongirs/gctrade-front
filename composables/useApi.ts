@@ -1,7 +1,14 @@
 import { NitroFetchRequest } from 'nitropack'
 import { FetchOptions } from 'ofetch'
 
+import { generateUniqueId } from '~/utils'
+
 export const useApi = (apiUrl?: string) => {
+  const visitorId = useCookie('visitorId')
+  if (!visitorId.value) {
+    visitorId.value = generateUniqueId()
+  }
+
   const baseURL =
     apiUrl ||
     (import.meta.env.VITE_API_BASE_URL as string) ||
@@ -16,6 +23,7 @@ export const useApi = (apiUrl?: string) => {
       headers: {
         ...options?.headers,
         'Accept-Language': locale.value || 'uz',
+        Fingerprint: visitorId.value,
       },
     })
   }

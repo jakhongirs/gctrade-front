@@ -60,3 +60,7 @@ export interface IProduct {
   is_in_cart: boolean
   sold_count: number
 }
+export interface IRecentProduct {
+  id: number
+  product: IProduct
+}
