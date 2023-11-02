@@ -22,8 +22,8 @@
         >
           <vue-image-zoomer
             class="w-full h-full object-cover !rounded"
-            :regular="item"
-            :zoom="item"
+            :regular="item?.replace('http', 'https')"
+            :zoom="item?.replace('http', 'https')"
           />
         </div>
       </swiper-slide>
