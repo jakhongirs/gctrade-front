@@ -27,7 +27,7 @@ const data = ref<IProduct[]>([])
 try {
   loading.value = true
   const list = useAsyncData('recent_products', () =>
-    useApi().$get<IResponse<IProduct>>(`product/list/`, {
+    useApi().$get<IResponse<IProduct>>(`product/last-seen-products/`, {
       params: {
         limit: 8,
       },
