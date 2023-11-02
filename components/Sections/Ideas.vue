@@ -1,18 +1,20 @@
 <template>
-  <div class="sm:py-14 pt-5">
-    <UISectionTitle title="partners_ideas" center class="sm:mb-8 mb-4" />
-    <div>
-      <Swiper v-bind="settings" class="!pt-6 !pb-16 h-full overflow-hidden">
-        <SwiperSlide
-          v-for="(item, idx) in loading ? 10 : generateItem(data)"
-          :key="'A' + idx"
-          class="cursor-grab active:cursor-grabbing relative max-w-[350px] w-full md:!h-max"
-        >
-          <CardsIdea :data="item" />
-        </SwiperSlide>
-      </Swiper>
+  <ClientOnly>
+    <div class="sm:py-14 pt-5">
+      <UISectionTitle title="partners_ideas" center class="sm:mb-8 mb-4" />
+      <div>
+        <Swiper v-bind="settings" class="!pt-6 !pb-16 h-full overflow-hidden">
+          <SwiperSlide
+            v-for="(item, idx) in loading ? 10 : generateItem(data)"
+            :key="'A' + idx"
+            class="cursor-grab active:cursor-grabbing relative sm:max-w-[350px] max-w-[260px] w-full md:!h-max"
+          >
+            <CardsIdea :data="item" />
+          </SwiperSlide>
+        </Swiper>
+      </div>
     </div>
-  </div>
+  </ClientOnly>
 </template>
 <script setup lang="ts">
 import { Autoplay } from 'swiper/modules'

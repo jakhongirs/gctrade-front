@@ -14,20 +14,20 @@
         border-radius="50%"
       >
         <img
-          :src="data.company.logo"
-          :alt="data.company.name"
+          :src="data?.company?.logo"
+          :alt="data?.company?.name"
           class="w-full h-full rounded-full object-cover"
         />
       </UISkeleton>
     </a>
     <UISkeleton v-bind="{ loading }" width="70%" height="24px" margin="16px 0">
       <h3 class="text-base font-bold text-center leading-6 my-4">
-        {{ data.company.name }}
+        {{ data?.company?.name }}
       </h3>
     </UISkeleton>
     <UISkeleton v-bind="{ loading }" width="90%" height="20px" margin="4px 0">
       <p class="text-gray-600 text-center text-base leading-5">
-        {{ data.text }}
+        {{ data?.text }}
       </p>
     </UISkeleton>
     <UISkeleton v-bind="{ loading }" width="90%" height="20px" margin="4px 0" />
@@ -41,8 +41,8 @@
 import { IIdeas } from '~/types'
 
 interface Props {
-  data: IIdeas
-  loading: boolean
+  data: IIdeas | number
+  loading?: boolean
 }
 defineProps<Props>()
 </script>

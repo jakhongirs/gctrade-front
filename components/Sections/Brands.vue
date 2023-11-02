@@ -1,42 +1,45 @@
 <template>
-  <div class="bg-white py-16">
-    <UISectionTitle title="partners" center class="mb-6" />
-    <div class="marquee mb-8">
-      <div class="marquee__group_left">
-        <CardsBrand
-          v-for="(item, index) in loading ? 100 : generateItem(data)"
-          :key="'F' + index"
-          :brand="item"
-          :loading="loading"
-          is-gray
-        />
-      </div>
-    </div>
+  <ClientOnly>
+    <div class="bg-white py-16">
+      <UISectionTitle title="partners" center class="mb-6" />
 
-    <div class="marquee mb-6">
-      <div class="marquee__group_right">
-        <CardsBrand
-          v-for="(item, index) in loading ? 100 : generateItem(data)"
-          :key="'G' + index"
-          :brand="item"
-          :loading="loading"
-          is-gray
-        />
+      <div class="marquee mb-8">
+        <div class="marquee__group_left">
+          <CardsBrand
+            v-for="(item, index) in loading ? 100 : generateItem(data)"
+            :key="'F' + index"
+            :brand="item"
+            :loading="loading"
+            is-gray
+          />
+        </div>
       </div>
-    </div>
 
-    <div class="marquee">
-      <div class="marquee__group_left">
-        <CardsBrand
-          v-for="(item, index) in loading ? 100 : generateItem(data)"
-          :key="'H' + index"
-          :brand="item"
-          :loading="loading"
-          is-gray
-        />
+      <div class="marquee mb-6">
+        <div class="marquee__group_right">
+          <CardsBrand
+            v-for="(item, index) in loading ? 100 : generateItem(data)"
+            :key="'G' + index"
+            :brand="item"
+            :loading="loading"
+            is-gray
+          />
+        </div>
+      </div>
+
+      <div class="marquee">
+        <div class="marquee__group_left">
+          <CardsBrand
+            v-for="(item, index) in loading ? 100 : generateItem(data)"
+            :key="'H' + index"
+            :brand="item"
+            :loading="loading"
+            is-gray
+          />
+        </div>
       </div>
     </div>
-  </div>
+  </ClientOnly>
 </template>
 
 <script lang="ts" setup>

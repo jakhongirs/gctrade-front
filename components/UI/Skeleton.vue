@@ -1,24 +1,24 @@
 <template>
-  <Transition name="skeleton" mode="out-in">
-    <div
-      v-if="loading"
-      key="loading"
-      :class="preloaderClass"
-      class="flex-shrink-0"
-      :style="{
-        height: height,
-        width: width,
-        margin: margin,
-      }"
-    >
-      <span class="skeleton" :style="shimmerStyles" />
-    </div>
-    <template v-else>
-      <ClientOnly>
-        <slot />
-      </ClientOnly>
-    </template>
-  </Transition>
+  <!--  <Transition name="skeleton" mode="out-in">-->
+  <div
+    v-if="loading"
+    key="loading"
+    :class="preloaderClass"
+    class="flex-shrink-0"
+    :style="{
+      height: height,
+      width: width,
+      margin: margin,
+    }"
+  >
+    <span class="skeleton" :style="shimmerStyles" />
+  </div>
+  <template v-else>
+    <ClientOnly>
+      <slot />
+    </ClientOnly>
+  </template>
+  <!--  </Transition>-->
 </template>
 
 <script setup lang="ts">

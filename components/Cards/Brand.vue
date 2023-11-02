@@ -23,7 +23,7 @@
 import { IPartners } from '~/types'
 
 interface Props {
-  brand: IPartners
+  brand: IPartners | number
   loading?: boolean
   isGray?: boolean
 }

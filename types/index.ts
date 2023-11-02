@@ -35,3 +35,28 @@ export interface IIdeas {
   }
   text: string
 }
+export interface IManufacturer {
+  id: number
+  title: string
+  logo: string
+}
+export interface IProduct {
+  id: number
+  manufacturer: IManufacturer
+  category: ICategory
+  title: string
+  slug: string
+  description: HTMLElement
+  features: HTMLElement
+  price: string
+  sale_price: string
+  in_stock_count: number
+  views_count: number
+  is_recommended: boolean
+  is_active: boolean
+  is_sale: boolean
+  gallery: string[]
+  is_in_saved: boolean
+  is_in_cart: boolean
+  sold_count: number
+}

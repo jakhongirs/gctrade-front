@@ -42,7 +42,7 @@ import { ICategory } from '~/types'
 
 export interface Props {
   loading?: boolean
-  data: ICategory
+  data: ICategory | number
 }
 defineProps<Props>()
 </script>
