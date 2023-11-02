@@ -24,21 +24,25 @@ import { IProduct, IRecentProduct, IResponse } from '~/types'
 
 const loading = ref(true)
 const data = ref<IProduct[]>([])
-try {
-  loading.value = true
-  const list = useAsyncData('recent_products', () =>
-    useApi().$get<IResponse<IRecentProduct>>(`product/last-seen-products/`, {
-      params: {
-        limit: 8,
-      },
-    })
-  )
-  if (list.data.value) {
-    data.value = list.data.value?.results.map((el) => el.product)
+async function fetchData() {
+  try {
+    loading.value = true
+    const list = await useApi().$get<IResponse<IRecentProduct>>(
+      `product/last-seen-products/`,
+      {
+        params: {
+          limit: 8,
+        },
+      }
+    )
+    if (list) {
+      data.value = list.results.map((el) => el.product)
+    }
+  } catch (err) {
+    console.log(err)
+  } finally {
+    loading.value = false
   }
-} catch (err) {
-  console.log(err)
-} finally {
-  loading.value = false
 }
+fetchData()
 </script>

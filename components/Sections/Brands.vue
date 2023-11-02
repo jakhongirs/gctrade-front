@@ -62,24 +62,24 @@ function generateItem(arr: IPartners[]) {
   }
   return generatedArray
 }
-
-try {
-  loading.value = true
-  const brands = useAsyncData('brands', () =>
-    useApi().$get<IResponse<IPartners>>(`partners/`, {
+async function fetchData() {
+  try {
+    loading.value = true
+    const list = await useApi().$get<IResponse<IPartners>>(`partners/`, {
       params: {
         limit: 50,
       },
     })
-  )
-  if (brands.data.value) {
-    data.value = brands.data.value?.results
+    if (list) {
+      data.value = list.results
+    }
+  } catch (err) {
+    console.log(err)
+  } finally {
+    loading.value = false
   }
-} catch (err) {
-  console.log(err)
-} finally {
-  loading.value = false
 }
+fetchData()
 </script>
 
 <style>

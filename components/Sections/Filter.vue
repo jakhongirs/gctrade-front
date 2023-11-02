@@ -83,9 +83,13 @@ import 'vue-slider-component/theme/default.css'
 
 import VueSlider from 'vue-slider-component/dist-css/vue-slider-component.umd.min.js'
 
-import { categories, filters } from '~/data'
+import { filters } from '~/data'
+import { useHomeStore } from '~/store/home'
 import { debounce } from '~/utils'
 
+const store = useHomeStore()
+
+const categories = computed(() => store.categories)
 const route = useRoute()
 const group = ref([])
 const others = ref([])

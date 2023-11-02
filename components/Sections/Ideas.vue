@@ -40,21 +40,22 @@ const settings = {
 }
 const loading = ref(true)
 const data = ref<IIdeas[]>([])
-try {
-  loading.value = true
-  const ideas = useAsyncData('ideas', () =>
-    useApi().$get<IResponse<IIdeas>>(`partners/feedback/`, {
+async function fetchData() {
+  try {
+    loading.value = true
+    const list = await useApi().$get<IResponse<IIdeas>>(`partners/feedback/`, {
       params: {
         limit: 50,
       },
     })
-  )
-  if (ideas.data.value) {
-    data.value = ideas.data.value?.results
+    if (list) {
+      data.value = list.results
+    }
+  } catch (err) {
+    console.log(err)
+  } finally {
+    loading.value = false
   }
-} catch (err) {
-  console.log(err)
-} finally {
-  loading.value = false
 }
+fetchData()
 </script>

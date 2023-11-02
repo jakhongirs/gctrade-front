@@ -24,22 +24,23 @@ import { IProduct, IResponse } from '~/types'
 
 const loading = ref(true)
 const data = ref<IProduct[]>([])
-try {
-  loading.value = true
-  const list = useAsyncData('top_products', () =>
-    useApi().$get<IResponse<IProduct>>(`product/list/`, {
+async function fetchData() {
+  try {
+    loading.value = true
+    const list = await useApi().$get<IResponse<IProduct>>(`product/list/`, {
       params: {
-        limit: 8,
+        limit: 10,
         ordering: '-views_count',
       },
     })
-  )
-  if (list.data.value) {
-    data.value = list.data.value?.results
+    if (list) {
+      data.value = list.results
+    }
+  } catch (err) {
+    console.log(err)
+  } finally {
+    loading.value = false
   }
-} catch (err) {
-  console.log(err)
-} finally {
-  loading.value = false
 }
+fetchData()
 </script>

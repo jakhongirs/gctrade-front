@@ -11,7 +11,7 @@
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2">
             <UISectionTitle title="products" class="!px-0" />
-            <span class="text-gray-600 text-xl"> (125) </span>
+            <span class="text-gray-600 text-xl"> ({{ count }}) </span>
           </div>
           <div
             class="lg:hidden flex items-center gap-2 text-lg text-dark-400"
@@ -24,7 +24,13 @@
         <div
           class="grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 sm:gap-6 gap-3 mt-6"
         >
-          <CardsProduct v-for="(item, index) in 9" :key="index" :ind="index" />
+          <CardsProduct
+            v-for="(item, index) in loading ? 9 : products"
+            :key="index"
+            :ind="index"
+            :loading="loading"
+            :data="item"
+          />
         </div>
       </div>
     </div>
@@ -42,6 +48,12 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useProductStore } from '~/store/products'
+
+const store = useProductStore()
+const products = computed(() => store.products)
+const count = computed(() => store.count)
+const loading = computed(() => store.loading)
 const breadcrumbs = computed(() => {
   return [
     {
@@ -55,4 +67,6 @@ const filterModal = ref(false)
 function openModal() {
   filterModal.value = true
 }
+
+Promise.allSettled([store.fetchProducts()])
 </script>
