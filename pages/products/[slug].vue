@@ -12,11 +12,11 @@
         </ClientOnly>
         <div class="lg:col-span-7 col-span-12 flex flex-col h-full">
           <ClientOnly>
-            <div class="flex items-center justify-between">
-              <h2 class="text-dark-400 text-3xl font-bold shrink-0">
+            <div class="flex items-start justify-between">
+              <h2 class="text-dark-400 text-3xl font-bold">
                 {{ single?.title }}
               </h2>
-              <UILikeButton class="!relative" />
+              <UILikeButton class="!relative !top-0" />
             </div>
             <p class="text-dark-400 text-2xl font-medium mt-2">
               {{ formatMoneyDecimal(single?.price) }} UZS
