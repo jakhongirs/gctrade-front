@@ -57,7 +57,11 @@
         </UISkeleton>
 
         <UISkeleton v-bind="{ loading }" width="100%" height="32px">
-          <UIAddButton :product-id="data.id" :saved="data?.is_in_cart" />
+          <UIAddButton
+            :product-id="data.id"
+            :saved="data?.is_in_cart"
+            :count="data.in_stock_count"
+          />
         </UISkeleton>
       </NuxtLink>
     </div>

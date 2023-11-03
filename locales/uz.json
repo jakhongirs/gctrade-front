@@ -60,5 +60,7 @@
   "phone_number": "Telefon raqami",
   "successfully_ordered": "Buyurtmangiz muvaffaqqiyatli amalga oshirildi!",
   "go_home": "Asosiy sahifaga qaytish",
-  "cancel": "Bekor qilish"
+  "cancel": "Bekor qilish",
+  "not_available": "Mavjud emas",
+  "no_data": "Mahsulot mavjud emas"
 }

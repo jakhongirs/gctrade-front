@@ -11,15 +11,18 @@
               <hr v-if="index !== 3" class="h-0.5 bg-gray-400/20 w-full my-2" />
             </template>
           </div>
-          <div v-else>
-            <template v-for="(item, index) in data" :key="index">
-              <CardsBasket :data="item" :loading="loading" />
-              <hr
-                v-if="index !== data?.length - 1"
-                class="h-0.5 bg-gray-400/20 w-full my-2"
-              />
-            </template>
-          </div>
+          <template v-else>
+            <div v-if="data?.length">
+              <template v-for="(item, index) in data" :key="index">
+                <CardsBasket :data="item" :loading="loading" />
+                <hr
+                  v-if="index !== data?.length - 1"
+                  class="h-0.5 bg-gray-400/20 w-full my-2"
+                />
+              </template>
+            </div>
+            <SectionsNoData v-else />
+          </template>
         </div>
         <div
           class="lg:col-span-4 col-span-12 bg-white shadow p-5 rounded h-fit"
@@ -204,7 +207,7 @@ const onSubmit = async () => {
         },
       })
       const cart = useCookie('cart')
-      cart.value = ''
+      cart.value = undefined
       showModal.value = false
       setTimeout(() => {
         status.value = true

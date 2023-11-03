@@ -73,7 +73,9 @@ export const useBasketStore = defineStore('basketStore', {
     },
     async fetchCheckData() {
       try {
-        const data = await useApi().$get<ICheck>('product/cart/total-price/')
+        const data = await useApi().$get<ICheck>(
+          `product/cart/total-price/${this.cartId}/`
+        )
         if (data) {
           this.check = data
         }
