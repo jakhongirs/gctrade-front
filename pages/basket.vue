@@ -59,8 +59,11 @@
           <UIButton
             :text="$t('send_order')"
             size="small"
+            :disabled="!data?.length"
+            :variant="!data?.length ? 'outline' : 'primary'"
+            :class="{ '!cursor-not-allowed !bg-gray-400': !data?.length }"
             class="w-full mt-6"
-            @click="showModal = true"
+            @click="openModal"
           />
         </div>
       </div>
@@ -188,6 +191,11 @@ const rules = {
 }
 
 const $v = useVuelidate(rules, form)
+const openModal = () => {
+  if (!data.value?.length) return
+
+  showModal.value = true
+}
 const onCloseModal = () => {
   showModal.value = false
   form.name = ''
