@@ -1,5 +1,5 @@
 <template>
-  <div v-if="loading || data?.length" class="container sm:py-16 py-5">
+  <div v-if="loading || data?.length" class="sm:py-16 py-5">
     <UISectionTitle
       title="recommended_products"
       link=""

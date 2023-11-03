@@ -1,40 +1,117 @@
 <template>
-  <div class="flex h-full sm:flex-row flex-col relative">
-    <div class="max-w-[140px] w-full rounded-md shrink-0 relative">
-      <img
-        src="https://picsum.photos/200/200"
-        alt=""
-        class="object-cover w-full h-full rounded-md"
-      />
-    </div>
-    <div class="sm:ml-4 sm:min-h-[140px] flex flex-col py-4 h-full grow">
-      <p class="text-xl text-dark-400 font-semibold">{{ 'Product title' }}</p>
-      <p class="mt-auto">
-        <span class="font-medium mr-2">{{ $t('products_count') }}:</span
-        >{{ formatMoneyDecimal(101) }}
-      </p>
+  <div class="flex sm:max-h-[140px] h-full sm:flex-row flex-col relative">
+    <div class="flex">
+      <div
+        class="max-w-[140px] max-h-[140px] w-full rounded-md shrink-0 relative"
+      >
+        <UISkeleton
+          v-bind="{ loading }"
+          width="100%"
+          height="100%"
+          preloader-class="sm:min-h-auto min-h-[140px]"
+        >
+          <img
+            :src="data?.product?.gallery?.[0]"
+            alt=""
+            class="object-cover w-full h-full sm:min-h-auto min-h-[140px] rounded-md"
+          />
+        </UISkeleton>
+      </div>
+      <div
+        class="ml-4 min-h-[140px] max-h-[140px] flex flex-col py-2 h-full grow"
+      >
+        <UISkeleton v-bind="{ loading }" width="70%" height="20px">
+          <p class="text-base text-dark-400 font-semibold line-clamp-2">
+            {{ data?.product?.title }}
+          </p>
+        </UISkeleton>
+        <UISkeleton
+          v-bind="{ loading }"
+          width="70%"
+          height="20px"
+          margin="16px 0 0 0"
+        >
+          <p class="text-base text-dark-400 font-medium line-clamp-2 mt-4">
+            <span class="font-normal text-gray-400">
+              {{ $t('manufacturer') }}:
+            </span>
+            {{ data?.product?.manufacturer?.title }}
+          </p>
+        </UISkeleton>
+        <UISkeleton
+          v-bind="{ loading }"
+          width="70%"
+          height="20px"
+          margin="auto 0 0 0"
+        >
+          <p class="mt-auto">
+            <span class="font-medium mr-2">{{ $t('products_count') }}:</span
+            >{{ formatMoneyDecimal(data?.product?.in_stock_count) }}
+          </p>
+        </UISkeleton>
+      </div>
     </div>
     <div
-      class="max-w-[180px] min-w-[178px] w-full shrink-0 sm:relative sm:pl-6 sm:border-l sm:border-l-gray-100/50 flex flex-col"
+      class="sm:mt-0 mt-6 sm:max-w-[180px] min-w-[178px] w-full shrink-0 sm:relative sm:pl-6 sm:border-l sm:border-l-gray-100/50 flex sm:flex-col flex-row-reverse"
     >
-      <UILikeButton class="!right-0 top-0" />
+      <UILikeButton v-if="!loading" class="!right-0 top-0" />
       <div
+        v-if="!loading"
         class="w-8 h-8 cursor-pointer flex items-center justify-center rounded absolute right-0 top-8"
       >
         <i class="icon-trash text-xl transition-200 hover:text-red"></i>
       </div>
-      <div>
-        <p class="text-base font-semibold">
-          {{ formatMoneyDecimal(150000) }} UZS
-        </p>
-        <p class="text-red line-through text-xs">
-          {{ formatMoneyDecimal(170000) }} UZS
-        </p>
+      <div class="w-full sm:ml-0 ml-6">
+        <UISkeleton v-bind="{ loading }" width="60%" height="20px">
+          <p class="text-base font-semibold">
+            {{ formatMoneyDecimal(data?.product?.price) }} UZS
+          </p>
+        </UISkeleton>
+        <UISkeleton
+          v-bind="{ loading }"
+          width="50%"
+          height="18px"
+          margin="2px 0 0 0"
+        >
+          <p
+            v-if="data?.product?.sale_price"
+            class="text-red line-through text-xs"
+          >
+            {{ formatMoneyDecimal(data?.product?.sale_price) }} UZS
+          </p>
+        </UISkeleton>
       </div>
-      <UICounter class="mt-auto" />
+      <UISkeleton
+        v-bind="{ loading }"
+        width="150px"
+        height="40px"
+        margin="auto 0 0 0"
+      >
+        <UICounter
+          :model-value="data.quantity"
+          class="mt-auto"
+          :min="1"
+          :max="data.product.in_stock_count"
+          @update:model-value="updateValue"
+        />
+      </UISkeleton>
     </div>
   </div>
 </template>
 <script setup lang="ts">
 import { formatMoneyDecimal } from '@/utils'
+import { ICartProduct } from '~/types'
+
+const { updateCartProduct } = useBasketController()
+interface Props {
+  loading: boolean
+  data: ICartProduct
+}
+const props = defineProps<Props>()
+const form = unref(props)
+
+const updateValue = async (e: number) => {
+  form.data.quantity = e
+  await updateCartProduct(props.data.product.id, e)
+}
 </script>

@@ -1,24 +1,25 @@
 <template>
   <UIButton
-    :text="$t(saved ? 'in_cart' : 'to_cart')"
+    :text="$t(isInCart ? 'in_cart' : 'to_cart')"
     size="small"
-    :variant="saved ? 'light' : 'primary'"
+    :variant="isInCart ? 'light' : 'primary'"
     class="w-full mt-auto"
     text-class="!text-xs"
-    @click.stop.prevent="store.incrementCount"
+    :loading="loading"
+    @click.stop.prevent="addToCart"
   />
 </template>
 <script setup lang="ts">
-import { useBasketStore } from '~/store/basket'
-
 interface Props {
   saved?: boolean
+  productId: number
 }
-defineProps<Props>()
+const props = defineProps<Props>()
+const isInCart = ref(props.saved)
+const { loading, addProductToCart } = useBasketController()
+const addToCart = () => {
+  if (isInCart.value) return
 
-const emit = defineEmits<{
-  (e: 'on-action'): void
-}>()
-
-const store = useBasketStore()
+  addProductToCart(props.productId).then(() => (isInCart.value = true))
+}
 </script>

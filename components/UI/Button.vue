@@ -11,7 +11,7 @@
     <slot>
       <Transition mode="out-in" name="fade">
         <span :key="loading" class="flex items-center justify-center relative">
-          <span v-show="loading" class="loader inline-block">
+          <span v-show="loading" class="loader inline-block h-4">
             <svg class="circular" viewBox="25 25 50 50">
               <circle
                 :class="{

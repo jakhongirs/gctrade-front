@@ -13,7 +13,7 @@
           veritatis!
         </p>
       </div>
-      <ul class="sm:mb-0 mb-4">
+      <ul class="sm:mb-0 mb-8">
         <li class="mb-2">
           <NuxtLink
             to="/about"

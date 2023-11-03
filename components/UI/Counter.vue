@@ -1,8 +1,8 @@
 <template>
   <div class="flex items-center justify-between w-full">
     <button
-      class="w-10 h-10 rounded border border-red-100 flex items-center justify-center active:scale-95 transition-200 hover:bg-red-100"
-      :disabled="disableDecrease"
+      class="w-10 h-10 rounded border border-red-100 disabled:cursor-not-allowed disabled:active:scale-100 disabled:opacity-50 flex items-center justify-center active:scale-95 transition-200 hover:bg-red-100"
+      :disabled="min >= count"
       @click="decrease"
     >
       <span class="md:text-2xl text-xl leading-6 text-red icon-minus-circle" />
@@ -13,104 +13,68 @@
     >
       <input
         v-model="count"
+        v-maska
         type="text"
-        readonly
-        :min="min"
-        :max="max"
+        data-maska="###"
         class="text-center flex-center w-16 outline-none"
         :class="[{ error }]"
         @input="onChangeCount"
       />
     </div>
     <button
-      class="w-10 h-10 rounded border border-dark-500/30 flex items-center justify-center active:scale-95 transition-200 hover:bg-gray-100/50"
-      :disabled="disableIncrease"
-      :class="[
-        { '!bg-gray-400 !border-gray-400 !cursor-not-allowed': max === count },
-      ]"
+      class="w-10 h-10 rounded border border-dark-500/30 disabled:cursor-not-allowed disabled:active:scale-100 disabled:opacity-50 flex items-center justify-center active:scale-95 transition-200 hover:bg-gray-100/50"
+      :disabled="count >= max"
       @click="increase"
     >
       <span
         class="md:text-2xl text-xl leading-6 text-green icon-add-circle transition-300"
-        :class="{ '!text-gray-300': max === count }"
       />
     </button>
   </div>
 </template>
 
 <script setup lang="ts">
+import { debounce } from '~/utils'
+
 interface Props {
-  defaultCount?: number
   disableIncrease?: boolean
   disableDecrease?: boolean
   error?: boolean
   readonly?: boolean
-  residentValidation?: boolean
-  inputMask?: string
   max?: number
   min?: number
-  // counterClass?: string
-  // inputStyle?: string
+  modelValue: number
 }
 const props = withDefaults(defineProps<Props>(), {
-  defaultCount: 0,
   min: 0,
   max: 999,
-  inputMask: '###',
 })
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: any): void
+  (e: 'update:modelValue', value: number): void
   (e: 'decrease', value: number): void
 }>()
 
-const count = ref(0)
-
-watch(
-  () => props.defaultCount,
-  (newValue) => {
-    if (newValue) {
-      count.value = newValue
-    }
-  },
-  { immediate: true }
-)
-
-watch(
-  () => count.value,
-  () => {
-    if (count.value < props.min) {
-      count.value = props.min
-    }
-    if (count.value > props.max) {
-      count.value = props.max
-    }
-    // debounce('count', () => emit('update:modelValue', count.value), 300)
-  },
-  { immediate: true, deep: true }
-)
-
+const count = ref(props.modelValue)
 const decrease = () => {
-  if (
-    count.value > 0 &&
-    !props.disableDecrease &&
-    ((props.residentValidation && count.value - 1 >= props.defaultCount) ||
-      !props.residentValidation)
-  ) {
-    count.value--
-    emit('decrease', count.value)
-  }
+  count.value--
 }
 const increase = () => {
-  if (!props.disableIncrease) {
-    count.value++
-  }
+  count.value++
 }
+watch(count, () => {
+  debounce(
+    'counter',
+    () => {
+      emit('update:modelValue', count.value)
+    },
+    500
+  )
+})
 const onChangeCount = (event: InputEvent) => {
-  const target = event.target as HTMLInputElement
-
-  if (target?.value.includes('-') || event.data?.includes('-')) {
-    return event.preventDefault()
-  }
+  // const target = event.target?.value
+  // count.value = target.replace(/\D/g, '')
+  if (count.value <= props.min) count.value = props.min
+  if (count.value >= props.max) count.value = props.max
 }
 </script>

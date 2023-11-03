@@ -64,3 +64,16 @@ export interface IRecentProduct {
   id: number
   product: IProduct
 }
+
+export interface ICartProduct {
+  id: number
+  cart: number
+  quantity: number
+  product: IProduct
+}
+
+export interface ICheck {
+  total_price: number
+  total_savings: number
+  quantity: number
+}

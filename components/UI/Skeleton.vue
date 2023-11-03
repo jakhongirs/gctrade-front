@@ -3,7 +3,6 @@
   <div
     v-if="loading"
     key="loading"
-    :class="preloaderClass"
     class="flex-shrink-0"
     :style="{
       height: height,
@@ -11,7 +10,7 @@
       margin: margin,
     }"
   >
-    <span class="skeleton" :style="shimmerStyles" />
+    <span class="skeleton" :class="preloaderClass" :style="shimmerStyles" />
   </div>
   <template v-else>
     <ClientOnly>

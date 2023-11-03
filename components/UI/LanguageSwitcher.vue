@@ -17,7 +17,7 @@
           alt="language flag"
         />
       </span>
-      <span class="w-full inline-block text-left">{{
+      <span class="w-full inline-block text-left text-sm">{{
         originTranslations[$i18n.locale]
       }}</span>
       <span

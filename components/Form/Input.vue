@@ -21,7 +21,7 @@
           :minLength="minLength"
           :readonly="readonly"
           :disabled="disabled"
-          class="py-3 px-4 text-dark read-only:!text-dark-400 focus:border-0 dark:text-white leading-21 text-lg border-0 outline-0 bg-transparent w-full z-[1] relative"
+          class="py-2 px-4 text-dark read-only:!text-dark-400 focus:border-0 dark:text-white leading-21 text-base border-0 outline-0 bg-transparent w-full z-[1] relative"
           :class="inputClass"
           @input="sanitizeInput"
           @blur="(e: Event) => emit('blur', e)"
@@ -31,9 +31,6 @@
         <slot name="postfix"></slot>
       </div>
     </div>
-    <p v-if="error" class="text-red text-xs mt-1 absolute">
-      {{ errorMessage }}
-    </p>
   </div>
 </template>
 <script setup lang="ts">

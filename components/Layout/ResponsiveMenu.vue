@@ -5,6 +5,7 @@
   >
     <div class="container py-8 h-full">
       <div class="flex flex-col h-full">
+        <UILanguageSwitcher class="max-w-[180px] -ml-3 mb-6" />
         <h2 class="text-base font-semibold mb-2">{{ $t('categories') }}</h2>
         <ul class="">
           <li
@@ -30,13 +31,13 @@
             <CollapseTransition>
               <ul
                 v-if="activeCategory === item.id"
-                class="pl-4 mt-2"
+                class="pl-4 mt-2 list-disc"
                 :class="{ p: activeCategory === item.id }"
               >
                 <li
                   v-for="(el, ind) in item.categories"
                   :key="ind"
-                  class="text-base text-dark mb-3 block w-full transition-200 hover:text-red"
+                  class="text-base text-dark mb-3 block w-full transition-200 hover:text-red list-disc"
                 >
                   <NuxtLink :to="`/products?category=${el.id}`">
                     {{ el.title }}
@@ -68,7 +69,6 @@
             </NuxtLink>
           </li>
         </ul>
-        <UILanguageSwitcher class="max-w-[180px] -ml-3 mt-6" />
         <div class="mt-auto mb-10">
           <a
             href="/"

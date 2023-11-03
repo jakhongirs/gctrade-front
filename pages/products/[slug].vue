@@ -13,14 +13,17 @@
         <div class="lg:col-span-7 col-span-12 flex flex-col h-full">
           <ClientOnly>
             <div class="flex items-start justify-between">
-              <h2 class="text-dark-400 text-3xl font-bold">
+              <h2 class="text-dark-400 sm:text-3xl text-xl font-bold">
                 {{ single?.title }}
               </h2>
               <UILikeButton class="!relative !top-0" />
             </div>
             <p class="text-dark-400 text-2xl font-medium mt-2">
               {{ formatMoneyDecimal(single?.price) }} UZS
-              <span class="text-red font-normal line-through text-sm">
+              <span
+                v-if="single?.sale_price"
+                class="text-red font-normal line-through text-sm"
+              >
                 {{ formatMoneyDecimal(single?.sale_price) }} UZS
               </span>
             </p>
@@ -72,7 +75,7 @@
           v-html="single?.description"
         ></div>
       </div>
-      <div class="mt-8 lg:px-16">
+      <div v-if="single?.features" class="mt-8 lg:px-16">
         <h3 class="text-2xl font-medium mb-4">{{ $t('features') }}</h3>
         <div
           class="text-base text-dark-400 leading-7"

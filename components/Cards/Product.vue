@@ -57,7 +57,7 @@
         </UISkeleton>
 
         <UISkeleton v-bind="{ loading }" width="100%" height="32px">
-          <UIAddButton :saved="data?.is_in_cart" />
+          <UIAddButton :product-id="data.id" :saved="data?.is_in_cart" />
         </UISkeleton>
       </NuxtLink>
     </div>
@@ -70,7 +70,7 @@ import { formatMoneyDecimal } from '~/utils'
 interface Props {
   ind: number
   loading?: boolean
-  data: IProduct | number
+  data: IProduct
 }
 defineProps<Props>()
 
