@@ -1,6 +1,6 @@
 <template>
   <div class="flex sm:max-h-[140px] h-full sm:flex-row flex-col relative">
-    <div class="flex">
+    <div class="flex grow">
       <div
         class="max-w-[140px] max-h-[140px] w-full rounded-md shrink-0 relative"
       >
@@ -44,7 +44,7 @@
           height="20px"
           margin="auto 0 0 0"
         >
-          <p class="mt-auto">
+          <p v-if="data?.product?.in_stock_count" class="mt-auto">
             <span class="font-medium mr-2">{{ $t('products_count') }}:</span
             >{{ formatMoneyDecimal(data?.product?.in_stock_count) }}
           </p>
@@ -52,12 +52,12 @@
       </div>
     </div>
     <div
-      class="sm:mt-0 mt-6 sm:max-w-[180px] min-w-[178px] w-full shrink-0 sm:relative sm:pl-6 sm:border-l sm:border-l-gray-100/50 flex sm:flex-col flex-row-reverse"
+      class="sm:mt-0 mt-6 sm:py-2 sm:max-w-[180px] min-w-[178px] items-center w-full shrink-0 sm:relative sm:pl-6 sm:border-l sm:border-l-gray-100/50 flex sm:flex-col flex-row-reverse"
     >
-      <UILikeButton v-if="!loading" class="!right-0 top-0" />
       <div
         v-if="!loading"
-        class="w-8 h-8 cursor-pointer flex items-center justify-center rounded absolute right-0 top-8"
+        class="w-8 h-8 ml-auto cursor-pointer flex items-center justify-center rounded absolute right-0 sm:top-2"
+        @click="deleteProduct(data.id)"
       >
         <i class="icon-trash text-xl transition-200 hover:text-red"></i>
       </div>
@@ -100,9 +100,11 @@
 </template>
 <script setup lang="ts">
 import { formatMoneyDecimal } from '@/utils'
+import { useBasketStore } from '~/store/basket'
 import { ICartProduct } from '~/types'
 
-const { updateCartProduct } = useBasketController()
+const { updateCartProduct, deleteCartProduct } = useBasketController()
+const store = useBasketStore()
 interface Props {
   loading: boolean
   data: ICartProduct
@@ -112,6 +114,12 @@ const form = unref(props)
 
 const updateValue = async (e: number) => {
   form.data.quantity = e
-  await updateCartProduct(props.data.product.id, e)
+  await updateCartProduct(props.data.id, props.data.product.id, e)
+  await store.fetchCheckData()
+}
+const deleteProduct = async (id: number) => {
+  await deleteCartProduct(id)
+  await store.fetchCartProductsList()
+  await store.fetchCheckData()
 }
 </script>

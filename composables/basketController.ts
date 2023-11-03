@@ -22,11 +22,15 @@ export const useBasketController = () => {
       loading.value = false
     }
   }
-  const updateCartProduct = async (productId: number, amount: number) => {
+  const updateCartProduct = async (
+    cartId: number,
+    productId: number,
+    amount: number
+  ) => {
     console.log('update product', productId, amount)
     try {
       const data = await useApi().$patch(
-        `product/cart-item/update/${store.cartId}/`,
+        `product/cart-item/update/${cartId}/`,
         {
           body: {
             cart: store.cartId,
@@ -40,6 +44,12 @@ export const useBasketController = () => {
     }
   }
 
-  const checkData = () => {}
-  return { loading, addProductToCart, updateCartProduct }
+  const deleteCartProduct = async (id: number) => {
+    try {
+      const data = await useApi().$delete(`product/cart-item/delete/${id}/`)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  return { loading, addProductToCart, updateCartProduct, deleteCartProduct }
 }

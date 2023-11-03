@@ -5,6 +5,44 @@
     <div
       class="lg:max-h-[500px] lg:overflow-y-auto filter-group lg:pr-4 lg:-mr-4"
     >
+      <div>
+        <p class="text-base text-dark font-medium mb-3">
+          {{ $t('price') }}
+        </p>
+        <div>
+          <label for="min_price" class="text-dark text-sm">
+            {{ $t('min_price') }}
+          </label>
+          <input
+            v-model="minValue"
+            type="text"
+            :placeholder="$t('enter_min_price')"
+            class="bg-transparent text-sm py-2 px-3 mt-1 border border-gray w-full focus:border-blue-900 rounded outline-none"
+          />
+        </div>
+        <div class="mt-2 mb-4">
+          <label for="min_price" class="text-dark text-sm">
+            {{ $t('max_price') }}
+          </label>
+          <input
+            v-model="maxValue"
+            type="text"
+            :placeholder="$t('enter_max_price')"
+            class="bg-transparent text-sm py-2 px-3 mt-1 border border-gray w-full focus:border-blue-900 rounded outline-none"
+          />
+        </div>
+        <VueSlider
+          :key="`${minValue}-${maxValue}`"
+          v-model="range"
+          :min="0"
+          :max="10000000"
+          :interval="100"
+          :tooltip-formatter="
+            (v) => `${('' + v).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`
+          "
+        />
+      </div>
+      <hr class="h-0.5 w-full bg-gray-100/50 my-4" />
       <div
         v-for="(item, index) in categories"
         :key="index"
@@ -35,44 +73,6 @@
         :items="filters"
         label-key="label"
         value-key="id"
-      />
-    </div>
-    <hr class="h-0.5 w-full bg-gray-100/50 my-4" />
-    <div>
-      <p class="text-base text-dark font-medium mb-3">
-        {{ $t('price') }}
-      </p>
-      <div>
-        <label for="min_price" class="text-dark text-sm">
-          {{ $t('min_price') }}
-        </label>
-        <input
-          v-model="minValue"
-          type="text"
-          :placeholder="$t('enter_min_price')"
-          class="bg-transparent text-sm py-2 px-3 mt-1 border border-gray w-full focus:border-blue-900 rounded outline-none"
-        />
-      </div>
-      <div class="mt-2 mb-4">
-        <label for="min_price" class="text-dark text-sm">
-          {{ $t('max_price') }}
-        </label>
-        <input
-          v-model="maxValue"
-          type="text"
-          :placeholder="$t('enter_max_price')"
-          class="bg-transparent text-sm py-2 px-3 mt-1 border border-gray w-full focus:border-blue-900 rounded outline-none"
-        />
-      </div>
-      <VueSlider
-        :key="`${minValue}-${maxValue}`"
-        v-model="range"
-        :min="0"
-        :max="10000000"
-        :interval="100"
-        :tooltip-formatter="
-          (v) => `${('' + v).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`
-        "
       />
     </div>
   </div>

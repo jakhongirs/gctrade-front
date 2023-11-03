@@ -5,7 +5,7 @@
       <UISectionTitle title="basket" class="mb-6" />
       <div class="grid grid-cols-12 gap-6">
         <div class="lg:col-span-8 col-span-12 bg-white shadow p-5 rounded">
-          <div v-if="true">
+          <div v-if="loading">
             <template v-for="(item, index) in 4" :key="index">
               <CardsBasket :data="{}" loading />
               <hr v-if="index !== 3" class="h-0.5 bg-gray-400/20 w-full my-2" />
@@ -108,6 +108,7 @@
             :text="$t('send')"
             size="small"
             class="w-full"
+            :loading="submitLoading"
             @click="onSubmit"
           />
         </div>
@@ -172,6 +173,7 @@ const breadcrumbs = computed(() => {
   ]
 })
 const status = ref(false)
+const submitLoading = ref(false)
 const showModal = ref(false)
 const form = reactive({
   name: '',
@@ -189,13 +191,29 @@ const onCloseModal = () => {
   form.phone = ''
   $v.value.$reset()
 }
-const onSubmit = () => {
+const onSubmit = async () => {
   $v.value.$touch()
   if (!$v.value.$invalid) {
-    showModal.value = false
-    setTimeout(() => {
-      status.value = true
-    }, 200)
+    submitLoading.value = true
+    try {
+      const data = await useApi().$post('product/order/create/', {
+        body: {
+          cart: store.cartId,
+          name: form.name,
+          phone: '+998' + form.phone.replace(/\s/g, ''),
+        },
+      })
+      const cart = useCookie('cart')
+      cart.value = ''
+      showModal.value = false
+      setTimeout(() => {
+        status.value = true
+      }, 200)
+    } catch (err) {
+      console.log(err)
+    } finally {
+      submitLoading.value = false
+    }
   }
 }
 
