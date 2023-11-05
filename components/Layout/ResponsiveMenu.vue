@@ -3,7 +3,7 @@
     :class="{ '!translate-x-0': isOpen }"
     class="fixed min-h-screen w-full inset-0 bg-white z-[998] pt-[68px] transition-300 transform translate-x-[-100%]"
   >
-    <div class="container py-8 h-full">
+    <div class="container py-8 h-full filter-group overflow-y-auto">
       <div class="flex flex-col h-full">
         <UILanguageSwitcher class="max-w-[180px] -ml-3 mb-6" />
         <h2 class="text-base font-semibold mb-2">{{ $t('categories') }}</h2>
@@ -39,7 +39,7 @@
                   :key="ind"
                   class="text-base text-dark mb-3 block w-full transition-200 hover:text-red list-disc"
                 >
-                  <NuxtLink :to="`/products?category=${el.id}`">
+                  <NuxtLink :to="`/category/${el.slug}?category=${el.id}`">
                     {{ el.title }}
                   </NuxtLink>
                 </li>
@@ -106,12 +106,13 @@
 <script lang="ts" setup>
 import CollapseTransition from '@ivanv/vue-collapse-transition/src/CollapseTransition.vue'
 
-import { categories } from '~/data'
+import { useHomeStore } from '~/store/home'
 
 export interface Props {
   isOpen: boolean
 }
 defineProps<Props>()
-
+const store = useHomeStore()
+const categories = computed(() => store.categories)
 const activeCategory = ref(1)
 </script>

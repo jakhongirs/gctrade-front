@@ -5,7 +5,7 @@
       <aside
         class="lg:col-span-3 col-span-12 lg:sticky top-[168px] shadow bg-white rounded-lg px-4 py-6 h-fit lg:block hidden"
       >
-        <SectionsFilter />
+        <SectionsFilter :categories="categories" />
       </aside>
       <div class="lg:col-span-9 col-span-12">
         <div class="flex items-center justify-between">
@@ -64,8 +64,8 @@
       title="Filter"
       @close="filterModal = false"
     >
-      <div class="max-h-[600px] overflow-y-auto">
-        <SectionsFilter />
+      <div class="max-h-[600px] overflow-y-auto filter-group -mr-2 pr-2">
+        <SectionsFilter :categories="categories" />
       </div>
     </UIModal>
   </div>
@@ -83,6 +83,7 @@ const route = useRoute()
 const { t } = useI18n()
 
 const products = computed(() => store.products)
+const categories = computed(() => homeStore.filteredCategories)
 const category = computed(() => homeStore.filteredCategories?.[0])
 const categoryLoading = computed(() => homeStore.loading)
 const count = computed(() => store.count)

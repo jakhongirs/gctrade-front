@@ -5,7 +5,7 @@
       <aside
         class="lg:col-span-3 col-span-12 lg:sticky top-[168px] shadow bg-white rounded-lg px-4 py-6 h-fit lg:block hidden"
       >
-        <SectionsFilter />
+        <SectionsFilter :categories="categories" />
       </aside>
       <div class="lg:col-span-9 col-span-12">
         <div class="flex items-center justify-between">
@@ -21,17 +21,37 @@
             Filter
           </div>
         </div>
-        <div
-          class="grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 sm:gap-6 gap-3 mt-6"
-        >
-          <CardsProduct
-            v-for="(item, index) in loading ? 9 : products"
-            :key="index"
-            :ind="index"
-            :loading="loading"
-            :data="item"
-          />
-        </div>
+        <Transition mode="out-in">
+          <div>
+            <div
+              v-if="loading"
+              class="grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 sm:gap-6 gap-3 mt-6"
+            >
+              <CardsProduct
+                v-for="(item, index) in 9"
+                :key="index"
+                :ind="index"
+                loading
+                :data="{} as IProduct"
+              />
+            </div>
+            <div v-else>
+              <div
+                v-if="products?.length"
+                class="grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 sm:gap-6 gap-3 mt-6"
+              >
+                <CardsProduct
+                  v-for="(item, index) in products"
+                  :key="index"
+                  :ind="index"
+                  :loading="loading"
+                  :data="item"
+                />
+              </div>
+              <SectionsNoData v-else />
+            </div>
+          </div>
+        </Transition>
       </div>
     </div>
     <UIModal
@@ -40,23 +60,33 @@
       title="Filter"
       @close="filterModal = false"
     >
-      <div class="max-h-[600px] overflow-y-auto">
-        <SectionsFilter />
+      <div class="max-h-[600px] overflow-y-auto filter-group -mr-2 pr-2">
+        <SectionsFilter :categories="categories" />
       </div>
     </UIModal>
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+
+import { useHomeStore } from '~/store/home'
 import { useProductStore } from '~/store/products'
+import { IProduct } from '~/types'
+import { debounce } from '~/utils'
 
 const store = useProductStore()
+const homeStore = useHomeStore()
+const route = useRoute()
+const { t } = useI18n()
+
 const products = computed(() => store.products)
+const categories = computed(() => homeStore.categories)
 const count = computed(() => store.count)
 const loading = computed(() => store.loading)
 const breadcrumbs = computed(() => {
   return [
     {
-      title: 'products',
+      title: t('products'),
       url: '/products',
     },
   ]
@@ -66,6 +96,21 @@ const filterModal = ref(false)
 function openModal() {
   filterModal.value = true
 }
-
-Promise.allSettled([store.fetchProducts()])
+watch(
+  () => route.query,
+  () => {
+    if (route.query?.is_sale) {
+      route.query.is_sale = true
+    }
+    debounce('query', () => {
+      store.fetchProducts({
+        ...route.query,
+      })
+    })
+  },
+  {
+    deep: true,
+  }
+)
+Promise.allSettled([store.fetchProducts({ limit: 40, ...route.query })])
 </script>

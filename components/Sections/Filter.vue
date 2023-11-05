@@ -2,45 +2,49 @@
   <div class="lg:mt-0 mt-6">
     <h2 class="text-xl text-dark font-medium lg:block hidden">Filter</h2>
     <hr class="h-0.5 w-full bg-gray-100/50 my-4 sm:block hidden" />
-    <div class="filter-group lg:pr-4 lg:-mr-4">
+    <div>
+      <p class="text-base text-dark font-bold mb-3">
+        {{ $t('price') }}
+      </p>
       <div>
-        <p class="text-base text-dark font-medium mb-3">
-          {{ $t('price') }}
-        </p>
-        <div>
-          <label for="min_price" class="text-dark text-sm">
-            {{ $t('min_price') }}
-          </label>
-          <input
-            v-model="minValue"
-            type="text"
-            :placeholder="$t('enter_min_price')"
-            class="bg-transparent text-sm py-2 px-3 mt-1 border border-gray w-full focus:border-blue-900 rounded outline-none"
-          />
-        </div>
-        <div class="mt-2 mb-4">
-          <label for="min_price" class="text-dark text-sm">
-            {{ $t('max_price') }}
-          </label>
-          <input
-            v-model="maxValue"
-            type="text"
-            :placeholder="$t('enter_max_price')"
-            class="bg-transparent text-sm py-2 px-3 mt-1 border border-gray w-full focus:border-blue-900 rounded outline-none"
-          />
-        </div>
+        <label for="min_price" class="text-dark text-sm">
+          {{ $t('min_price') }}
+        </label>
+        <input
+          v-model="minValue"
+          type="text"
+          :placeholder="$t('enter_min_price')"
+          class="bg-transparent text-sm py-2 px-3 mt-1 border border-gray w-full focus:border-blue-900 rounded outline-none"
+        />
       </div>
-      <hr class="h-0.5 w-full bg-gray-100/50 my-4" />
-      <p class="text-base text-dark font-medium mb-3">
+      <div class="mt-2 mb-4">
+        <label for="min_price" class="text-dark text-sm">
+          {{ $t('max_price') }}
+        </label>
+        <input
+          v-model="maxValue"
+          type="text"
+          :placeholder="$t('enter_max_price')"
+          class="bg-transparent text-sm py-2 px-3 mt-1 border border-gray w-full focus:border-blue-900 rounded outline-none"
+        />
+      </div>
+    </div>
+    <hr class="h-0.5 w-full bg-gray-100/50 my-4" />
+    <div
+      class="filter-group lg:pr-4 lg:-mr-4 transition-200"
+      :class="open ? '' : 'max-h-[500px] overflow-hidden'"
+    >
+      <p class="text-base text-dark font-bold mb-3">
         {{ $t('categories') }}
       </p>
       <template v-if="loading">
         <UISkeleton
-          v-for="(item, index) in 100"
+          v-for="(item, index) in 10"
           v-bind="{ loading }"
           :key="index"
           width="80%"
           height="24px"
+          class="mb-2"
         />
       </template>
       <template v-else>
@@ -65,9 +69,16 @@
         </div>
       </template>
     </div>
+    <div
+      v-if="!open && categories?.length > 1"
+      class="text-center text-xs text-dark-400 px-4 py-1.5 mt-3 rounded-lg bg-gray-100 transition-200 hover:bg-gray cursor-pointer"
+      @click="open = true"
+    >
+      {{ $t('see_other_categories') }}
+    </div>
     <hr class="h-0.5 w-full bg-gray-100/50 my-4" />
     <div class="">
-      <p class="text-base text-dark font-medium mb-3">
+      <p class="text-base text-dark font-bold mb-3">
         {{ $t('other_filters') }}
       </p>
       <FormCheckbox
@@ -95,14 +106,19 @@
 </template>
 <script setup lang="ts">
 import { useHomeStore } from '~/store/home'
+import { ICategory } from '~/types'
 import { debounce } from '~/utils'
 
+interface Props {
+  categories: ICategory[]
+}
+defineProps<Props>()
 const store = useHomeStore()
 
-const categories = computed(() => store.filteredCategories)
 const loading = computed(() => store.loading)
 const route = useRoute()
 const router = useRouter()
+const open = ref(false)
 const group = ref<number[]>([])
 const minValue = ref(route.query?.min_price ?? 100)
 const maxValue = ref(route.query?.max_price ?? 1000000)

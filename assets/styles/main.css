@@ -9,3 +9,15 @@
 .transition-300 {
     @apply duration-300 transition-all;
 }
+.filter-group::-webkit-scrollbar {
+    width: 4px;
+}
+
+.filter-group::-webkit-scrollbar-track {
+    background: #ebeef5;
+}
+
+.filter-group::-webkit-scrollbar-thumb {
+    background: rgba(213, 216, 220, 0.5);
+    border-radius: 12px;
+}
