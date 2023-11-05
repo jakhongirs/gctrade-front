@@ -56,6 +56,15 @@
             </div>
           </div>
         </Transition>
+        <div class="flex justify-end mt-8">
+          <UIPagination
+            v-if="count > pagination.limit"
+            :total="count"
+            :current-page="pagination.page"
+            :limit="pagination.limit"
+            @input="handlePagination"
+          />
+        </div>
       </div>
     </div>
     <UIModal
@@ -80,6 +89,7 @@ import { debounce } from '~/utils'
 const store = useProductStore()
 const homeStore = useHomeStore()
 const route = useRoute()
+const router = useRouter()
 const { t } = useI18n()
 
 const products = computed(() => store.products)
@@ -88,6 +98,11 @@ const category = computed(() => homeStore.filteredCategories?.[0])
 const categoryLoading = computed(() => homeStore.loading)
 const count = computed(() => store.count)
 const loading = computed(() => store.loading)
+const pagination = reactive({
+  page: route.query?.page ? Number(route?.query?.page) : 1,
+  limit: 12,
+  offset: 0,
+})
 const breadcrumbs = computed(() => {
   return [
     {
@@ -105,6 +120,38 @@ const filterModal = ref(false)
 function openModal() {
   filterModal.value = true
 }
+function handlePagination(e: number) {
+  pagination.page = e
+}
+function updateQueries(queries) {
+  const query = route.query
+  router.replace({ query: { ...query, ...queries } })
+}
+watch(
+  () => pagination.page,
+  (val) => {
+    pagination.offset = (pagination.page - 1) * pagination.limit
+    updateQueries({ page: pagination.page })
+  },
+  {
+    immediate: true,
+  }
+)
+watch(
+  () => [
+    route.query.category,
+    route.query.ordering,
+    route.query.is_sale,
+    route.query.min_price,
+    route.query.max_price,
+  ],
+  (val) => {
+    const value = val.find((el) => el != undefined)
+    if (value) {
+      pagination.page = 1
+    }
+  }
+)
 watch(
   () => route.query,
   () => {
@@ -115,6 +162,7 @@ watch(
       store.fetchProducts({
         parent_category: !isNaN(route.params.id) ? route.params.id : undefined,
         ...route.query,
+        ...pagination,
       })
     })
   },
@@ -127,6 +175,7 @@ Promise.allSettled([
   store.fetchProducts({
     parent_category: !isNaN(route.params.id) ? route.params.id : undefined,
     ...route.query,
+    ...pagination,
   }),
   homeStore.fetchFilteredCategories({
     id: !isNaN(route.params.id) ? route.params.id : undefined,

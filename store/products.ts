@@ -2,6 +2,15 @@ import { defineStore } from 'pinia'
 
 import { IProduct, IResponse } from '~/types'
 
+interface IFilter {
+  limit?: number
+  offset?: number
+  category?: number[] | string
+  is_sale?: boolean
+  ordering?: string
+  page?: number
+  parent_category?: number
+}
 export const useProductStore = defineStore('productStore', {
   state: () => ({
     products: [] as IProduct[],
@@ -9,7 +18,7 @@ export const useProductStore = defineStore('productStore', {
     loading: true,
   }),
   actions: {
-    async fetchProducts(params) {
+    async fetchProducts(params: IFilter) {
       this.loading = true
       try {
         const data = await useApi().$get<IResponse<IProduct>>('product/list/', {

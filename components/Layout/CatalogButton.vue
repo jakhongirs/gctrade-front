@@ -21,7 +21,7 @@
       <div class="col-span-9 px-16 py-4 overflow-y-auto">
         <ul class="columns-2">
           <li
-            v-for="(item, index) in subCategories"
+            v-for="(item, index) in subCategories || data?.[0]?.categories"
             :key="index"
             class="text-base text-dark mb-3 transition-200 hover:text-red"
           >
@@ -47,7 +47,7 @@ defineProps<Props>()
 const store = useHomeStore()
 const router = useRouter()
 const data = computed((): ICategory[] => store.categories)
-const subCategories = ref(data.value[0]?.categories || [])
+const subCategories = ref(data.value[0]?.categories)
 const activeCatgeory = ref(1)
 function defineSubCategories(id: number) {
   subCategories.value = data.value.find(
