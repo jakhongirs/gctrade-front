@@ -30,8 +30,10 @@
 </template>
 
 <script lang="ts" setup>
+import 'swiper/css'
 import 'swiper/css/effect-fade'
 import 'swiper/css/navigation'
+import 'swiper/css/pagination'
 
 import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
@@ -53,17 +55,11 @@ const settings = {
   // centerInsufficientSlides: true,
   pauseOnMouseEnter: true,
   loop: true,
-  spaceBetween: 20,
   autoplay: {
     delay: 3000,
     disableOnInteraction: false,
   },
   modules: [Autoplay, Pagination, EffectFade, Navigation],
-  breakpoints: {
-    450: {
-      spaceBetween: 20,
-    },
-  },
 }
 
 const activeSlide = ref(0)
@@ -73,9 +69,6 @@ function onChangeSlide(newValue: { activeIndex: number }) {
 </script>
 
 <style>
-.swiper-wrapper {
-  display: flex;
-}
 .main-slider .swiper-pagination-bullet {
   height: 4px !important;
   width: 30px;
