@@ -69,7 +69,10 @@
       </template>
     </div>
     <hr class="h-0.5 w-full bg-gray-100/50 my-4" />
-    <p class="text-base text-dark font-bold mb-3">
+    <p
+      v-if="loading || manufacturer?.length"
+      class="text-base text-dark font-bold mb-3"
+    >
       {{ $t('manufacturer') }}
     </p>
     <div
@@ -102,7 +105,10 @@
         </div>
       </template>
     </div>
-    <hr class="h-0.5 w-full bg-gray-100/50 my-4" />
+    <hr
+      v-if="loading || manufacturer?.length"
+      class="h-0.5 w-full bg-gray-100/50 my-4"
+    />
     <div class="">
       <p class="text-base text-dark font-bold mb-3">
         {{ $t('other_filters') }}

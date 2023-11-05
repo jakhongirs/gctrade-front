@@ -3,7 +3,7 @@
     <Transition name="fade" mode="out-in">
       <div
         :key="loading"
-        class="md:!h-[487px] h-[200px] overflow-hidden md:pb-[52px]"
+        class="md:!h-[350px] h-[200px] overflow-hidden container"
       >
         <Swiper
           v-bind="settings"
@@ -13,15 +13,13 @@
           <SwiperSlide
             v-for="(item, idx) in data"
             :key="'A' + idx"
-            class="cursor-grab active:cursor-grabbing relative md:max-w-[1000px] max-w-[350px] w-full md:!h-max"
+            class="cursor-grab active:cursor-grabbing relative !w-full md:!h-max"
           >
-            <div
-              class="inner_slider_main lg:min-w-[1000px] min-w-[320px] h-full image-preloader"
-            >
+            <div class="inner_slider_main !w-full h-full image-preloader">
               <img
                 :src="item?.image_src"
                 alt="banner"
-                class="object-cover transition-200 rounded-lg sm:w-full w-[350px] md:h-full h-[200px]"
+                class="object-cover transition-200 rounded-lg !w-full md:h-[350px] h-[200px]"
               />
             </div>
           </SwiperSlide>
@@ -32,7 +30,10 @@
 </template>
 
 <script lang="ts" setup>
-import { Autoplay, Pagination } from 'swiper/modules'
+import 'swiper/css/effect-fade'
+import 'swiper/css/navigation'
+
+import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 
 interface Props {
@@ -44,7 +45,9 @@ const settings = {
   pagination: {
     clickable: true,
   },
-  slidesPerView: 'auto',
+  effect: 'fade',
+  navigation: true,
+  slidesPerView: 1,
   centeredSlides: true,
   // centeredSlidesBounds: true,
   // centerInsufficientSlides: true,
@@ -55,7 +58,7 @@ const settings = {
     delay: 3000,
     disableOnInteraction: false,
   },
-  modules: [Autoplay],
+  modules: [Autoplay, Pagination, EffectFade, Navigation],
   breakpoints: {
     450: {
       spaceBetween: 20,
