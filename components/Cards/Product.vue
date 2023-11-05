@@ -7,7 +7,12 @@
         <div
           class="max-h-[200px] min-h-[200px] h-full rounded-t-lg overflow-hidden relative"
         >
-          <UILikeButton class="top-4 right-4" @click.stop.prevent="addCart" />
+          <UILikeButton
+            class="top-4 right-4"
+            :saved="data?.is_in_saved"
+            :product-id="data?.id"
+            @click.stop.prevent="addCart"
+          />
           <img
             :src="data?.gallery?.[0]"
             :alt="data?.title"
@@ -52,7 +57,7 @@
             class="my-4 text-sm font-medium text-dark"
           >
             {{ data?.manufacturer?.title }},
-            <span class="text-gray-400 font-normal">Tashkent</span>
+            <!--            <span class="text-gray-400 font-normal">Tashkent</span>-->
           </p>
         </UISkeleton>
 

@@ -64,10 +64,13 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 const breadcrumbs = computed(() => {
   return [
     {
-      title: 'contacts',
+      title: t('contacts'),
       url: '/contact',
     },
   ]

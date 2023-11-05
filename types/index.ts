@@ -83,3 +83,8 @@ export interface IManufacture {
   title: string
   logo: string | null
 }
+export interface ISaved {
+  id: number
+  fingerprint: string
+  product: IProduct
+}

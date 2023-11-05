@@ -20,6 +20,8 @@
 import 'vue-slider-component/dist-css/vue-slider-component.css'
 import 'vue-slider-component/theme/default.css'
 
+import { useI18n } from 'vue-i18n'
+
 import { useHomeStore } from '~/store/home'
 import { ICategory } from '~/types'
 
@@ -27,11 +29,12 @@ const store = useHomeStore()
 
 const data = computed((): ICategory[] => store.categories)
 const count = computed(() => store.categoriesCount)
+const { t } = useI18n()
 
 const breadcrumbs = computed(() => {
   return [
     {
-      title: 'categories',
+      title: t('categories'),
       url: '/products',
     },
   ]

@@ -5,6 +5,7 @@
 </template>
 <script setup lang="ts">
 import { useBasketStore } from '~/store/basket'
+import { useSavedStore } from '~/store/saved'
 
 const { init } = useTheme()
 

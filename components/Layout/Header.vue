@@ -84,8 +84,14 @@
       <div class="md:flex hidden items-center gap-2">
         <NuxtLink
           to="/saved"
-          class="w-8 h-8 rounded-lg bg-white-100 flex items-center justify-center group cursor-pointer"
+          class="w-8 h-8 rounded-lg bg-white-100 flex items-center justify-center group cursor-pointer relative"
         >
+          <div
+            v-if="savedCount"
+            class="flex items-center justify-center rounded-full bg-red text-white text-xs absolute w-5 h-5 -top-3 -right-4 z-10 font-medium"
+          >
+            {{ savedCount }}
+          </div>
           <i
             class="icon-heart text-2xl text-gray-600 group-hover:text-red transition-200"
           ></i>
@@ -114,6 +120,7 @@ import { useWindowScroll } from '@vueuse/core'
 
 import { useBasketStore } from '~/store/basket'
 import { useHomeStore } from '~/store/home'
+import { useSavedStore } from '~/store/saved'
 
 interface Props {
   open: boolean
@@ -125,7 +132,9 @@ defineEmits<{
 
 const homeStore = useHomeStore()
 const store = useBasketStore()
+const savedStore = useSavedStore()
 const count = computed(() => store.count)
+const savedCount = computed(() => savedStore.count)
 const scroll = useWindowScroll()
 const scrollTop = scroll.y
 const windowIsScrolled = ref(false)
@@ -142,7 +151,10 @@ watch(
   }
 )
 
-Promise.allSettled([homeStore.fetchCategories()]).catch((err) => {
+Promise.allSettled([
+  homeStore.fetchCategories(),
+  savedStore.fetchSavedProducts(),
+]).catch((err) => {
   console.log(err)
 })
 </script>

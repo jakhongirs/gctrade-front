@@ -162,9 +162,11 @@
 <script setup lang="ts">
 import { useVuelidate } from '@vuelidate/core'
 import { required } from '@vuelidate/validators'
+import { useI18n } from 'vue-i18n'
 
 import { useBasketStore } from '~/store/basket'
 
+const { t } = useI18n()
 const store = useBasketStore()
 const data = computed(() => store.products)
 const count = computed(() => store.count)
@@ -173,7 +175,7 @@ const check = computed(() => store.check)
 const breadcrumbs = computed(() => {
   return [
     {
-      title: 'basket',
+      title: t('basket'),
       url: '/basket',
     },
   ]

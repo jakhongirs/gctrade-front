@@ -88,20 +88,23 @@
   <!-- End .main -->
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+
 import { formatMoneyDecimal } from '@/utils'
 import { IProduct } from '~/types'
 
 const single = ref<IProduct | null>(null)
 const route = useRoute()
+const { t } = useI18n()
 
 const breadcrumbs = computed(() => {
   return [
     {
-      title: 'products',
+      title: t('products'),
       url: '/products',
     },
     {
-      title: 'Metall buyum',
+      title: single.value?.title,
       url: '/',
     },
   ]
