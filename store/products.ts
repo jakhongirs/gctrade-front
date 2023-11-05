@@ -18,21 +18,24 @@ export const useProductStore = defineStore('productStore', {
     loading: true,
   }),
   actions: {
-    async fetchProducts(params: IFilter) {
+    fetchProducts(params: IFilter) {
       this.loading = true
-      try {
-        const data = await useApi().$get<IResponse<IProduct>>('product/list/', {
-          params,
-        })
-        if (data) {
-          this.products = data?.results
-          this.count = data?.count
-        }
-      } catch (err) {
-        console.log(err)
-      } finally {
-        this.loading = false
-      }
+      return new Promise((resolve, reject) => {
+        useApi()
+          .$get<IResponse<IProduct>>('product/list/', {
+            params,
+          })
+          .then((res) => {
+            this.products = res.results
+            this.count = res.count
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+          .finally(() => {
+            this.loading = false
+          })
+      })
     },
   },
 })

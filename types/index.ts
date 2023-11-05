@@ -77,3 +77,9 @@ export interface ICheck {
   total_savings: number
   quantity: number
 }
+
+export interface IManufacture {
+  id: number
+  title: string
+  logo: string | null
+}

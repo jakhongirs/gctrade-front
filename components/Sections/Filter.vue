@@ -69,6 +69,40 @@
       </template>
     </div>
     <hr class="h-0.5 w-full bg-gray-100/50 my-4" />
+    <p class="text-base text-dark font-bold mb-3">
+      {{ $t('manufacturer') }}
+    </p>
+    <div
+      class="filter-group max-h-[300px] overflow-y-auto lg:pr-4 lg:-mr-4 transition-200"
+    >
+      <template v-if="loading">
+        <UISkeleton
+          v-for="(item, index) in 10"
+          v-bind="{ loading }"
+          :key="index"
+          width="80%"
+          height="24px"
+          class="mb-2"
+        />
+      </template>
+      <template v-else>
+        <div
+          v-for="(item, index) in manufacturer"
+          :key="index"
+          class="first:mt-0 mt-3"
+        >
+          <FormCheckbox
+            :value="item.id"
+            :label="item.title"
+            name="checkbox_group"
+            class="py-1 block w-full"
+            :checked="manufacturers.includes(item?.id)"
+            @update:model-value="handleManufacturer(item.id)"
+          />
+        </div>
+      </template>
+    </div>
+    <hr class="h-0.5 w-full bg-gray-100/50 my-4" />
     <div class="">
       <p class="text-base text-dark font-bold mb-3">
         {{ $t('other_filters') }}
@@ -98,11 +132,12 @@
 </template>
 <script setup lang="ts">
 import { useHomeStore } from '~/store/home'
-import { ICategory } from '~/types'
+import { ICategory, IManufacture } from '~/types'
 import { debounce } from '~/utils'
 
 interface Props {
   categories: ICategory[]
+  manufacturer: IManufacture[]
 }
 defineProps<Props>()
 const store = useHomeStore()
@@ -110,8 +145,8 @@ const store = useHomeStore()
 const loading = computed(() => store.loading)
 const route = useRoute()
 const router = useRouter()
-const open = ref(false)
 const group = ref<number[]>([])
+const manufacturers = ref<number[]>([])
 const minValue = ref(route.query?.min_price ?? 100)
 const maxValue = ref(route.query?.max_price ?? 1000000)
 const extraFilters = reactive({
@@ -128,6 +163,16 @@ watch(
     })
   }
 )
+const handleManufacturer = (id: number) => {
+  if (manufacturers.value.includes(id)) {
+    manufacturers.value.splice(group.value.indexOf(id), 1)
+  } else {
+    manufacturers.value.push(id)
+  }
+  debounce('manufacturer', () => {
+    updateQueries({ manufacturer: manufacturers.value.join(',') })
+  })
+}
 // working with checkbox group
 const handleChange = (id: number) => {
   if (group.value.includes(id)) {
@@ -156,6 +201,11 @@ onMounted(() => {
   // child category
   if (route.query?.category) {
     group.value = route.query?.category
+      ?.split(',')
+      ?.map((el: string) => Number(el))
+  }
+  if (route.query?.manufacturer) {
+    manufacturers.value = route.query?.manufacturer
       ?.split(',')
       ?.map((el: string) => Number(el))
   }

@@ -5,7 +5,10 @@
       <aside
         class="lg:col-span-3 col-span-12 lg:sticky top-[168px] shadow bg-white rounded-lg px-4 py-6 h-fit lg:block hidden"
       >
-        <SectionsFilter :categories="categories" />
+        <SectionsFilter
+          :categories="categories"
+          :manufacturer="manufacturers"
+        />
       </aside>
       <div class="lg:col-span-9 col-span-12">
         <div class="flex items-center justify-between">
@@ -28,7 +31,7 @@
               class="grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 sm:gap-6 gap-3 mt-6"
             >
               <CardsProduct
-                v-for="(item, index) in 9"
+                v-for="(item, index) in 12"
                 :key="index"
                 :ind="index"
                 loading
@@ -70,7 +73,10 @@
       @close="filterModal = false"
     >
       <div class="max-h-[600px] overflow-y-auto filter-group -mr-2 pr-2">
-        <SectionsFilter :categories="categories" />
+        <SectionsFilter
+          :categories="categories"
+          :manufacturer="manufacturers"
+        />
       </div>
     </UIModal>
   </div>
@@ -79,18 +85,21 @@
 import { useI18n } from 'vue-i18n'
 
 import { useHomeStore } from '~/store/home'
+import { useManufacturerStore } from '~/store/manufacturer'
 import { useProductStore } from '~/store/products'
 import { IProduct } from '~/types'
 import { debounce } from '~/utils'
 
 const store = useProductStore()
 const homeStore = useHomeStore()
+const manStore = useManufacturerStore()
 const route = useRoute()
 const router = useRouter()
 const { t } = useI18n()
 
 const products = computed(() => store.products)
 const categories = computed(() => homeStore.categories)
+const manufacturers = computed(() => manStore.data)
 const count = computed(() => store.count)
 const loading = computed(() => store.loading)
 const pagination = reactive({
@@ -135,6 +144,7 @@ watch(
     route.query.is_sale,
     route.query.min_price,
     route.query.max_price,
+    route.query.manufacturer,
   ],
   (val) => {
     const value = val.find((el) => el != undefined)
@@ -161,4 +171,5 @@ watch(
     immediate: true,
   }
 )
+manStore.fetchManufacturer()
 </script>
