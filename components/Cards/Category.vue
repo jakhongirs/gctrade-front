@@ -1,5 +1,6 @@
 <template>
-  <div
+  <NuxtLink
+    :to="`/category/${data?.id}`"
     class="pt-3 md:pt-5 bg-white rounded-2xl flex items-start justify-between gap-2 h-32 overflow-hidden category-card transition-300 cursor-pointer group"
     :class="{ 'pointer-events-none': loading }"
   >
@@ -15,7 +16,7 @@
       </UISkeleton>
       <UISkeleton height="18px" width="30%" v-bind="{ loading }">
         <NuxtLink
-          :to="`/products?parent_category=${data.id}`"
+          :to="`/category/${data.id}`"
           class="inline-flex items-center gap-1 transition-300 md:opacity-0 group-hover:opacity-100"
         >
           <p class="text-red text-sm leading-130">{{ $t('more') }}</p>
@@ -34,7 +35,7 @@
         </UISkeleton>
       </div>
     </ClientOnly>
-  </div>
+  </NuxtLink>
 </template>
 
 <script setup lang="ts">
@@ -42,7 +43,7 @@ import { ICategory } from '~/types'
 
 export interface Props {
   loading?: boolean
-  data: ICategory | number
+  data: ICategory
 }
 defineProps<Props>()
 </script>

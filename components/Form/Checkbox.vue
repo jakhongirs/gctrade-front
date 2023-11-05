@@ -24,7 +24,7 @@
     <span v-if="label" class="ml-2">
       <slot name="label">
         <p class="leading-130 text-dark text-sm" :class="[labelStyles]">
-          {{ $t(label) }}
+          {{ label }}
         </p>
       </slot>
     </span>
@@ -33,7 +33,7 @@
 
 <script setup lang="ts">
 interface Props {
-  modelValue: boolean
+  modelValue?: boolean
   label?: string
   name?: string
   value?: string | number | boolean
@@ -51,6 +51,6 @@ const emit = defineEmits<{
   (e: 'change', val: Event): void
 }>()
 const handleChange = (e: Event) => {
-  emit('update:modelValue', e?.target?.value)
+  emit('update:modelValue', e?.target?.checked)
 }
 </script>

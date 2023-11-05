@@ -2,9 +2,7 @@
   <div class="lg:mt-0 mt-6">
     <h2 class="text-xl text-dark font-medium lg:block hidden">Filter</h2>
     <hr class="h-0.5 w-full bg-gray-100/50 my-4 sm:block hidden" />
-    <div
-      class="lg:max-h-[500px] lg:overflow-y-auto filter-group lg:pr-4 lg:-mr-4"
-    >
+    <div class="filter-group lg:pr-4 lg:-mr-4">
       <div>
         <p class="text-base text-dark font-medium mb-3">
           {{ $t('price') }}
@@ -31,111 +29,127 @@
             class="bg-transparent text-sm py-2 px-3 mt-1 border border-gray w-full focus:border-blue-900 rounded outline-none"
           />
         </div>
-        <VueSlider
-          :key="`${minValue}-${maxValue}`"
-          v-model="range"
-          :min="0"
-          :max="10000000"
-          :interval="100"
-          :tooltip-formatter="
-            (v) => `${('' + v).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`
-          "
-        />
       </div>
       <hr class="h-0.5 w-full bg-gray-100/50 my-4" />
-      <div
-        v-for="(item, index) in categories"
-        :key="index"
-        class="first:mt-0 mt-3"
-      >
-        <p class="text-base text-dark font-medium mb-3">
-          {{ item.title }}
-        </p>
-        <template v-for="(category, ind) in item.categories" :key="ind">
-          <FormCheckbox
-            :value="category.id"
-            :label="category.title"
-            name="checkbox_group"
-            class="py-1 block w-full"
-            :checked="group.includes(category.id)"
-            @update:model-value="handleChange(category.id)"
-          />
-        </template>
-      </div>
+      <p class="text-base text-dark font-medium mb-3">
+        {{ $t('categories') }}
+      </p>
+      <template v-if="loading">
+        <UISkeleton
+          v-for="(item, index) in 100"
+          v-bind="{ loading }"
+          :key="index"
+          width="80%"
+          height="24px"
+        />
+      </template>
+      <template v-else>
+        <div
+          v-for="(item, index) in categories"
+          :key="index"
+          class="first:mt-0 mt-3"
+        >
+          <p class="text-base text-dark font-medium mb-3">
+            {{ item.title }}
+          </p>
+          <template v-for="(category, ind) in item.categories" :key="ind">
+            <FormCheckbox
+              :value="category.id"
+              :label="category.title"
+              name="checkbox_group"
+              class="py-1 block w-full"
+              :checked="group.includes(category?.id)"
+              @update:model-value="handleChange(category.id)"
+            />
+          </template>
+        </div>
+      </template>
     </div>
     <hr class="h-0.5 w-full bg-gray-100/50 my-4" />
     <div class="">
       <p class="text-base text-dark font-medium mb-3">
         {{ $t('other_filters') }}
       </p>
-      <FormCheckboxGroup
-        v-model="others"
-        :items="filters"
-        label-key="label"
-        value-key="id"
+      <FormCheckbox
+        v-model="extraFilters.sale_products"
+        name="checkbox_group"
+        class="py-1 block w-full"
+        :label="$t('sale_products')"
+        :checked="extraFilters.sale_products"
+        @update:model-value="
+          (e) => updateQueries({ is_sale: e ? e : undefined })
+        "
+      />
+      <FormCheckbox
+        v-model="extraFilters.top_products"
+        name="checkbox_group"
+        class="py-1 block w-full"
+        :label="$t('top_products')"
+        :checked="extraFilters.top_products"
+        @update:model-value="
+          (e) => updateQueries({ ordering: e ? '-views_count' : undefined })
+        "
       />
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import 'vue-slider-component/dist-css/vue-slider-component.css'
-import 'vue-slider-component/theme/default.css'
-
-import VueSlider from 'vue-slider-component/dist-css/vue-slider-component.umd.min.js'
-
-import { filters } from '~/data'
 import { useHomeStore } from '~/store/home'
 import { debounce } from '~/utils'
 
 const store = useHomeStore()
 
-const categories = computed(() => store.categories)
+const categories = computed(() => store.filteredCategories)
+const loading = computed(() => store.loading)
 const route = useRoute()
-const group = ref([])
-const others = ref([])
-const minValue = ref(0)
-const maxValue = ref(1000000)
-const range = ref([1000, 1000000])
+const router = useRouter()
+const group = ref<number[]>([])
+const minValue = ref(route.query?.min_price ?? 100)
+const maxValue = ref(route.query?.max_price ?? 1000000)
+const extraFilters = reactive({
+  top_products: !!route.query?.ordering || false,
+  sale_products: !!route.query?.is_sale || false,
+  recent_products: false,
+})
 
 watch(
   () => [minValue.value, maxValue.value],
   () => {
     debounce('range', () => {
-      range.value[0] = +minValue.value
-      range.value[1] = +maxValue.value
+      updateQueries({ min_price: minValue.value, max_price: maxValue.value })
     })
-  }
-)
-watch(
-  () => range.value,
-  () => {
-    debounce('range', () => {
-      minValue.value = range.value[0]
-      maxValue.value = range.value[1]
-    })
-  },
-  {
-    deep: true,
   }
 )
 // working with checkbox group
-
 const handleChange = (id: number) => {
   if (group.value.includes(id)) {
     group.value.splice(group.value.indexOf(id), 1)
   } else {
     group.value.push(id)
   }
+  debounce('category', () => {
+    updateQueries({ category: group.value.join(',') })
+  })
 }
-watch(
-  () => route.query?.category,
-  () => {
-    group.value.push(Number(route.query?.category))
-  }
-)
+function updateQueries(queries) {
+  const query = route.query
+  router.replace({ query: { ...query, ...queries } })
+}
 onMounted(() => {
+  // Parent category
+  // if (!isNaN(route.params.id) && categories.value) {
+  //   const parent = categories.value.find(
+  //     (el) => el?.id === Number(route.params.id)
+  //   )
+  //   if (parent?.categories?.length) {
+  //     group.value = parent?.categories?.map((el) => el.id)
+  //   }
+  // }
+  // child category
   if (route.query?.category) {
-    group.value.push(Number(route.query?.category))
+    group.value = route.query?.category
+      ?.split(',')
+      ?.map((el: string) => Number(el))
   }
 })
 </script>

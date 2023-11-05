@@ -1,6 +1,6 @@
 <template>
   <UIButton
-    :text="$t(!count ? 'not_available' : saved ? 'in_cart' : 'to_cart')"
+    :text="$t(!count ? 'not_available' : isInCart ? 'in_cart' : 'to_cart')"
     size="small"
     :variant="!count ? 'outline' : isInCart ? 'light' : 'primary'"
     class="w-full mt-auto"

@@ -9,10 +9,12 @@ export const useProductStore = defineStore('productStore', {
     loading: true,
   }),
   actions: {
-    async fetchProducts() {
+    async fetchProducts(params) {
       this.loading = true
       try {
-        const data = await useApi().$get<IResponse<IProduct>>('product/list/')
+        const data = await useApi().$get<IResponse<IProduct>>('product/list/', {
+          params,
+        })
         if (data) {
           this.products = data?.results
           this.count = data?.count

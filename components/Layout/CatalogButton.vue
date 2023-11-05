@@ -11,7 +11,7 @@
             :key="index"
             :class="{ '!text-red': activeCatgeory === item.id }"
             class="text-lg cursor-pointer text-dark py-2 transition-200 hover:text-red flex justify-between items-center"
-            @click="defineSubCategories(item.id)"
+            @click="onClickCategory(item.id)"
             @mouseenter="defineSubCategories(item.id)"
           >
             {{ item.title }} <i class="icon-chevron-right"></i>
@@ -25,7 +25,7 @@
             :key="index"
             class="text-base text-dark mb-3 transition-200 hover:text-red"
           >
-            <NuxtLink :to="`/products?category=${item.id}`">
+            <NuxtLink :to="`/category/${item.slug}?category=${item.id}`">
               {{ item.title }}
             </NuxtLink>
           </li>
@@ -45,6 +45,7 @@ export interface Props {
 }
 defineProps<Props>()
 const store = useHomeStore()
+const router = useRouter()
 const data = computed((): ICategory[] => store.categories)
 const subCategories = ref(data.value[0]?.categories || [])
 const activeCatgeory = ref(1)
@@ -54,5 +55,8 @@ function defineSubCategories(id: number) {
   )?.categories
 
   activeCatgeory.value = id
+}
+function onClickCategory(id: number) {
+  router.push(`/category/${id}`)
 }
 </script>

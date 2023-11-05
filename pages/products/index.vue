@@ -35,7 +35,6 @@
       </div>
     </div>
     <UIModal
-      id="filter_modal"
       :show="filterModal"
       with-header
       title="Filter"
