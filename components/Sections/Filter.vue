@@ -30,13 +30,12 @@
       </div>
     </div>
     <hr class="h-0.5 w-full bg-gray-100/50 my-4" />
+    <p class="text-base text-dark font-bold mb-3">
+      {{ $t('categories') }}
+    </p>
     <div
-      class="filter-group lg:pr-4 lg:-mr-4 transition-200"
-      :class="open ? '' : 'max-h-[500px] overflow-hidden'"
+      class="filter-group max-h-[300px] overflow-y-auto lg:pr-4 lg:-mr-4 transition-200"
     >
-      <p class="text-base text-dark font-bold mb-3">
-        {{ $t('categories') }}
-      </p>
       <template v-if="loading">
         <UISkeleton
           v-for="(item, index) in 10"
@@ -68,13 +67,6 @@
           </template>
         </div>
       </template>
-    </div>
-    <div
-      v-if="!open && categories?.length > 1"
-      class="text-center text-xs text-dark-400 px-4 py-1.5 mt-3 rounded-lg bg-gray-100 transition-200 hover:bg-gray cursor-pointer"
-      @click="open = true"
-    >
-      {{ $t('see_other_categories') }}
     </div>
     <hr class="h-0.5 w-full bg-gray-100/50 my-4" />
     <div class="">
