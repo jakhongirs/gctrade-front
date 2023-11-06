@@ -64,5 +64,5 @@ const breadcrumbs = computed(() => {
   ]
 })
 
-store.fetchSavedProducts()
+store.fetchSavedProducts(true)
 </script>

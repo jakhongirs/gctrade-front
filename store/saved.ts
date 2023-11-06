@@ -9,8 +9,8 @@ export const useSavedStore = defineStore('savedStore', {
     loading: false,
   }),
   actions: {
-    fetchSavedProducts() {
-      this.loading = true
+    fetchSavedProducts(loading?: boolean) {
+      this.loading = loading
       return new Promise((resolve, reject) => {
         useApi()
           .$get<IResponse<ISaved>>('product/saved-products/')

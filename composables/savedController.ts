@@ -29,11 +29,10 @@ export const useSavedController = () => {
         `product/saved-products/delete/${id}/`
       )
       store.count--
-      const product = saved.value?.find((el) => el.product.id === id)
-      console.log(product, store.data)
-      if (product) {
-        store.data.splice(saved.value.indexOf(product), 1)
-      }
+      await store.fetchSavedProducts()
+      // if (product) {
+      //   store.data.splice(saved.value.indexOf(product), 1)
+      // }
     } catch (err) {
       console.log(err)
     }
