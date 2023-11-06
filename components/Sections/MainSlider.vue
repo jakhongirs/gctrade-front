@@ -74,11 +74,15 @@ function onChangeSlide(newValue: { activeIndex: number }) {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #d4dfff;
+  background: rgba(255, 255, 255, 0.5);
   border: 1px solid hsla(220, 4%, 48%, 0.3);
 }
 .swiper-button-next:after,
 .swiper-button-prev:after {
   font-size: 16px;
+  color: #040e1a;
+}
+.swiper-pagination-bullet {
+  background: rgba(255, 255, 255, 0.5) !important;
 }
 </style>
