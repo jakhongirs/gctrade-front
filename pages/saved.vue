@@ -6,15 +6,37 @@
         <UISectionTitle title="saved_products" />
         <span class="text-gray-600 text-xl"> ({{ count }}) </span>
       </div>
-      <div class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6 mt-6">
-        <CardsProduct
-          v-for="(item, index) in data"
-          :key="index"
-          :ind="index"
-          :data="item.product"
-          :loading="loading"
-        />
-      </div>
+      <Transition mode="out-in">
+        <div>
+          <div
+            v-if="loading"
+            class="grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 sm:gap-6 gap-3 mt-6"
+          >
+            <CardsProduct
+              v-for="(item, index) in 12"
+              :key="index"
+              :ind="index"
+              loading
+              :data="{} as IProduct"
+            />
+          </div>
+          <div v-else>
+            <div
+              v-if="data?.length"
+              class="grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 sm:gap-6 gap-3 mt-6"
+            >
+              <CardsProduct
+                v-for="(item, index) in data"
+                :key="index"
+                :ind="index"
+                :loading="loading"
+                :data="item.product"
+              />
+            </div>
+            <SectionsNoData v-else />
+          </div>
+        </div>
+      </Transition>
     </div>
   </div>
 </template>
@@ -25,6 +47,7 @@ import 'vue-slider-component/theme/default.css'
 import { useI18n } from 'vue-i18n'
 
 import { useSavedStore } from '~/store/saved'
+import { IProduct } from '~/types'
 
 const store = useSavedStore()
 const { t } = useI18n()

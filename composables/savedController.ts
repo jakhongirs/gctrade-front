@@ -4,6 +4,7 @@ export const useSavedController = () => {
   const loading = ref(false)
   const store = useSavedStore()
   const fingerPrint = useCookie('visitorId')
+  const saved = computed(() => store.data)
   const saveProduct = async (id: number) => {
     loading.value = true
     try {
@@ -28,9 +29,10 @@ export const useSavedController = () => {
         `product/saved-products/delete/${id}/`
       )
       store.count--
-      const product = store.data.find((el) => el.product.id === id)
+      const product = saved.value?.find((el) => el.product.id === id)
+      console.log(product, store.data)
       if (product) {
-        store.data = store.data.splice(store.data.indexOf(product), 1)
+        store.data.splice(saved.value.indexOf(product), 1)
       }
     } catch (err) {
       console.log(err)
