@@ -16,7 +16,12 @@
               <h2 class="text-dark-400 sm:text-3xl text-xl font-bold">
                 {{ single?.title }}
               </h2>
-              <UILikeButton class="!relative !top-0" />
+              <UILikeButton
+                class="!relative !top-0"
+                :product-id="single?.id"
+                :saved="single?.is_in_saved"
+                @click.stop.prevent="single.is_in_saved = !single?.is_in_saved"
+              />
             </div>
             <p class="text-dark-400 text-2xl font-medium mt-2">
               {{ formatMoneyDecimal(single?.price) }} UZS
@@ -35,7 +40,10 @@
               <span class="font-normal"> {{ $t('category') }}: </span>
               {{ single?.category?.title }}
             </p>
-            <hr class="h-0.5 bg-gray-400/50 w-full rounded my-4" />
+            <hr
+              v-if="single?.sold_count || single?.in_stock_count"
+              class="h-0.5 bg-gray-400/50 w-full rounded my-4"
+            />
             <div class="grid grid-cols-2 gap-6">
               <div v-if="single?.sold_count" class="flex items-center gap-4">
                 <i class="text-red text-4xl icon-delivery"></i>
@@ -62,8 +70,25 @@
               </div>
             </div>
 
-            <hr class="h-0.5 bg-gray-400/50 w-full rounded my-4" />
-            <UIButton :text="$t('to_cart')" class="mt-6 sm:w-fit w-full" />
+            <hr
+              v-if="single?.sold_count || single?.in_stock_count"
+              class="h-0.5 bg-gray-400/50 w-full rounded my-4"
+            />
+            <UIButton
+              :text="
+                $t(
+                  !single?.in_stock_count
+                    ? 'not_available'
+                    : single.is_in_cart
+                    ? 'in_cart'
+                    : 'to_cart'
+                )
+              "
+              :variant="single.is_in_cart ? 'light' : 'primary'"
+              class="mt-6 sm:w-[220px] sm:h-[52px] w-full"
+              :loading="loading"
+              @click="addCart"
+            />
           </ClientOnly>
           <!--          <hr class="h-0.5 bg-gray-400/50 w-full rounded my-4" />-->
         </div>
@@ -96,7 +121,7 @@ import { IProduct } from '~/types'
 const single = ref<IProduct | null>(null)
 const route = useRoute()
 const { t } = useI18n()
-
+const { loading, addProductToCart } = useBasketController()
 const breadcrumbs = computed(() => {
   return [
     {
@@ -109,6 +134,14 @@ const breadcrumbs = computed(() => {
     },
   ]
 })
+function addCart() {
+  if (single.value.is_in_cart || !single.value.in_stock_count) return
+
+  if (single.value) {
+    addProductToCart(single.value.id)
+    single.value.is_in_cart = !single.value.is_in_cart
+  }
+}
 async function fetchProductSingle() {
   try {
     const data = await useApi().$get<IProduct>(

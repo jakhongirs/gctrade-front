@@ -84,6 +84,6 @@ interface Props {
 defineProps<Props>()
 
 function addCart() {
-  console.log('add cart')
+  console.log('')
 }
 </script>

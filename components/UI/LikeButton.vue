@@ -22,6 +22,16 @@ const props = defineProps<Props>()
 
 const isSaved = ref(props.saved)
 const { saveProduct, deleteSavedProduct } = useSavedController()
+
+watch(
+  () => props.saved,
+  () => {
+    isSaved.value = props.saved
+  },
+  {
+    immediate: true,
+  }
+)
 async function onDelete(id: number) {
   await deleteSavedProduct(id)
   isSaved.value = false
