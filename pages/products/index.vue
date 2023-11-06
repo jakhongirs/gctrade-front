@@ -171,5 +171,5 @@ watch(
     immediate: true,
   }
 )
-manStore.fetchManufacturer()
+manStore.fetchManufacturer({})
 </script>

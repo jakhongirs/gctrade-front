@@ -10,42 +10,26 @@ export const useManufacturerStore = defineStore('manufactureStore', {
     single: [] as IManufacture[],
   }),
   actions: {
-    fetchManufacturer() {
+    fetchManufacturer(params: {
+      parent_category: number | undefined
+      child_category: number | undefined
+    }) {
       this.loading = true
       return new Promise((resolve, reject) => {
         useApi()
           .$get<IResponse<IManufacture>>('product/manufacturer/', {
             params: {
               limit: 50,
+              ...params,
             },
           })
           .then((res) => {
             this.data = res?.results
             this.count = res?.count
+            resolve(res)
           })
           .catch((err) => {
-            console.log(err)
-          })
-          .finally(() => {
-            this.loading = false
-          })
-      })
-    },
-    fetchManufacturerSingle(id: number) {
-      this.loading = true
-      return new Promise((resolve, reject) => {
-        useApi()
-          .$get<IResponse<IManufacture>>(`product/manufacturer/${id}/`, {
-            params: {
-              limit: 50,
-            },
-          })
-          .then((res) => {
-            this.single = res?.results
-            this.count = res?.count
-          })
-          .catch((err) => {
-            console.log(err)
+            reject(err)
           })
           .finally(() => {
             this.loading = false

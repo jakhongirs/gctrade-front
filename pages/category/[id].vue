@@ -102,7 +102,7 @@ const { t } = useI18n()
 
 const products = computed(() => store.products)
 const categories = computed(() => homeStore.filteredCategories)
-const manufacturers = computed(() => manStore.single)
+const manufacturers = computed(() => manStore.data)
 const category = computed(() => homeStore.filteredCategories?.[0])
 const categoryLoading = computed(() => homeStore.loading)
 const count = computed(() => store.count)
@@ -191,12 +191,11 @@ Promise.allSettled([
     id: !isNaN(route.params.id) ? route.params.id : undefined,
     categories__id: route.query.category || undefined,
   }),
-  manStore.fetchManufacturerSingle(
-    !isNaN(route.params.id)
+  manStore.fetchManufacturer({
+    parent_category: !isNaN(route.params.id)
       ? Number(route.params.id)
-      : route.query?.category
-      ? Number(route.query.category)
-      : 0
-  ),
+      : undefined,
+    child_category: route.query.category || undefined,
+  }),
 ])
 </script>
