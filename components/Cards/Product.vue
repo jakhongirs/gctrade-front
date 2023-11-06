@@ -42,7 +42,7 @@
           </h3>
         </UISkeleton>
         <UISkeleton v-bind="{ loading }" width="96%" height="24px">
-          <p class="text-dark text-base transition-200 line-clamp-2">
+          <p class="text-dark text-base transition-200 line-clamp-2 mb-4">
             {{ data?.title }}
           </p>
         </UISkeleton>
@@ -54,9 +54,9 @@
         >
           <p
             v-if="data?.manufacturer"
-            class="my-4 text-sm font-medium text-dark"
+            class="mb-4 text-sm font-medium text-dark"
           >
-            {{ data?.manufacturer?.title }},
+            {{ data?.manufacturer?.title }}
             <!--            <span class="text-gray-400 font-normal">Tashkent</span>-->
           </p>
         </UISkeleton>
