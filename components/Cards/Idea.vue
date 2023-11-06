@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-white sm:min-w-[350px] sm:max-w-auto max-w-[260px] min-w-[260px] rounded-lg shadow-2xl p-6 flex flex-col items-center justify-center"
+    class="bg-white sm:min-w-[350px] sm:max-w-auto max-w-[260px] min-w-[260px] rounded-lg shadow-xl p-6 flex flex-col items-center justify-center"
   >
     <a
       :href="data?.company?.url"
