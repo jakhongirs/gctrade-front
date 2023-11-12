@@ -106,7 +106,7 @@
         </NuxtLink>
       </div>
     </div>
-    <div class="sm:hidden block p-2 border-t border-t-gray-100">
+    <div class="sm:hidden block py-2 px-4 border-t border-t-gray-100">
       <UISearch />
     </div>
   </header>
