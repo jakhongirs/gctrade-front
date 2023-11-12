@@ -6,7 +6,15 @@
       input-class="!py-2"
       @update:model-value="handleSearch"
       @focus="handleFocus"
-    />
+    >
+      <template #postfix>
+        <span
+          v-if="search"
+          class="icon-close-circle text-dark-400 text-xl px-4 cursor-pointer transition-200 hover:text-red"
+          @click="search = ''"
+        ></span>
+      </template>
+    </FormInput>
     <CollapseTransition easing="linear" dimension="height" :duration="200">
       <div
         v-if="showResult"
@@ -74,7 +82,7 @@
                 v-bind="{ loading }"
               >
                 <NuxtLink
-                  :to="`/products/${item?.slug}`"
+                  :to="`/products?search=${search}`"
                   class="w-full py-2 flex items-center"
                 >
                   <i
@@ -98,6 +106,8 @@ import { useSearchStore } from '~/store/search'
 import { debounce } from '~/utils'
 
 const store = useSearchStore()
+const route = useRoute()
+const router = useRouter()
 
 const data = computed(() => store.data)
 const history = computed(() => store.history)
@@ -115,6 +125,7 @@ onClickOutside(target, () => {
 watch(
   () => search.value,
   () => {
+    updateQueries({ search: search.value })
     debounce('search', () => {
       store.fetchSearchData(search.value)
     })
@@ -146,11 +157,14 @@ async function deleteQuery(id: number) {
 function handleAction() {
   createQueryHistory()
   showResult.value = false
-  search.value = ''
   setTimeout(() => {
     store.data = []
     store.loading = true
   }, 1000)
+}
+function updateQueries(queries) {
+  const query = route.query
+  router.replace({ query: { ...query, ...queries } })
 }
 onMounted(() => {
   store.fetchSearchHistory()
