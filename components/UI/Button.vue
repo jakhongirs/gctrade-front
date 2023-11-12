@@ -1,7 +1,7 @@
 <template>
   <button
     v-bind="{ disabled }"
-    class="rounded-lg w-fit flex-center cursor-pointer main-transition relative group disabled:!pointer-events-none"
+    class="rounded-lg w-fit items-center justify-center cursor-pointer main-transition relative group disabled:!pointer-events-none"
     :class="[
       sizes[size],
       variants[variant],
@@ -39,7 +39,7 @@
                   '!text-base !leading-19': size === 'small',
                 },
               ]"
-              class="font-normal text-class text-center items-center justify-center letter-3"
+              class="font-normal text-class text-center letter-3"
             >
               {{ text }}
             </span>

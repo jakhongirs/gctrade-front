@@ -15,7 +15,9 @@
         />
       </div>
     </Transition>
-    <div class="bg-white-100 lg:pt-[128px] pt-16 grow relative z-0 pb-16">
+    <div
+      class="bg-white-100 lg:pt-[128px] sm:pt-[76px] pt-[127px] grow relative z-0 pb-16"
+    >
       <slot />
     </div>
     <LayoutFooter class="mt-auto" />

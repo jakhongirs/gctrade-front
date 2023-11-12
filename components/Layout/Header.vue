@@ -49,14 +49,12 @@
           <img src="/svg/logo.svg" alt="" class="max-w-[180px]" />
         </NuxtLink>
       </div>
-      <div class="min-w-[600px] lg:flex hidden">
+      <div class="lg:min-w-[600px] flex">
         <UIButton
           :text="$t('catalog')"
           size="small"
           variant="custom"
-          :icon-name="open ? 'close-circle-colored' : 'hamburger-menu'"
-          text-class="text-white"
-          class="mr-6 header-burger min-w-[150px] -ml-20"
+          class="mr-6 header-burger lg:min-w-[150px] -ml-20 md:flex hidden"
           @click="$emit('on-open')"
         >
           <div class="flex items-center justify-center gap-2 w-full text-white">
@@ -66,10 +64,10 @@
                 open ? 'icon-close-circle-regular' : 'icon-hamburger-menu'
               "
             ></i>
-            {{ $t('catalog') }}
+            <span class="lg:block hidden">{{ $t('catalog') }}</span>
           </div>
         </UIButton>
-        <UISearch />
+        <UISearch class="sm:block hidden" />
       </div>
       <div class="md:hidden block" @click="$emit('on-open')">
         <i
@@ -107,6 +105,9 @@
           ></i>
         </NuxtLink>
       </div>
+    </div>
+    <div class="sm:hidden block p-2 border-t border-t-gray-100">
+      <UISearch />
     </div>
   </header>
 </template>

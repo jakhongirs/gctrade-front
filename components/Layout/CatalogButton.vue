@@ -1,10 +1,10 @@
 <template>
   <div
     v-if="isOpen"
-    class="fixed min-h-screen w-full inset-0 bg-white z-[998] pt-[128px]"
+    class="fixed min-h-screen w-full inset-0 bg-white z-[998] pt-[76px]"
   >
     <div class="container py-16 grid grid-cols-12 gap-6 h-full">
-      <div class="col-span-3 overflow-y-auto">
+      <div class="lg:col-span-3 col-span-4 overflow-y-auto">
         <ul class="px-4 py-2">
           <li
             v-for="(item, index) in data"
@@ -18,7 +18,7 @@
           </li>
         </ul>
       </div>
-      <div class="col-span-9 px-16 py-4 overflow-y-auto">
+      <div class="lg:col-span-9 col-span-8 px-16 py-4 overflow-y-auto">
         <ul class="columns-2">
           <li
             v-for="(item, index) in subCategories || data?.[0]?.categories"

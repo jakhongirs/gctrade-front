@@ -1,7 +1,7 @@
 <template>
   <div
     :class="{ '!translate-x-0': isOpen }"
-    class="fixed min-h-screen w-full inset-0 bg-white z-[998] pt-[68px] transition-300 transform translate-x-[-100%]"
+    class="fixed min-h-screen w-full inset-0 bg-white z-[998] sm:pt-[76px] pt-[120px] transition-300 transform translate-x-[-100%]"
   >
     <div class="container py-8 h-full filter-group overflow-y-auto">
       <div class="flex flex-col h-full">
