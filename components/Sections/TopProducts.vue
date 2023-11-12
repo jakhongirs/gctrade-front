@@ -2,7 +2,7 @@
   <div v-if="loading || data?.length" class="container sm:pt-0 py-5">
     <UISectionTitle
       title="top_products"
-      link="/products?top=true"
+      link="/products?ordering=-views_count"
       link-text="all_top_products"
       class="mb-6"
     />

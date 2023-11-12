@@ -113,16 +113,16 @@
       <p class="text-base text-dark font-bold mb-3">
         {{ $t('other_filters') }}
       </p>
-      <FormCheckbox
-        v-model="extraFilters.sale_products"
-        name="checkbox_group"
-        class="py-1 block w-full"
-        :label="$t('sale_products')"
-        :checked="extraFilters.sale_products"
-        @update:model-value="
-          (e) => updateQueries({ is_sale: e ? e : undefined })
-        "
-      />
+      <!--      <FormCheckbox-->
+      <!--        v-model="extraFilters.sale_products"-->
+      <!--        name="checkbox_group"-->
+      <!--        class="py-1 block w-full"-->
+      <!--        :label="$t('sale_products')"-->
+      <!--        :checked="extraFilters.sale_products"-->
+      <!--        @update:model-value="-->
+      <!--          (e) => updateQueries({ is_sale: e ? e : undefined })-->
+      <!--        "-->
+      <!--      />-->
       <FormCheckbox
         v-model="extraFilters.top_products"
         name="checkbox_group"

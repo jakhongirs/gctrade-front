@@ -5,8 +5,15 @@
         :key="loading"
         class="md:!h-[420px] h-[200px] overflow-hidden container"
       >
+        <UISkeleton
+          v-if="loading"
+          class="w-full h-full"
+          width="100%"
+          height="100%"
+          v-bind="{ loading }"
+        />
         <Swiper
-          v-if="!loading"
+          v-else
           v-bind="settings"
           class="!pb-8 h-full"
           @slide-change="onChangeSlide"
@@ -27,17 +34,22 @@
               <a
                 target="_blank"
                 :href="item?.url"
-                class="bg-white/10 absolute top-0 left-0 w-full h-full layer rounded-lg flex flex-col justify-end px-10 py-6"
+                class="bg-white/10 group absolute top-0 left-0 !w-full md:h-[420px] h-[200px] layer rounded-lg flex flex-col justify-end md:px-10 px-6 md:py-6 py-3"
               >
-                <h2 class="text-[32px] font-medium text-white">
+                <h2
+                  class="sm:text-[32px] text-lg font-medium text-white group-hover:text-white/90 transition-200"
+                >
                   {{ item?.title }}
                 </h2>
-                <p class="text-base text-white mt-2">{{ item?.sub_title }}</p>
+                <p
+                  class="sm:text-base text-sm text-white sm:mt-2 group-hover:text-white/90 transition-200"
+                >
+                  {{ item?.sub_title }}
+                </p>
               </a>
             </div>
           </SwiperSlide>
         </Swiper>
-        <UISkeleton v-else class="w-full h-full" v-bind="{ loading }" />
       </div>
     </Transition>
   </ClientOnly>

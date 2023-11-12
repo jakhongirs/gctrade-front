@@ -6,7 +6,7 @@
     <SectionsBrands />
     <SectionsIdeas />
     <SectionsTopProducts />
-    <SectionsOnSaleProducts />
+    <!--    <SectionsOnSaleProducts />-->
     <SectionsRecentlySeen />
   </div>
 </template>
