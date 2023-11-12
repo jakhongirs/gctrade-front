@@ -103,7 +103,17 @@ const { t } = useI18n()
 const products = computed(() => store.products)
 const categories = computed(() => homeStore.filteredCategories)
 const manufacturers = computed(() => manStore.data)
-const category = computed(() => homeStore.filteredCategories?.[0])
+const category = computed(() => {
+  const parent = !isNaN(route.params.id) ? route.params.id : null
+  if (parent) {
+    return categories.value?.[0]
+  }
+  if (route.query?.category) {
+    return categories.value?.[0]?.categories?.find(
+      (element) => element?.id === Number(route.query?.category)
+    )
+  }
+})
 const categoryLoading = computed(() => homeStore.loading)
 const count = computed(() => store.count)
 const loading = computed(() => store.loading)
