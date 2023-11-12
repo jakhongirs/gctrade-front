@@ -63,5 +63,9 @@
   "cancel": "Bekor qilish",
   "not_available": "Mavjud emas",
   "no_data": "Mahsulot mavjud emas",
-  "see_other_categories": "Boshqa kategoriyalarni ko'rish"
+  "see_other_categories": "Boshqa kategoriyalarni ko'rish",
+  "search_results": "Qidiruv natijalari",
+  "popular_search": "Ommabop qidiruvlar",
+  "search_history": "Qidiruvlar tarixi",
+  "no_data_for_search": "Siz izlagan mahsulot mavjud emas!"
 }

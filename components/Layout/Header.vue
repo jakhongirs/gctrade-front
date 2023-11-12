@@ -69,11 +69,7 @@
             {{ $t('catalog') }}
           </div>
         </UIButton>
-        <!--        <LayoutCatalogButton />-->
-        <FormInput
-          :placeholder="$t('search_for_product')"
-          input-class="!py-2"
-        />
+        <UISearch />
       </div>
       <div class="md:hidden block" @click="$emit('on-open')">
         <i

@@ -13,7 +13,7 @@
       <div class="relative w-full">
         <input
           :id="id"
-          v-model="inputValue"
+          :value="modelValue"
           :type="type"
           :area-label="areaLabel"
           :placeholder="placeholder"
@@ -23,7 +23,8 @@
           :disabled="disabled"
           class="py-2 px-4 text-dark read-only:!text-dark-400 focus:border-0 dark:text-white leading-21 text-base border-0 outline-0 bg-transparent w-full z-[1] relative"
           :class="inputClass"
-          @input="sanitizeInput"
+          @input="handleInput($event)"
+          @focus="(e: Event) => emit('focus', e)"
           @blur="(e: Event) => emit('blur', e)"
         />
       </div>
@@ -47,41 +48,21 @@ interface Props {
   postfixClass?: string
   inputClass?: string
   placeholderClass?: string
-  defaultValue?: string
   validation?: boolean
   isArticlePage?: boolean
   readonly?: boolean
   disabled?: boolean
+  modelValue?: string
 }
 
-const props = defineProps<Props>()
+defineProps<Props>()
 const emit = defineEmits<{
   (e: 'update:modelValue', value: string): void
   (e: 'blur', value: Event): void
+  (e: 'focus', value: Event): void
 }>()
-const inputValue = ref('')
-watch(
-  () => inputValue.value,
-  () => {
-    emit('update:modelValue', inputValue.value)
-  }
-)
-watch(
-  () => props.defaultValue,
-  () => {
-    inputValue.value = props.defaultValue
-  },
-  {
-    immediate: true,
-  }
-)
-function sanitizeInput(input) {
-  if (props.validation) {
-    input.target.value = input.target.value.replace(/[^a-zA-Z0-9@_]/g, '')
-    if (input.target.value.charAt(0) !== '@') {
-      inputValue.value = '@' + inputValue.value
-    }
-  }
+function handleInput(e: string) {
+  emit('update:modelValue', e.target.value)
 }
 </script>
 <style>

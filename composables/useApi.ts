@@ -4,7 +4,11 @@ import { FetchOptions } from 'ofetch'
 import { generateUniqueId } from '~/utils'
 
 export const useApi = (apiUrl?: string) => {
-  const visitorId = useCookie('visitorId')
+  const expirationDate = new Date()
+  expirationDate.setFullYear(expirationDate.getFullYear() + 1)
+  const visitorId = useCookie('visitorId', {
+    expires: expirationDate,
+  })
   if (!visitorId.value) {
     visitorId.value = generateUniqueId()
   }

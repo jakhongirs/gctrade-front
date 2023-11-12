@@ -79,12 +79,12 @@
                 $t(
                   !single?.in_stock_count
                     ? 'not_available'
-                    : single.is_in_cart
+                    : single?.is_in_cart
                     ? 'in_cart'
                     : 'to_cart'
                 )
               "
-              :variant="single.is_in_cart ? 'light' : 'primary'"
+              :variant="single?.is_in_cart ? 'light' : 'primary'"
               class="mt-6 sm:w-[220px] sm:h-[52px] w-full"
               :loading="loading"
               @click="addCart"
