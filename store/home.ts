@@ -8,6 +8,8 @@ export const useHomeStore = defineStore('homeStore', {
     categoriesCount: 0,
     loading: true,
     filteredCategories: [] as ICategory[],
+    banner: [],
+    bannerLoading: true,
   }),
   actions: {
     async fetchCategories() {
@@ -45,6 +47,23 @@ export const useHomeStore = defineStore('homeStore', {
       } catch (err) {
         this.loading = false
       }
+    },
+    fetchBanner() {
+      this.bannerLoading = true
+      return new Promise((resolve, reject) => {
+        useApi()
+          .$get('product/banner/')
+          .then((res) => {
+            this.banner = res.results
+            resolve(res)
+          })
+          .catch((err) => {
+            reject(err)
+          })
+          .finally(() => {
+            this.bannerLoading = false
+          })
+      })
     },
   },
 })
