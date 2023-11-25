@@ -46,7 +46,7 @@
     >
       <div class="flex items-center">
         <NuxtLink to="/" class="text-3xl">
-          <img src="/svg/logo.svg" alt="" class="max-w-[180px]" />
+          <img src="/svg/logo.svg" alt="" class="max-w-[140px]" />
         </NuxtLink>
       </div>
       <div class="lg:min-w-[600px] flex">

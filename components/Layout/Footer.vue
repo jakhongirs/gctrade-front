@@ -6,7 +6,7 @@
       >
         <div class="sm:mb-0 mb-4">
           <NuxtLink to="/" class="text-3xl">
-            <img src="/svg/logo.svg" alt="" class="max-w-[180px]" />
+            <img src="/svg/logo.svg" alt="" class="max-w-[140px]" />
           </NuxtLink>
           <p class="text-gray-600 text-sm mt-6">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit.
