@@ -118,7 +118,7 @@ store.fetchBanner()
   background: linear-gradient(
     180deg,
     rgba(2, 5, 20, 0) 0%,
-    rgba(2, 5, 20, 0.7) 51.34%,
+    rgba(2, 5, 20, 0.7) 75.34%,
     #020514 100%
   );
 }

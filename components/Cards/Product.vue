@@ -52,13 +52,16 @@
           height="24px"
           margin="16px 0"
         >
-          <p
+          <button
             v-if="data?.manufacturer"
-            class="mb-4 text-sm font-medium text-dark"
+            class="mb-4 text-sm font-medium text-blue outline-none bg-transparent inline text-left py-1"
+            @click.stop.prevent="
+              $router.push(`/products?manufacturer=${data?.manufacturer?.id}`)
+            "
           >
             {{ data?.manufacturer?.title }}
             <!--            <span class="text-gray-400 font-normal">Tashkent</span>-->
-          </p>
+          </button>
         </UISkeleton>
 
         <UISkeleton v-bind="{ loading }" width="100%" height="32px">

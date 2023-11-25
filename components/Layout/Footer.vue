@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <footer class="bg-white shadow sm:py-10 pt-6 pb-4 mt-16 md:mb-0 mb-[50px]">
+    <footer class="bg-white shadow sm:py-10 pt-6 pb-4 md:mb-0 mb-[49px]">
       <div
         class="container lg:grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-16"
       >
