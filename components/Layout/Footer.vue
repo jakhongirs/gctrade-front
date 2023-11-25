@@ -79,28 +79,28 @@
         to="/"
         class="flex flex-col items-center justify-end text-dark-400 text-xs"
       >
-        <i class="icon-hamburger-menu text-[#8B8E99] text-2xl shrink-0"></i>
+        <i class="icon-hamburger-menu text-[#8B8E99] text-3xl shrink-0"></i>
         {{ $t('dashboard') }}
       </NuxtLink>
       <NuxtLink
         to="/categories"
         class="flex flex-col items-center justify-end text-dark-400 text-xs gap-1"
       >
-        <i class="icon-search-regular text-[#8B8E99] text-xl shrink-0"></i>
+        <i class="icon-search-regular text-[#8B8E99] text-2xl shrink-0"></i>
         {{ $t('categories') }}
       </NuxtLink>
       <NuxtLink
         to="/saved"
         class="flex flex-col items-center justify-end text-dark-400 text-xs"
       >
-        <i class="icon-heart text-[#8B8E99] text-2xl shrink-0"></i>
+        <i class="icon-heart text-[#8B8E99] text-3xl shrink-0"></i>
         {{ $t('loved') }}
       </NuxtLink>
       <NuxtLink
         to="/basket"
         class="flex flex-col items-center justify-end text-dark-400 text-xs"
       >
-        <i class="icon-basket-regular text-[#8B8E99] text-2xl shrink-0"></i>
+        <i class="icon-basket-regular text-[#8B8E99] text-3xl shrink-0"></i>
         {{ $t('basket') }}
       </NuxtLink>
     </div>
