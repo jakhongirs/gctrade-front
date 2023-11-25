@@ -18,12 +18,15 @@
         </UISkeleton>
       </div>
       <div
-        class="ml-4 min-h-[140px] max-h-[140px] flex flex-col py-2 h-full grow"
+        class="ml-4 min-h-[140px] sm:max-h-[140px] flex flex-col py-2 h-full grow"
       >
         <UISkeleton v-bind="{ loading }" width="70%" height="20px">
-          <p class="text-base text-dark-400 font-semibold line-clamp-2">
+          <nuxt-link
+            :to="`/products/${data?.product?.slug}`"
+            class="sm:text-base text-sm text-dark-400 font-semibold line-clamp-2"
+          >
             {{ data?.product?.title }}
-          </p>
+          </nuxt-link>
         </UISkeleton>
         <UISkeleton
           v-bind="{ loading }"
@@ -31,8 +34,10 @@
           height="20px"
           margin="16px 0 0 0"
         >
-          <p class="text-base text-dark-400 font-medium line-clamp-2 mt-4">
-            <span class="font-normal text-gray-400">
+          <p
+            class="sm:text-base text-sm text-dark-400 font-medium sm:line-clamp-2 mt-4"
+          >
+            <span class="font-normal text-gray-400 sm:inline hidden">
               {{ $t('manufacturer') }}:
             </span>
             {{ data?.product?.manufacturer?.title }}
@@ -44,8 +49,12 @@
           height="20px"
           margin="auto 0 0 0"
         >
-          <p v-if="data?.product?.in_stock_count" class="mt-auto">
-            <span class="font-medium mr-2">{{ $t('products_count') }}:</span
+          <p
+            v-if="data?.product?.in_stock_count"
+            class="mt-auto sm:text-base text-sm"
+          >
+            <span class="font-medium mr-2 sm:text-base text-xs"
+              >{{ $t('products_count') }}:</span
             >{{ formatMoneyDecimal(data?.product?.in_stock_count) }}
           </p>
         </UISkeleton>
@@ -56,7 +65,7 @@
     >
       <div
         v-if="!loading"
-        class="w-8 h-8 ml-auto cursor-pointer flex items-center justify-center rounded absolute right-0 sm:top-2"
+        class="w-8 h-8 ml-auto cursor-pointer flex items-center justify-center rounded absolute sm:right-0 -right-4 sm:top-2 sm:bottom-auto -bottom-4"
         @click="deleteProduct(data.id)"
       >
         <i class="icon-trash text-xl transition-200 hover:text-red"></i>
@@ -119,7 +128,7 @@ const updateValue = async (e: number) => {
 }
 const deleteProduct = async (id: number) => {
   await deleteCartProduct(id)
-  await store.fetchCartProductsList()
+  await store.fetchCartProductsList(false)
   await store.fetchCheckData()
 }
 </script>

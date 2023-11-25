@@ -4,11 +4,16 @@
     <div class="container my-12">
       <UISectionTitle title="basket" class="mb-6" />
       <div class="grid grid-cols-12 gap-6">
-        <div class="lg:col-span-8 col-span-12 bg-white shadow p-5 rounded">
+        <div
+          class="lg:col-span-8 col-span-12 h-fit bg-white shadow p-5 rounded"
+        >
           <div v-if="loading">
             <template v-for="(item, index) in 4" :key="index">
               <CardsBasket :data="{}" loading />
-              <hr v-if="index !== 3" class="h-0.5 bg-gray-400/20 w-full my-2" />
+              <hr
+                v-if="index !== 3"
+                class="h-0.5 bg-gray-400/20 w-full sm:my-2 my-3"
+              />
             </template>
           </div>
           <template v-else>
@@ -17,7 +22,7 @@
                 <CardsBasket :data="item" :loading="loading" />
                 <hr
                   v-if="index !== data?.length - 1"
-                  class="h-0.5 bg-gray-400/20 w-full my-2"
+                  class="h-0.5 bg-gray-400/20 w-full sm:my-2 my-4"
                 />
               </template>
             </div>
@@ -113,7 +118,7 @@
           <UIButton
             :text="$t('send')"
             size="small"
-            class="w-full"
+            class="w-full h-10"
             :loading="submitLoading"
             @click="onSubmit"
           />
@@ -152,7 +157,7 @@
             size="small"
             variant="light"
             class="max-w-[280px] mx-auto"
-            @click="$router.push('/')"
+            @click="goHome"
           />
         </div>
       </div>
@@ -168,6 +173,7 @@ import { useBasketStore } from '~/store/basket'
 
 const { t } = useI18n()
 const store = useBasketStore()
+const router = useRouter()
 const data = computed(() => store.products)
 const count = computed(() => store.count)
 const loading = computed(() => store.loading)
@@ -218,6 +224,7 @@ const onSubmit = async () => {
       })
       const cart = useCookie('cart')
       cart.value = undefined
+      store.cartId = 0
       showModal.value = false
       setTimeout(() => {
         status.value = true
@@ -229,7 +236,10 @@ const onSubmit = async () => {
     }
   }
 }
-
-store.fetchCartProductsList()
+const goHome = async () => {
+  await store.initCart()
+  await router.push('/')
+}
+store.fetchCartProductsList(true)
 store.fetchCheckData()
 </script>

@@ -14,7 +14,11 @@ export const useBasketStore = defineStore('basketStore', {
   }),
   actions: {
     async initCart() {
-      const cart = useCookie('cart')
+      const expirationDate = new Date()
+      expirationDate.setFullYear(expirationDate.getFullYear() + 1)
+      const cart = useCookie('cart', {
+        expires: expirationDate,
+      })
       if (cart.value) {
         this.cartId = +cart.value
       } else {
@@ -25,7 +29,11 @@ export const useBasketStore = defineStore('basketStore', {
     },
     async createCart() {
       try {
-        const cart = useCookie('cart')
+        const expirationDate = new Date()
+        expirationDate.setFullYear(expirationDate.getFullYear() + 1)
+        const cart = useCookie('cart', {
+          expires: expirationDate,
+        })
         const visitorId = useCookie('visitorId')
         const data = await useApi().$post<{ fingerprint: string; id: number }>(
           'product/cart/create/',
@@ -55,8 +63,8 @@ export const useBasketStore = defineStore('basketStore', {
         console.log(err)
       }
     },
-    async fetchCartProductsList() {
-      this.loading = true
+    async fetchCartProductsList(loading: boolean) {
+      this.loading = loading
       try {
         const data = await useApi().$get<IResponse<ICartProduct>>(
           `product/cart-items/${this.cartId}/`
