@@ -238,6 +238,7 @@ const onSubmit = async () => {
 }
 const goHome = async () => {
   await store.initCart()
+  store.count = 0
   await router.push('/')
 }
 store.fetchCartProductsList(true)

@@ -13,11 +13,18 @@ export const useHomeStore = defineStore('homeStore', {
     contact: {} as IContact,
   }),
   actions: {
-    async fetchCategories() {
+    async fetchCategories(params?: {
+      page: number
+      limit: number
+      offset: number
+    }) {
       this.loading = true
       try {
         const data = await useApi().$get<IResponse<ICategory>>(
-          `product/categories/`
+          `product/categories/`,
+          {
+            params,
+          }
         )
         if (data) {
           this.categoriesCount = data.count
