@@ -1,28 +1,37 @@
-name: Build and Update Project
+name: CI/CD Workflow
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
-  build_and_update:
-    runs-on: ubuntu-latest
+  run_pull:
+    name: Run Pull and Deploy
+    runs-on: self-hosted
+    
+    env:
+      SSH_USER: ${{ secrets.SSH_USER }}
+      SSH_HOST: ${{ secrets.SSH_HOST }}
+      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      WORK_DIR: ${{ secrets.WORK_DIR }}
+      MAIN_BRANCH: ${{ secrets.MAIN_BRANCH }}
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Build
+    - name: Install SSH keys 
       run: |
-        npm run build
-
-    - name: Update Project (Replace with your update command)
+        mkdir -p ~/.ssh
+        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H $SSH_HOST > ~/.ssh/known_hosts
+    - name: Connect and Pull
       run: |
-        cd /var/www/gctrade/gctrade-front &&
-        git pull
-
-    # - name: Deploy (Replace with your deploy command)
-    #   run: |
-    #     # Add your deploy command here, e.g., restarting a service
-    #     pm2 restart your_service_name
+        ssh $SSH_USER@$SSH_HOST "cd $WORK_DIR &&
+          git checkout $MAIN_BRANCH &&
+          git pull &&
+          yarn &&
+          yarn build &&
+          pm2 start"
+    - name: Cleanup
+      run: rm -rf ~/.ssh
