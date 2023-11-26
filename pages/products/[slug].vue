@@ -67,7 +67,7 @@
                 </div>
               </div>
               <div
-                v-if="single?.in_stock_count"
+                v-if="single?.in_stock_count && single?.in_stock_count < 9000"
                 class="flex items-center gap-4"
               >
                 <i class="text-red text-4xl icon-box"></i>

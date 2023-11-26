@@ -102,7 +102,7 @@
               v-maska
               data-maska="## ### ## ##"
               type="text"
-              placeholder="91 223 86 77"
+              placeholder="91 224 98 56 "
               class="py-2 pl-1 pr-4 text-dark read-only:!text-dark-400 focus:border-0 dark:text-white leading-21 border-0 outline-0 bg-transparent w-full z-[1] relative"
             />
           </div>

@@ -50,7 +50,10 @@
           margin="auto 0 0 0"
         >
           <p
-            v-if="data?.product?.in_stock_count"
+            v-if="
+              data?.product?.in_stock_count &&
+              data?.product?.in_stock_count < 9000
+            "
             class="mt-auto sm:text-base text-sm"
           >
             <span class="font-medium mr-2 sm:text-base text-xs"
@@ -72,9 +75,13 @@
       </div>
       <div class="w-full sm:ml-0 ml-6">
         <UISkeleton v-bind="{ loading }" width="60%" height="20px">
-          <p class="text-base font-semibold">
+          <p
+            v-if="Number(data?.product?.price)"
+            class="text-base font-semibold"
+          >
             {{ formatMoneyDecimal(data?.product?.price) }} UZS
           </p>
+          <p v-else class="text-base font-semibold">{{ $t('on_deal') }}</p>
         </UISkeleton>
         <UISkeleton
           v-bind="{ loading }"
