@@ -26,7 +26,7 @@
       >
         <UISkeleton v-bind="{ loading }" width="70%" height="16px">
           <span
-            v-if="data?.sale_price"
+            v-if="Number(data?.sale_price)"
             class="text-red-400 text-xs line-through"
             >{{ formatMoneyDecimal(data?.sale_price) }} UZS</span
           >
@@ -37,7 +37,10 @@
           height="24px"
           margin="4px 0"
         >
-          <h3 v-if="data?.price" class="font-bold text-base text-dark">
+          <h3
+            v-if="Number(formatMoneyDecimal(data?.price))"
+            class="font-bold text-base text-dark"
+          >
             {{ formatMoneyDecimal(data?.price) }} UZS
           </h3>
           <h3 v-else class="font-bold text-base text-dark">

@@ -19,21 +19,6 @@
           </div>
           <div class="flex items-center gap-4">
             <a
-              v-for="(item, index) in contact.social_media"
-              :key="index"
-              :href="item.url"
-              target="_blank"
-              class="flex items-center text-sm transition-200 group hover:text-red"
-            >
-              <img
-                v-if="item.icon"
-                :src="item.icon"
-                :alt="item.name"
-                class="object-cover w-4 h-4 mr-2"
-              />
-              {{ item.name }}</a
-            >
-            <a
               :href="`tel:${contact?.phone?.[0].phone}`"
               class="flex items-center text-sm transition-200 group hover:text-red"
               ><i

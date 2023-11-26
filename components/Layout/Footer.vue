@@ -53,20 +53,13 @@
             {{ $t('on_social_media') }}:
           </p>
           <div class="flex items-center gap-4 my-4">
-            <a href="">
-              <i
-                class="icon-telegram transition-200 text-gray-600 hover:text-telegram text-xl"
-              ></i>
-            </a>
-            <a href="">
-              <i
-                class="icon-instagram transition-200 text-gray-600 hover:text-red text-xl"
-              ></i>
-            </a>
-            <a href="">
-              <i
-                class="icon-facebook-square transition-200 text-gray-600 hover:text-facebook text-xl"
-              ></i>
+            <a
+              v-for="(item, index) in contact?.social_media"
+              :key="index"
+              :href="item?.url"
+              target="_blank"
+            >
+              <img :src="item?.icon" alt="" class="object-cover w-6" />
             </a>
           </div>
         </div>
@@ -106,4 +99,9 @@
     </div>
   </div>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useHomeStore } from '~/store/home'
+
+const store = useHomeStore()
+const contact = computed(() => store.contact)
+</script>

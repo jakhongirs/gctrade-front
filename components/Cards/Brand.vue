@@ -13,7 +13,7 @@
         :alt="brand?.name"
         width="200px"
         height="62px"
-        class="w-full h-full grayscale transition-200 group-hover:scale-105 group-hover:grayscale-0 max-h-[62px] max-w-[200px] mx-auto object-contain"
+        class="w-full h-full transition-200 group-hover:scale-105 max-h-[62px] max-w-[200px] mx-auto object-contain"
       />
     </UISkeleton>
   </a>
