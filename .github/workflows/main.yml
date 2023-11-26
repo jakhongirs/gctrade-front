@@ -19,19 +19,19 @@ jobs:
       MAIN_BRANCH: ${{ secrets.MAIN_BRANCH }}
 
     steps:
-    # - name: Install SSH keys 
-    #   run: |
-    #     mkdir -p ~/.ssh
-    #     echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-    #     chmod 600 ~/.ssh/id_rsa
-    #     ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
+    - name: Install SSH keys 
+      run: |
+        mkdir -p ~/.ssh
+        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
     - name: Connect, Pull, and Build
       run: |
-        ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} &&
+        ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} &&
           git checkout ${{ secrets.MAIN_BRANCH }} &&
           git pull &&
           yarn &&
           yarn build &&
           pm2 start"
-    # - name: Cleanup
-    #   run: rm -rf ~/.ssh
+    - name: Cleanup
+      run: rm -rf ~/.ssh
