@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex justify-between items-center md:flex-row flex-col lg:px-0 px-4"
+    class="flex justify-between items-center md:flex-row flex-col md:px-0 px-4"
     :class="{ '!justify-center !flex-col': center }"
   >
     <h2
