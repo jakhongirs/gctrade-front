@@ -1,7 +1,7 @@
 <template>
   <div class="w-full">
     <div
-      class="w-full flex items-center bg-blue/[0.05] rounded-lg relative outline-0 border-2 border-solid border-transparent focus-within:border-blue main-transition"
+      class="w-full flex items-center bg-blue/[0.05] rounded-lg relative outline-0 border border-solid border-transparent focus-within:border-blue main-transition"
       :class="[
         { '!border-red focus-within:!border-red': error },
         { 'focus-within:!border-transparent': readonly },

@@ -88,3 +88,15 @@ export interface ISaved {
   fingerprint: string
   product: IProduct
 }
+export interface IContact {
+  phone: { phone: string }[]
+  email: string
+  longitude: null | string
+  latitude: null | string
+  address: string
+  social_media: {
+    name: string
+    url: string | null
+    icon: string | null
+  }[]
+}

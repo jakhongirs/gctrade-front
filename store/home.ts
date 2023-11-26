@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-import { ICategory, IResponse } from '~/types'
+import { ICategory, IContact, IResponse } from '~/types'
 
 export const useHomeStore = defineStore('homeStore', {
   state: () => ({
@@ -10,6 +10,7 @@ export const useHomeStore = defineStore('homeStore', {
     filteredCategories: [] as ICategory[],
     banner: [],
     bannerLoading: true,
+    contact: {} as IContact,
   }),
   actions: {
     async fetchCategories() {
@@ -62,6 +63,19 @@ export const useHomeStore = defineStore('homeStore', {
           })
           .finally(() => {
             this.bannerLoading = false
+          })
+      })
+    },
+    fetchContact() {
+      return new Promise((resolve, reject) => {
+        useApi()
+          .$get<IContact>('contact-us/')
+          .then((res) => {
+            this.contact = res
+            resolve(res)
+          })
+          .catch((err) => {
+            reject(err)
           })
       })
     },

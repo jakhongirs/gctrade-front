@@ -142,22 +142,24 @@ function addCart() {
     single.value.is_in_cart = !single.value.is_in_cart
   }
 }
-async function fetchProductSingle() {
-  try {
-    const data = await useApi().$get<IProduct>(
-      `product/detail/${route.params.slug}/`
-    )
-    if (data) {
-      single.value = data
-    }
-  } catch (err) {
-    showError({
-      statusCode: 404,
-    })
-  }
+function fetchProductSingle() {
+  return new Promise((resolve, reject) => {
+    useApi()
+      .$get<IProduct>(`product/detail/${route.params.slug}/`)
+      .then((res) => {
+        console.log(res)
+        single.value = res
+        resolve(res)
+      })
+      .catch((err) => {
+        showError({
+          statusCode: 404,
+        })
+        reject(err)
+      })
+  })
 }
 
-useAsyncData('single', async () => await fetchProductSingle())
 const relatedProducts = ref([])
 
 function fetchRelated() {
@@ -175,5 +177,13 @@ function fetchRelated() {
       })
   })
 }
+const { data, error } = await useAsyncData('productSingle', async () => {
+  return await fetchProductSingle()
+})
+console.log(data)
+useSeoMeta({
+  title: data.value?.title,
+  description: data.value?.description || '',
+})
 </script>
 <style></style>

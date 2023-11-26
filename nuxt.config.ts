@@ -3,7 +3,33 @@ export default defineNuxtConfig({
   ssr: true,
   app: {
     head: {
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/svg/logo.svg' },
+        {
+          rel: 'canonical',
+          href: 'https://artpresent.uz/',
+        },
+      ],
+
       title: 'GC Trade',
+      meta: [
+        {
+          key: 'google-site-verification',
+          name: 'google-site-verification',
+          content: 'lN1l6v7o0k8hriFEymyi0IVUDh5QkG_I_MXaveKkkq0',
+        },
+        {
+          name: 'yandex-verification',
+          key: 'yandex-verification',
+          content: '786f7609ea99e42d',
+        },
+        {
+          name: 'keywords',
+          key: 'keywords',
+          content:
+            'сувениры Узбекистана, узбекские сувениры, керамика, шелк,, атлас, хан-атлас, золотое шитье, глиняные статуэтки, тюбетейки, резные шкатулки, подарочные ножи, подарки из Узбекистана',
+        },
+      ],
     },
   },
   css: [

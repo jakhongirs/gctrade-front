@@ -242,4 +242,9 @@ const goHome = async () => {
 }
 store.fetchCartProductsList(true)
 store.fetchCheckData()
+
+useSeoMeta({
+  title: `GC Trade - ${t('basket')}`,
+  description: 'GC Trade is a base ecommerce',
+})
 </script>

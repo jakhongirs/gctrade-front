@@ -39,4 +39,8 @@ const breadcrumbs = computed(() => {
     },
   ]
 })
+useSeoMeta({
+  title: `GC Trade - ${t('categories')}`,
+  description: 'GC Trade is a base ecommerce',
+})
 </script>

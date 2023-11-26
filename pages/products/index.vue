@@ -172,4 +172,9 @@ watch(
   }
 )
 manStore.fetchManufacturer({})
+
+useSeoMeta({
+  title: `GC Trade - ${t('products')}`,
+  description: 'GC Trade is a base ecommerce',
+})
 </script>

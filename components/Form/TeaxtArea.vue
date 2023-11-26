@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="w-full flex items-center bg-blue/[0.05] dark:bg-dark-500 rounded-lg relative outline-0 border-2 border-solid transition duration-200 ease-in-out"
+      class="w-full flex items-center bg-blue/[0.05] dark:bg-dark-500 rounded-lg relative outline-0 border border-solid transition duration-200 ease-in-out"
       :class="[
         error
           ? 'border-red focus-within:border-red'
@@ -11,13 +11,13 @@
       <div class="relative w-full">
         <textarea
           :id="id"
-          v-model="inputValue"
           placeholder=""
+          :value="modelValue"
           :maxLength="maxLength"
           :minLength="minLength"
           class="py-3 px-4 resize-none text-dark dark:text-white leading-21 text-lg border-0 outline-0 bg-transparent w-full z-1 relative"
           :class="textareaClass"
-          @blur="$emit('blur')"
+          @input="$emit('update:modelValue', $event.target.value)"
         />
         <span
           class="absolute top-0 py-3 px-4 left-0 z-0 text-dark-400 dark:text-white opacity-20 leading-21 text-lg origin-left scale-100 transition-all duration-150"
@@ -40,6 +40,7 @@ interface Props {
   minLength?: number
   defaultValue?: string
   textareaClass?: string
+  modelValue?: string
 }
 
 const props = defineProps<Props>()

@@ -208,4 +208,8 @@ Promise.allSettled([
     child_category: route.query.category || undefined,
   }),
 ])
+useSeoMeta({
+  title: computed(() => category.value?.title) || 'GC Trade',
+  description: 'GC Trade is a base ecommerce',
+})
 </script>

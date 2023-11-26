@@ -14,26 +14,32 @@
               <i
                 class="icon-map-square text-gray text-xl mr-1 transition-200 group-hover:text-red"
               ></i>
-              Toshkent
+              {{ contact.address }}
             </a>
           </div>
           <div class="flex items-center gap-4">
             <a
-              href="https://t.me/bozor_com"
+              v-for="(item, index) in contact.social_media"
+              :key="index"
+              :href="item.url"
+              target="_blank"
               class="flex items-center text-sm transition-200 group hover:text-red"
             >
-              <i
-                class="icon-telegram text-base text-gray mr-2 group-hover:text-red transition-200"
-              ></i
-              >t.me/bozor_com</a
+              <img
+                v-if="item.icon"
+                :src="item.icon"
+                :alt="item.name"
+                class="object-cover w-4 h-4 mr-2"
+              />
+              {{ item.name }}</a
             >
             <a
-              href="tel:+998955156515"
+              :href="`tel:${contact?.phone?.[0].phone}`"
               class="flex items-center text-sm transition-200 group hover:text-red"
               ><i
                 class="icon-phone text-2xl text-gray mr-2 group-hover:text-red transition-200"
               ></i>
-              +998 95 515 65 15</a
+              {{ formatPhone(contact?.phone?.[0].phone) }}</a
             >
             <UILanguageSwitcher />
             <!--          <UIThemeSwitcher />-->
@@ -132,6 +138,7 @@ const store = useBasketStore()
 const savedStore = useSavedStore()
 const count = computed(() => store.count)
 const savedCount = computed(() => savedStore.count)
+const contact = computed(() => homeStore.contact)
 const scroll = useWindowScroll()
 const scrollTop = scroll.y
 const windowIsScrolled = ref(false)
@@ -151,6 +158,7 @@ watch(
 Promise.allSettled([
   homeStore.fetchCategories(),
   savedStore.fetchSavedProducts(),
+  homeStore.fetchContact(),
 ]).catch((err) => {
   console.log(err)
 })

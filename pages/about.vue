@@ -106,4 +106,8 @@ const statistics = [
     value: '2013',
   },
 ]
+useSeoMeta({
+  title: `GC Trade - ${t('about')}`,
+  description: 'GC Trade is a base ecommerce',
+})
 </script>

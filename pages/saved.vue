@@ -65,4 +65,9 @@ const breadcrumbs = computed(() => {
 })
 
 store.fetchSavedProducts(true)
+
+useSeoMeta({
+  title: `GC Trade - ${t('saved_products')}`,
+  description: 'GC Trade is a base ecommerce',
+})
 </script>
