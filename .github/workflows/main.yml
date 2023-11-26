@@ -9,7 +9,7 @@ on:
 jobs:
   run_pull:
     name: Run Pull and Deploy
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     
     env:
       SSH_USER: ${{ secrets.SSH_USER }}
