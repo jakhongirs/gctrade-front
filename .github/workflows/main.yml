@@ -18,11 +18,12 @@ jobs:
     #     echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
     #     ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
     - name: connect and pull
-      run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} &&
+      working-directory: ${{ secrets.WORK_DIR }}
+      run: | 
           git checkout ${{ secrets.MAIN_BRANCH }} &&
           git pull &&
           yarn &&
           yarn build &&
-          pm2 start"
-    - name: Cleanup
-      run: rm -rf ~/.ssh
+          pm2 start
+    # - name: Cleanup
+    #   run: rm -rf ~/.ssh
