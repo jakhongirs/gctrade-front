@@ -1,6 +1,6 @@
 <template>
   <ClientOnly>
-    <div class="bg-white py-16">
+    <div v-if="loading || data?.length" class="bg-white py-16">
       <UISectionTitle title="partners" center class="mb-6" />
 
       <div class="marquee mb-8">

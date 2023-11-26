@@ -1,6 +1,6 @@
 <template>
   <ClientOnly>
-    <div class="sm:py-14 pt-5 sm:block hidden">
+    <div v-if="loading || data?.length" class="sm:py-14 pt-5 sm:block hidden">
       <UISectionTitle title="partners_ideas" center class="sm:mb-8 mb-4" />
       <div class="relative ideas-swiper">
         <Swiper v-bind="settings" class="!pt-6 !pb-16 h-full overflow-hidden">

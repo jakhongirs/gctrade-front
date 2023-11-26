@@ -2,6 +2,7 @@
   <ClientOnly>
     <Transition name="fade" mode="out-in">
       <div
+        v-if="loading || banners?.length"
         :key="loading"
         class="md:!h-[420px] h-[200px] overflow-hidden container"
       >
@@ -13,7 +14,7 @@
           v-bind="{ loading }"
         />
         <Swiper
-          v-else
+          v-if="!loading && banners?.length"
           v-bind="settings"
           class="!pb-8 h-full"
           @slide-change="onChangeSlide"

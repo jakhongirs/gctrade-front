@@ -37,10 +37,7 @@
           height="24px"
           margin="4px 0"
         >
-          <h3
-            v-if="formatMoneyDecimal(data?.price)"
-            class="font-bold text-base text-dark"
-          >
+          <h3 v-if="Number(data?.price)" class="font-bold text-base text-dark">
             {{ formatMoneyDecimal(data?.price) }} UZS
           </h3>
           <h3 v-else class="font-bold text-base text-dark">
