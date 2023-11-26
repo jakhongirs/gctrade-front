@@ -24,11 +24,11 @@ jobs:
         mkdir -p ~/.ssh
         echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -H $SSH_HOST > ~/.ssh/known_hosts
-    - name: Connect and Pull
+        ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
+    - name: Connect and Pull and Build
       run: |
-        ssh $SSH_USER@$SSH_HOST "cd $WORK_DIR &&
-          git checkout $MAIN_BRANCH &&
+        ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} &&
+          git checkout ${{ secrets.MAIN_BRANCH }} &&
           git pull &&
           yarn &&
           yarn build &&
