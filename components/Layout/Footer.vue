@@ -53,14 +53,18 @@
             {{ $t('on_social_media') }}:
           </p>
           <div class="flex items-center gap-4 my-4">
-            <a
+            <template
               v-for="(item, index) in contact?.social_media"
               :key="index"
-              :href="item?.url"
-              target="_blank"
             >
-              <img :src="item?.icon" alt="" class="object-cover w-6" />
-            </a>
+              <a
+                v-if="item?.url && item?.icon"
+                :href="item?.url"
+                target="_blank"
+              >
+                <img :src="item?.icon" alt="" class="object-cover w-6" />
+              </a>
+            </template>
           </div>
         </div>
       </div>

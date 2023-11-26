@@ -23,7 +23,7 @@
       </div>
     </div>
     <div class="bg-white my-10">
-      <div class="py-6 container">
+      <div v-if="loading || members?.length" class="py-6 container">
         <UISectionTitle title="team_members" center />
         <div
           v-if="loading"

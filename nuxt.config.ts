@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   app: {
     head: {
       link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/svg/logo.svg' },
+        { rel: 'icon', type: 'image/x-icon', href: '/svg/favicon.ico' },
         {
           rel: 'canonical',
           href: 'https://artpresent.uz/',

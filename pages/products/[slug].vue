@@ -24,12 +24,12 @@
               />
             </div>
             <p
-              v-if="single?.price"
+              v-if="Number(single?.price)"
               class="text-dark-400 text-2xl font-medium mt-2"
             >
               {{ formatMoneyDecimal(single?.price) }} UZS
               <span
-                v-if="single?.sale_price"
+                v-if="Number(single?.sale_price)"
                 class="text-red font-normal line-through text-sm"
               >
                 {{ formatMoneyDecimal(single?.sale_price) }} UZS
@@ -38,9 +38,11 @@
             <p v-else class="text-dark-400 text-2xl font-medium mt-2">
               {{ $t('on_deal') }}
             </p>
-            <p class="text-base text-gray-600 my-2">
+            <p v-if="single?.product_code" class="text-base text-gray-600 my-2">
               {{ $t('product_number') }}:
-              <span class="text-dark-400 ml-2"> {{ single?.id }} </span>
+              <span class="text-dark-400 ml-2">
+                {{ single?.product_code }}
+              </span>
             </p>
             <p
               class="text-base text-dark-400 leading-8 mt-6 line-clamp-3"
