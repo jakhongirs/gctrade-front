@@ -11,8 +11,8 @@
           </p>
           <p class="text-base text-dark-500">
             <span class="font-medium mr-2">{{ $t('phone') }}:</span>
-            <a :href="`tel:${contact?.phone?.[0].phone}`">
-              {{ formatPhone(contact?.phone?.[0].phone) }}
+            <a :href="`tel:${contact?.phone?.[0]?.phone}`">
+              {{ formatPhone(contact?.phone?.[0]?.phone) }}
             </a>
           </p>
           <p class="text-base text-dark-500">
