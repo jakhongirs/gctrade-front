@@ -58,8 +58,8 @@ const count = computed(() => store.count)
 const breadcrumbs = computed(() => {
   return [
     {
-      title: 'saved_products',
-      url: t('/products'),
+      title: t('saved_products'),
+      url: '/saved',
     },
   ]
 })
