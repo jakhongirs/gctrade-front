@@ -23,7 +23,10 @@
                 @click.stop.prevent="single.is_in_saved = !single?.is_in_saved"
               />
             </div>
-            <p class="text-dark-400 text-2xl font-medium mt-2">
+            <p
+              v-if="single?.price"
+              class="text-dark-400 text-2xl font-medium mt-2"
+            >
               {{ formatMoneyDecimal(single?.price) }} UZS
               <span
                 v-if="single?.sale_price"
@@ -31,6 +34,13 @@
               >
                 {{ formatMoneyDecimal(single?.sale_price) }} UZS
               </span>
+            </p>
+            <p v-else class="text-dark-400 text-2xl font-medium mt-2">
+              {{ $t('on_deal') }}
+            </p>
+            <p class="text-base text-gray-600 my-2">
+              {{ $t('product_number') }}:
+              <span class="text-dark-400 ml-2"> {{ single?.id }} </span>
             </p>
             <p
               class="text-base text-dark-400 leading-8 mt-6 line-clamp-3"
@@ -180,7 +190,7 @@ function fetchRelated() {
 const { data, error } = await useAsyncData('productSingle', async () => {
   return await fetchProductSingle()
 })
-console.log(data)
+if (!single.value) fetchProductSingle()
 useSeoMeta({
   title: data.value?.title,
   description: data.value?.description || '',

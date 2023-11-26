@@ -37,8 +37,11 @@
           height="24px"
           margin="4px 0"
         >
-          <h3 class="font-bold text-base text-dark">
+          <h3 v-if="data?.price" class="font-bold text-base text-dark">
             {{ formatMoneyDecimal(data?.price) }} UZS
+          </h3>
+          <h3 v-else class="font-bold text-base text-dark">
+            {{ $t('on_deal') }}
           </h3>
         </UISkeleton>
         <UISkeleton v-bind="{ loading }" width="96%" height="24px">
