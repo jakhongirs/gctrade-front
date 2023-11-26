@@ -47,7 +47,7 @@
             </CollapseTransition>
           </li>
         </ul>
-        <ul class="mt-8">
+        <ul class="my-8">
           <li class="py-1">
             <NuxtLink to="/about" class="text-base font-medium text-dark-400">
               {{ $t('about') }}
