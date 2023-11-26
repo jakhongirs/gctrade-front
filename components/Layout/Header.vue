@@ -19,12 +19,12 @@
           </div>
           <div class="flex items-center gap-4">
             <a
-              :href="`tel:${contact?.phone?.[0].phone}`"
+              :href="`tel:${contact?.phone?.[0]?.phone}`"
               class="flex items-center text-sm transition-200 group hover:text-red"
               ><i
                 class="icon-phone text-2xl text-gray mr-2 group-hover:text-red transition-200"
               ></i>
-              {{ formatPhone(contact?.phone?.[0].phone) }}</a
+              {{ formatPhone(contact?.phone?.[0]?.phone) }}</a
             >
             <UILanguageSwitcher />
             <!--          <UIThemeSwitcher />-->

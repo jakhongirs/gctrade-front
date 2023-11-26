@@ -20,24 +20,18 @@ interface Props {
 }
 const props = defineProps<Props>()
 
-const isSaved = ref(props.saved)
+const isSaved = ref(false)
 const { saveProduct, deleteSavedProduct } = useSavedController()
 
-watch(
-  () => props.saved,
-  () => {
-    isSaved.value = props.saved
-  },
-  {
-    immediate: true,
-  }
-)
 async function onDelete(id: number) {
-  await deleteSavedProduct(id)
   isSaved.value = false
+  await deleteSavedProduct(id)
 }
 async function onSave(id: number) {
-  await saveProduct(id)
   isSaved.value = true
+  await saveProduct(id)
 }
+onMounted(() => {
+  isSaved.value = props.saved
+})
 </script>
