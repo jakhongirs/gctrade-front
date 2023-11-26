@@ -2,7 +2,7 @@
   <div>
     <div class="w-full max-h-[400px] md:min-h-[390px] min-h-[190px] h-full">
       <img
-        src="/fake/about1.png"
+        :src="about?.cover || '/fake/about1.png'"
         alt=""
         class="w-full max-h-[400px] h-full object-cover"
       />
@@ -13,42 +13,103 @@
       <h2
         class="lg:text-4xl md:text-2xl text-xl text-dark font-medium text-center"
       >
-        {{ $t('about') }}
+        {{ about?.title || $t('about') }}
       </h2>
       <div class="mt-8">
         <div
-          class="md:text-base text-sm text-gray-600 leading-7 mx-auto flex flex-col justify-center items-center max-w-[900px]"
-        >
-          <span>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi
-            cumque dolorum exercitationem facere, in quo recusandae suscipit
-            voluptas voluptatum? Adipisci blanditiis ipsa officiis sapiente
-            voluptate! Accusantium, architecto culpa esse ex harum hic ipsam
-            iure minima nam neque non nostrum numquam officia pariatur possimus
-            quas quidem rem sapiente similique unde vel velit veritatis vero.
-            Beatae dolore incidunt minima rem sint.
-          </span>
-          <img
-            src="/fake/about.png"
-            alt="gc_trade_about"
-            class="max-w-[600px] mx-auto my-8 object-cover w-full h-auto rounded-xl"
-          />
-          Alias, aliquam aliquid consectetur doloribus eligendi enim et, eveniet
-          laborum laudantium libero magni nisi numquam obcaecati, quasi quisquam
-          sapiente sint soluta unde vero voluptates. Alias asperiores aspernatur
-          atque dolorem ea eveniet ex harum illo itaque molestiae, odit officia
-          quasi quibusdam, quos rerum, similique sint sit ullam vitae voluptas!
-          Accusantium aliquid aperiam beatae corporis dolore doloremque dolorum,
-          eligendi enim esse fuga fugit inventore magnam maxime nam nesciunt
-          nostrum numquam optio pariatur provident qui quisquam quo ratione
-          repellendus saepe sed soluta, tenetur ullam veniam vitae, voluptate! A
-          aliquam animi asperiores consequatur delectus deserunt dolorem error
-          esse fugit maiores non, perferendis perspiciatis quibusdam quod
-          reprehenderit sit soluta ullam unde voluptates voluptatum.
-        </div>
+          class="md:text-base text-sm text-gray-600 leading-7 mx-auto flex flex-col justify-center items-center max-w-[900px] description"
+          v-html="about?.description"
+        ></div>
       </div>
     </div>
     <div class="bg-white my-10">
+      <div class="py-6 container">
+        <UISectionTitle title="team_members" center />
+        <div
+          v-if="loading"
+          class="grid md:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-6 mt-10"
+        >
+          <div
+            v-for="(item, index) in 5"
+            :key="index"
+            class="flex flex-col items-center"
+          >
+            <UISkeleton
+              v-bind="{ loading }"
+              width="100px"
+              height="100px"
+              class="rounded-full"
+              border-radius="50%"
+            />
+            <UISkeleton
+              v-bind="{ loading }"
+              width="90%"
+              height="28px"
+              class="rounded-full"
+              margin="16px 0"
+            />
+            <UISkeleton
+              v-bind="{ loading }"
+              width="70%"
+              height="24px"
+              margin="2px 0"
+            />
+            <UISkeleton
+              v-bind="{ loading }"
+              width="90%"
+              height="24px"
+              margin="2px 0"
+            />
+            <UISkeleton
+              v-bind="{ loading }"
+              width="60%"
+              height="24px"
+              margin="2px 0"
+            />
+          </div>
+        </div>
+        <div
+          v-if="!loading"
+          class="grid md:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-6 mt-10"
+        >
+          <div
+            v-for="(item, index) in members"
+            :key="index"
+            class="flex flex-col items-center"
+          >
+            <img
+              :src="item.image"
+              :alt="item.name"
+              class="object-cover aspect-square rounded-full border border-green-500 max-w-[100px]"
+            />
+            <h3 class="my-3 sm:text-lg text-sm text-dark-400 font-semibold">
+              {{ item.name }}
+            </h3>
+            <a
+              :href="`tel:${item.phone}`"
+              class="block sm:text-base text-xs text-dark-400 transition-200 hover:text-blue"
+            >
+              {{ item.phone }}
+            </a>
+            <a
+              :href="`mailto:${item.email}`"
+              class="block sm:text-base text-xs text-dark-400 transition-200 hover:text-blue"
+            >
+              {{ item.email }}
+            </a>
+            <a
+              :href="`https://t.me/${item.telegram_username?.replace(
+                /@/g,
+                ''
+              )}`"
+              target="_blank"
+              class="block sm:text-base text-xs text-dark-400 transition-200 hover:text-blue"
+            >
+              {{ item.telegram_username }}
+            </a>
+          </div>
+        </div>
+      </div>
       <div class="pt-10 pb-16 container">
         <UISectionTitle center title="statistics" />
         <div class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 mt-14">
@@ -74,8 +135,14 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 
-const { t } = useI18n()
+import { useMainStore } from '~/store/main'
 
+const { t } = useI18n()
+const store = useMainStore()
+
+const members = computed(() => store.team)
+const loading = computed(() => store.loading)
+const about = computed(() => store.about)
 const breadcrumbs = computed(() => {
   return [
     {
@@ -110,4 +177,11 @@ useSeoMeta({
   title: `GC Trade - ${t('about')}`,
   description: 'GC Trade is a base ecommerce',
 })
+store.fetchTeamMembers()
+store.fetchAbout()
 </script>
+<style>
+.description img {
+  max-width: 900px !important;
+}
+</style>

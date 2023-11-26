@@ -100,3 +100,11 @@ export interface IContact {
     icon: string | null
   }[]
 }
+
+export interface IMembers {
+  email: string
+  image: string
+  name: string
+  phone: string
+  telegram_username: string
+}
