@@ -53,7 +53,10 @@
               {{ single?.category?.title }}
             </p>
             <hr
-              v-if="single?.sold_count || single?.in_stock_count"
+              v-if="
+                single?.sold_count ||
+                (single?.in_stock_count < 9000 && single?.in_stock_count > 0)
+              "
               class="h-0.5 bg-gray-400/50 w-full rounded my-4"
             />
             <div class="grid grid-cols-2 gap-6">
@@ -83,7 +86,10 @@
             </div>
 
             <hr
-              v-if="single?.sold_count || single?.in_stock_count"
+              v-if="
+                single?.sold_count ||
+                (single?.in_stock_count < 9000 && single?.in_stock_count > 0)
+              "
               class="h-0.5 bg-gray-400/50 w-full rounded my-4"
             />
             <UIButton

@@ -77,24 +77,25 @@
             <i
               class="icon-map-square text-gray text-2xl mr-1 transition-200"
             ></i>
-            Toshkent
+            {{ contact?.address }}
           </a>
+          <template v-for="(item, index) in contact?.social_media" :key="index">
+            <a
+              v-if="item?.icon && item?.url"
+              :href="item?.url"
+              class="flex items-center w-full transition-200 text-sm mb-2"
+            >
+              <img :src="item?.icon" alt="" class="object-cover w-6 mr-2" />
+              {{ item?.name }}</a
+            >
+          </template>
           <a
-            href="https://t.me/bozor_com"
-            class="flex items-center w-full transition-200 text-sm mb-2"
-          >
-            <i
-              class="icon-telegram text-xl text-gray mr-2 group-hover:text-red transition-200"
-            ></i
-            >t.me/bozor_com</a
-          >
-          <a
-            href="tel:+998955156515"
+            :href="`tel:${contact?.phone?.[0]?.phone}`"
             class="flex items-center w-full transition-200 text-sm mb-2"
             ><i
               class="icon-phone text-2xl text-gray mr-2 group-hover:text-red transition-200"
             ></i>
-            +998 95 515 65 15</a
+            {{ formatPhone(contact?.phone?.[0]?.phone) }}</a
           >
         </div>
       </div>
@@ -113,6 +114,7 @@ export interface Props {
 }
 defineProps<Props>()
 const store = useHomeStore()
+const contact = computed(() => store.contact)
 const categories = computed(() => store.categories)
 const activeCategory = ref(1)
 </script>
