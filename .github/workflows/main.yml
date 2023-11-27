@@ -10,13 +10,6 @@ jobs:
     runs-on: self-hosted
     
     steps:
-    # - name: install ssh keys
-    #   # check this thread to understand why its needed:
-    #   # https://stackoverflow.com/a/70447517
-    #   run: |
-    #     install -m 600 -D /dev/null ~/.ssh/id_rsa
-    #     echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-    #     ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
     - name: connect and pull
       working-directory: ${{ secrets.WORK_DIR }}
       run: | 
@@ -26,5 +19,3 @@ jobs:
           yarn &&
           yarn build &&
           pm2 start
-    # - name: Cleanup
-    #   run: rm -rf ~/.ssh
